@@ -1,0 +1,17 @@
+<h3>
+  <a id="top" name="top"></a>
+  <%= @vacancy.name %>
+</h3>
+
+<dl class="dl-horizontal">
+  <%= show_associations :project %>
+  <%= show_attribute :limit, value: "#{@vacancy.candidatures_left} / #{@vacancy.limit}" %>
+  <%= show_attribute :state %>
+  <%= show_actions %>
+</dl>
+
+<%= render partial: 'shared/resource/actions', locals: { type: 'vacancies', resource: @vacancy } %>
+
+<%= markdown @vacancy.text %>
+
+<%= render 'shared/comments', comment: @vacancy.comments.new %>

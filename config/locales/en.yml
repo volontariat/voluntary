@@ -1,0 +1,26 @@
+# Sample localization file for English: Add more files in this directory for other locales:
+# See https://github:com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points:
+
+en:     
+  pages:
+    privacy_policy:
+      title: Privacy Police
+    terms_of_use:
+      title: Terms of Use
+    about_us:
+      title: About Us    
+       
+  layout:
+    title: Volontari.at - Creative Open Crowdsource Platform
+   
+  home:
+    index:
+      last_projects: Last projects
+      last_vacancies: Last vacancies
+      
+  authentication:
+    title: Authentication
+    sign_in: Sign in
+    sign_up: Sign up
+    rpx_sign_in: RPX sign in
+    sign_out: Sign out

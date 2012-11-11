@@ -1,0 +1,48 @@
+= Voluntary
+
+This is a gem which turns your rails application into a crowdsourcing platform to run on your intranet or on the internet.
+
+Then you can add existing voluntary products like text creation or create your own products.
+
+== Installation
+
+Run this in your console:
+
+  rvm --create use 1.9.3@your_crowdsourcing_platform_name
+  gem update bundler
+  gem install rails --no-rdoc --no-ri  
+  rails new your_crowdsourcing_platform_name
+  cd your_crowdsourcing_platform_name
+
+Add this to your Gemfile:
+
+  gem 'voluntary'
+  
+Run this in your console:
+
+  bundle install  
+  
+Run this in your console (confirm all overwrite questions):
+
+  rails g voluntary:install
+  rake voluntary:install:migrations  
+
+Remove gem 'sqlite3' from your Gemfile.
+
+Copy the content of config/database.example.yml into config/database.yml
+
+Remove public/index.html
+
+Add at least 1 controller with 1 action, 1 view and a root route.
+
+Run this in your console:
+
+  bundle install
+  rake db:create
+  rake db:migrate
+  rake db:seed
+  rails s
+
+= License 
+
+This project uses MIT-LICENSE.
