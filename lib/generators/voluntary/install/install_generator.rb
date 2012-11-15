@@ -7,23 +7,6 @@ module Voluntary
         ['app', 'config', 'features', 'spec', 'vendor', 'lib'].each do |directory_name|
           directory directory_name
         end
-        
-=begin        
-        Dir["#{File.expand_path(File.dirname(__FILE__))}/**/*.*"].each do |file_path|
-          file_path = file_path.split('/')
-          
-          file_path.each do |part|
-            file_path.shift
-            
-            break if part == 'templates'
-          end
-          
-          file_path = file_path.join('/')
-          
-          copy_file file_path, file_path
-          chmod file_path, 0755
-        end
-=end
       end
       
       def gem_dependencies
