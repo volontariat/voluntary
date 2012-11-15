@@ -1,0 +1,28 @@
+development:
+ adapter: postgresql
+ database: volontariat_development
+ encoding: unicode
+ username: root
+ password:
+ encoding: unicode
+
+test: &TEST
+ adapter: postgresql
+ encoding: unicode
+ database: volontariat_test
+ pool: 5
+ username: root
+ password:
+ 
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: volontariat_production
+  encoding: utf8
+  pool: 5
+  host: localhost
+  username: volontariat
+  password:
+  
+cucumber:
+ <<: *TEST

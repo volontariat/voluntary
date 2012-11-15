@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= t('layout.title') %></title>
+  <meta charset='utf-8'>
+  <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+  <%= stylesheet_link_tag 'voluntary/application', media: 'all' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+</head>
+<body>
+  <%= render 'layouts/shared/navigation' %>
+  
+  <div class="container-fluid">
+<% unless flash.empty? %>
+    <div class="row-fluid">
+      <div class="span12">
+        <%= render 'layouts/shared/flash_messages' %>
+      </div>
+    </div>
+<% end %>    
+    <div class="row-fluid">
+      <div class="span9">
+        <%= breadcrumbs %>
+        
+        <%= yield %>
+      </div>      
+      <div class="span3">
+        <%= sidenav %>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid footer">
+      <div class="span12">
+        <%= footer_navigation %>
+      </div>
+    </div>
+  </div>
+  <%= javascript_include_tag 'voluntary/application' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <%= javascript_tag do %>
+    <%= yield :top_javascript %>
+    
+    $(function() {
+      <%= yield(:document_ready) %>
+    });
+  <% end %>
+</body>
+</html>
