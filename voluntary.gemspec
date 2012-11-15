@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = Voluntary::VERSION
   s.authors     = ["Mathias Gawlista"]
   s.email       = ["gawlista@gmail.com"]
-  s.homepage    = "http://volontari.at"
+  s.homepage    = "http://github.com/Applicat/voluntary"
   s.summary     = "This is a gem which turns your rails application into a crowdsourcing platform to run on your intranet or on the internet."
-  s.description = "Then you can add existing voluntary products like text creation or create your own products."
+  s.description = "This is a gem which turns your rails application into a crowdsourcing platform to run on your intranet or on the internet."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
