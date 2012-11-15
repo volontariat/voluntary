@@ -18,3 +18,4 @@ rerun.txt
 pickle-email-*.html
 /config/database.yml
 /spec/dummy/config/database.yml
+/pkg/
