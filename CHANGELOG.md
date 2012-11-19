@@ -1,4 +1,4 @@
-## volontariat (unreleased) ##
+## voluntary (unreleased) ##
 
 ## voluntary 0.0.2 (November 19, 2012) ##
 
