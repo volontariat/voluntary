@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "This is a gem which turns your rails application into a crowdsourcing platform to run on your intranet or on the internet."
   s.description = "This is a gem which turns your rails application into a crowdsourcing platform to run on your intranet or on the internet."
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib,vendor_extensions}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency 'rails', '~> 3.2.8'
 

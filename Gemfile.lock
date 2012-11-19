@@ -48,7 +48,7 @@ GIT
 PATH
   remote: .
   specs:
-    voluntary (0.0.2)
+    voluntary (0.0.3)
       activerecord-import
       acts_as_api
       acts_as_list
