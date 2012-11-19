@@ -18,9 +18,11 @@ module ProductHelper
     if resource && resource.respond_to?(:product) && resource.product
       path = "products/types/#{directory_for_resource(resource.product)}/#{partial_path}"
       
-      if File.exist?("#{Rails.root.to_s}/app/views/#{path}/_#{file_name}.html.erb")
-        path = [path, file_name].join('/')
-      else
+      path = [path, file_name].join('/')
+      
+      begin 
+        return render(path, options)
+      rescue ActionView::MissingTemplate
         path = nil
       end
     end
