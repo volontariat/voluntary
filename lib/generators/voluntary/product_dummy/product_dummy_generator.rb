@@ -4,7 +4,7 @@ module Voluntary
       source_root File.expand_path("../templates", __FILE__)
   
       def copy_templates
-        ['app', 'config', 'features', 'spec'].each do |directory_name|
+        ['app', 'config', 'features', 'spec', 'vendor'].each do |directory_name|
           directory directory_name
         end
       end
