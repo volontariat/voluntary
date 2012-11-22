@@ -5,6 +5,7 @@ class Product
   field :_id, type: String, default: -> { name.to_s.parameterize }
   field :user_id, type: Integer
   field :name, type: String, localize: true
+  field :klass_name, type: String
   field :text, type: String, localize: true
   field :area_ids, type: Array, default: []
   field :state, type: String
