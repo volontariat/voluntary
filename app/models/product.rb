@@ -20,7 +20,7 @@ class Product
   
   index({ name: 1 }, { unique: true })
   
-  before_validation :set_type
+  before_validation :set_klass_name
   
   # active record compatibility
   # just belongs_to reflections for cucumber's factory steps
@@ -82,7 +82,7 @@ class Product
     end
   end
 
-  def get_type
+  def get_klass_name
     if name == 'Product'
       'Product'
     else
@@ -92,8 +92,11 @@ class Product
     end
   end
   
-  def set_type
-    # TODO: check with a better internet connection a better regex on rubular.com
-    self._type = get_type
+  def set_klass_name
+    if klass_name.present?
+      self._type = klass_name
+    else
+      self._type = get_klass_name
+    end
   end
 end
