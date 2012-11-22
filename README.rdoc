@@ -6,6 +6,8 @@ Then you can add existing voluntary products like text creation or create your o
 
 == Installation
 
+=== New Application
+
 Run this in your console:
 
   rvm --create use 1.9.3@your_crowdsourcing_platform_name
@@ -43,6 +45,29 @@ Run this in your console:
   rake db:seed
   rails s
 
+=== New Product
+  
+  git clone https://github.com/user/voluntary_product_name.git
+  cd voluntary_product_name
+  rvm --create use --rvmrc 1.9.3@voluntary_product_name
+  gem update bundler
+  gem install rails --no-ri --no-rdoc
+  cd ..
+  rails plugin new voluntary_music_research --database=postgresql --skip-javascript --skip-test-unit --dummy-path=dummy --full
+  cd voluntary_product_name
+  # Add voluntary gem as a dependency to gemspec.
+  # Add development dependencies to gemspec, see voluntary_text_creation.
+  bundle install
+  cd dummy
+  rails g voluntary:product_dummy # confirm all overwrite questions
+  # Add "gemspec path: File.expand_path(File.dirname(__FILE__) + '/../')" to the top of the dummy's Gemfile
+  bundle install # if it hangs at Fetching source index stop it and deactivate gems until it works and add them back one by one
+  >> migrations of voluntary and voluntary_* gems <<
+  # database.yml erstellen
+  # optional: bundle exec rake db:migrate
+  # add "require 'voluntary'" to ../lib/voluntary_product_name.rb
+  bundle exec rails s
+  
 = License 
 
 This project uses MIT-LICENSE.
