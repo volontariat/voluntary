@@ -76,7 +76,7 @@ class Product
   end
   
   def existing_model_file?
-    unless (get_type.constantize rescue false)
+    unless (get_klass_name.constantize rescue false)
       errors[:name] << I18n.t(
         'activerecord.errors.models.product.attributes.name.missing_model_file'
       )
