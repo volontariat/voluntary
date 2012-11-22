@@ -1,7 +1,5 @@
 class AddKlassNameToProducts < ActiveRecord::Migration
   def up
-    add_column :products, :klass_name, :string
-    
     Product.find_each do |product|
       next if product.klass_name.present?
       
