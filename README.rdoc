@@ -27,7 +27,7 @@ Run this in your console:
 Run this in your console (confirm all overwrite questions):
 
   rails g voluntary:install
-  rake voluntary:install:migrations  
+  rake voluntary_engine:install:migrations  
 
 Remove gem 'sqlite3' from your Gemfile.
 
