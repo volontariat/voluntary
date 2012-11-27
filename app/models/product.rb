@@ -12,9 +12,7 @@ class Product
   
   attr_accessible :name, :text, :area_ids
   
-  validates :user_id, presence: true
   validates :name, presence: true, uniqueness: true
-  validates :area_ids, presence: true
   
   validate :english_name_available?
   validate :existing_model_file?
