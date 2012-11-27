@@ -82,7 +82,9 @@ class Product
   end
 
   def get_klass_name
-    if name == 'Product'
+    if klass_name.present?
+      klass_name
+    elsif name == 'Product'
       'Product'
     else
       [
@@ -92,10 +94,6 @@ class Product
   end
   
   def set_klass_name
-    if klass_name.present?
-      self._type = klass_name
-    else
-      self._type = get_klass_name
-    end
+    self._type = get_klass_name
   end
 end
