@@ -13,7 +13,11 @@ module CollectionHelper
         value = '-'
       end
       
-      link_to value, eval("#{root_model_class_name(resource).tableize.singularize}_path(resource)")
+      begin
+        link_to value, eval("#{root_model_class_name(resource).tableize.singularize}_path(resource)")
+      rescue
+        link_to value, eval("#{root_model_class_name(resource).constantize.table_name.singularize}_path(resource)")
+      end
     elsif column.match('_id')
       association = nil
       
