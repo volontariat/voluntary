@@ -43,6 +43,8 @@ Remove public/index.html
 
 Add at least 1 controller with 1 action, 1 view and a root route.
 
+Add a Capfile to your Rails root.
+
 Run this in your console:
 
   bundle install
