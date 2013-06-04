@@ -32,3 +32,6 @@ $(document).ready ->
         
         return false;
     });
+    
+  $( ".datepicker" ).each (k, v) ->
+    $(v).datepicker({ dateFormat: "yy-mm-dd", changeYear: true, yearRange: "c-100:c+10" });
