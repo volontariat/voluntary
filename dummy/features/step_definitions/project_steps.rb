@@ -11,7 +11,7 @@ World(ProjectFactoryMethods)
 Given /^a project named "([^\"]*)"$/ do |name|
   attributes = {name: name}
   set_project_defaults(attributes)
-  @project = Factory(:project, attributes)
+  @project = FactoryGirl.create(:project, attributes) 
   
   @project.reload
 end

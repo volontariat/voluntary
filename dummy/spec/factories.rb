@@ -37,8 +37,8 @@ FactoryGirl.define do
   
   factory :product do
     name 'Product'
-    user_id Factory(:user, password: 'password', password_confirmation: 'password').id
-    area_ids [Area.first.try(:id) || Factory(:area).id]
+    user_id FactoryGirl.create(:user, password: 'password', password_confirmation: 'password').id
+    area_ids [Area.first.try(:id) || FactoryGirl.create(:area).id]
     text Faker::Lorem.sentences(5).join(' ')
     
     after_build do |product|
@@ -79,7 +79,7 @@ FactoryGirl.define do
   end
   
   factory :story do
-    project_id Factory(:project).id
+    association :project
     sequence(:name) { |n| "story#{n}#{r_str}" }
     text Faker::Lorem.sentences(10).join(' ')
     event 'setup_tasks'
@@ -87,12 +87,12 @@ FactoryGirl.define do
     state 'tasks_defined'
     
     after_build do |story|
-      story.tasks << Factory.build(:task, offeror_id: Factory(:project).user_id)
+      story.tasks << Factory.build(:task, offeror_id: FactoryGirl.create(:project).user_id)
     end
   end
   
   factory :story_without_tasks do
-    project_id Project.first.try(:id) || Factory(:project).id
+    association :project
     sequence(:name) { |n| "story#{n}#{r_str}" }
     text Faker::Lorem.sentences(10).join(' ')
     language 'en'
