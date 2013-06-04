@@ -11,9 +11,8 @@ module Applicat
               @@per_page = 20
   
               attr_accessor :current_user
-              
+                
               if self.table_exists?
-                #reflections.values.select{|r| [:has_one, :has_many].include?(r.macro)}.map(&:name)
                 
                 columns.map(&:name).select{|c| c.match('_id')}.each do |column|
                   association = column.split('_id').first.classify
@@ -33,7 +32,13 @@ module Applicat
                       association_type = self.send("#{association.underscore}_type")
                     end
                     
-                    self.send("#{association.underscore}=", association_type.constantize.find_or_initialize_by_name(name))
+                    begin
+                      association_type = association_type.constantize
+                    rescue
+                      association_type = self.class.reflections[column.split('_id').first.to_sym].options[:class_name].constantize
+                    end
+                     
+                    self.send("#{association.underscore}=", association_type.find_or_initialize_by_name(name))
                   end
                 end
               end
