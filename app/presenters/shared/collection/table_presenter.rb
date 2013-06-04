@@ -23,9 +23,9 @@ class Shared::Collection::TablePresenter < Presenter
     return '' unless append_new_link
     
     path = if current_parent
-      eval("new_#{root_model_class_name(current_parent).tableize.singularize}_#{type.singularize}_path(current_parent)")
+      eval("new_#{root_model_class_name(current_parent).tableize.singularize}_#{type.gsub('.', '_').singularize}_path(current_parent)")
     else
-      eval("new_#{type.singularize}_path")
+      eval("new_#{type.gsub('.', '_').singularize}_path")
     end
     
     link_to t("#{type}.new.title"), path
