@@ -29,11 +29,10 @@ Gem::Specification.new do |s|
   # authentication / authorization
 
   s.add_dependency 'devise'
+  s.add_dependency 'cancan'
   s.add_dependency 'omniauth', '1.0.3'
   s.add_dependency 'omniauth-facebook'
   s.add_dependency 'omniauth-tumblr'
-  s.add_dependency 'omniauth-twitter'
-  s.add_dependency 'cancan'
   
   # cannot load such file -- devise/schema (LoadError)
   #  s.add_dependency 'devise_rpx_connectable'
@@ -116,9 +115,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'faraday'
   s.add_dependency 'faraday_middleware'
- 
-  # web services
-  s.add_dependency 'twitter', '2.0.2'
   
   # group :development
   s.add_development_dependency 'letter_opener'
