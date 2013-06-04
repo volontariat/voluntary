@@ -20,6 +20,8 @@ Add this to your Gemfile:
 
   gem 'voluntary'
   
+Add voluntary products to your Gemfile.  
+  
 Run this in your console:
 
   bundle install  
@@ -27,7 +29,7 @@ Run this in your console:
 Run this in your console (confirm all overwrite questions):
 
   rails g voluntary:install
-  rake voluntary_engine:install:migrations  
+  rake railties:install:migrations
 
 Remove gem 'sqlite3' from your Gemfile.
 
