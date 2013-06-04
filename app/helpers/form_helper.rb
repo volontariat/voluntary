@@ -33,7 +33,11 @@ module FormHelper
     end
   end
     
-  def autocomplete_input(f, field)
-    f.input "#{field}_name", input_html: { data: {autocomplete: eval("autocomplete_#{field.to_s.tableize}_path")} }
+  def autocomplete_input(f, field, namespace = nil)
+    if namespace
+      f.input "#{field}_name", input_html: { data: {autocomplete: eval("autocomplete_#{namespace}_#{field.to_s.tableize}_path")} }
+    else
+      f.input "#{field}_name", input_html: { data: {autocomplete: eval("autocomplete_#{field.to_s.tableize}_path")} }
+    end
   end
 end
