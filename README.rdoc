@@ -33,6 +33,12 @@ Remove gem 'sqlite3' from your Gemfile.
 
 Copy the content of config/database.example.yml into config/database.yml
 
+Add this to your application.rb:
+
+  config.generators do |g|
+    g.orm :active_record
+  end
+
 Remove public/index.html
 
 Add at least 1 controller with 1 action, 1 view and a root route.
