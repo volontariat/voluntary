@@ -73,7 +73,7 @@ class DbSeed
         password: "#{role}2012", language: 'en', country: 'Germany', interface_language: 'en'
       }
       attributes[:password_confirmation] = attributes[:password]
-      create_record(User, attributes, events: ['skip_confirmation!'])
+      create_record(User, attributes) # events: ['skip_confirmation!']
     end
   end
   
