@@ -10,7 +10,7 @@ module Applicat::Mvc::Controller::Resource
   module InstanceMethods
     def autocomplete
       render json: (
-        controller_name.classify.constantize.
+        params[:controller].classify.constantize.
         select(:name).order(:name).where("name LIKE ?", "%#{params[:term]}%").
         map(&:name)
       )
