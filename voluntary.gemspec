@@ -125,7 +125,7 @@ Gem::Specification.new do |s|
 
   # group :development, :test
   s.add_development_dependency 'awesome_print'
-  s.add_development_dependency 'rspec-rails', '~> 2.10' 
+  s.add_development_dependency 'rspec-rails', '~> 2.0' 
   
   # group :test
   s.add_development_dependency 'capybara', '~> 1.1.2'
