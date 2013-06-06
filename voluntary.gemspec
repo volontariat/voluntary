@@ -15,14 +15,13 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib,vendor_extensions}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency 'rails', '~> 3.2.8'
+  s.add_dependency 'rails', '~> 3.2.13'
 
   # core
   s.add_dependency 'pg'
   s.add_dependency 'mongoid', '~> 3.0.0'
   s.add_dependency 'foreman', '0.46'
   s.add_dependency 'rails_autolink'
-  s.add_dependency 'rails_info'
   s.add_dependency 'remotipart', '~> 1.0'
   s.add_dependency 'messagebus_ruby_api', '1.0.3'
   
@@ -48,13 +47,15 @@ Gem::Specification.new do |s|
   s.add_dependency 'faker' # needed not just for testing but for rake db:seed, too
   s.add_dependency 'paper_trail'
   s.add_dependency 'mongoid-history'
+  s.add_dependency 'acts-as-taggable-on'
 
   # mongo model
   s.add_dependency 'mongoid_slug'
 
   # controller
   s.add_dependency 'has_scope'
-  s.add_dependency 'friendly_id', '~> 4.0.0'
+  
+  s.add_dependency 'friendly_id', '~> 4.0.0' # use 4.x for Rails 3 and later 5.x for Rails 4
   s.add_dependency 'wicked'
 
   # view
@@ -102,13 +103,13 @@ Gem::Specification.new do |s|
 
   # view
   s.add_dependency 'jquery-rails'
-  s.add_dependency 'jquery-ui-rails'
+  s.add_dependency 'jquery-ui-bootstrap-rails-asset'
   s.add_dependency 'auto_html'
   
   # ffi dependency older than the one from selenium-webdriver
   #  s.add_dependency 'pygments.rb'
 
-  s.add_dependency 'twitter-bootstrap-rails', '2.1.3'
+  #s.add_dependency 'twitter-bootstrap-rails', '2.1.3'
   s.add_dependency 'simple-navigation-bootstrap'
 
   # web
@@ -147,9 +148,8 @@ Gem::Specification.new do |s|
   # Gems used only for assets and not required  
   # in production environments by default.
   # group :assets
-  s.add_dependency 'sass-rails',   '~> 3.2.3'
-  s.add_dependency 'coffee-rails', '~> 3.2.1'
-
+  s.add_dependency 'sass-rails',     '~> 3.2.3'
+  s.add_dependency 'coffee-rails',   '~> 3.2.1'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   s.add_dependency 'handlebars_assets'
   s.add_dependency 'uglifier', '>= 1.0.3'
