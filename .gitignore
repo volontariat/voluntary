@@ -17,6 +17,7 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 /config/database.yml
-/spec/dummy/config/database.yml
-/spec/dummy/log/*
+/dummy/config/database.yml
+/dummy/log/*
+/dummy/tmp/*
 /pkg/
