@@ -11,6 +11,6 @@
 </div>
 <% content_for :document_ready do %>
   $( '.accordions' ).each(function(k, v) {
-    $(v).accordion({ active: <%= wizard_steps.index(step) %> })
+    $(v).accordion({ active: <%= wizard_steps.index(step).to_i %> })
   })
 <% end %>
