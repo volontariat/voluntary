@@ -18,7 +18,6 @@ module Voluntary
         
         # model 
         gem 'settingslogic', git: 'https://github.com/binarylogic/settingslogic.git'
-        gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on.git'
 
         # view 
         gem 'acts_as_markup', git: 'git://github.com/vigetlabs/acts_as_markup.git'
