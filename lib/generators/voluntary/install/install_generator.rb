@@ -19,8 +19,7 @@ module Voluntary
         # model 
         gem 'settingslogic', git: 'https://github.com/binarylogic/settingslogic.git'
         gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on.git'
-        gem 'cancan', git: 'https://github.com/ryanb/cancan.git', branch: '2.0'
-        
+
         # view 
         gem 'acts_as_markup', git: 'git://github.com/vigetlabs/acts_as_markup.git'
         gem 'auto_html', git: 'git://github.com/Applicat/auto_html'
