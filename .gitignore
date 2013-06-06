@@ -20,4 +20,5 @@ pickle-email-*.html
 /dummy/config/database.yml
 /dummy/log/*
 /dummy/tmp/*
+/dummy/db/structure.sql
 /pkg/
