@@ -1,6 +1,6 @@
 //= require jquery
-//= require jquery.ui.all
 //= require jquery_ujs
-//= require jquery.tokeninput
 //= require twitter/bootstrap
+//= require jquery-ui-bootstrap
+//= require jquery.tokeninput
 //= require_tree .

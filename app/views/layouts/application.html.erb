@@ -5,9 +5,15 @@
   <meta charset='utf-8'>
   <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
   <%= stylesheet_link_tag 'voluntary/application', media: 'all' %>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet"/>
 </head>
 <body>
   <%= render 'layouts/shared/navigation' %>
+  
+  <section id="dialog">
+    <img alt="Ajax-loader-small" class="hide " id="dialog_body_spinner" src="<%=image_path('voluntary/spinner.gif')%>"/>
+    <div id="dialog_body"/>
+  </section>
   
   <div class="container-fluid">
 <% unless flash.empty? %>

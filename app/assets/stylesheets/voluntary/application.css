@@ -10,6 +10,8 @@
  *
  *= require_self
  *= require token-input-facebook
+ *= require twitter/bootstrap
+ *= require jquery-ui-bootstrap
  *= require 'voluntary/bootstrap_and_overrides'
  *= require 'voluntary/base'
  */
