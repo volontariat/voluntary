@@ -7,7 +7,7 @@ class AddKlassNameToProducts < ActiveRecord::Migration
         product.klass_name = 'Product'
       else
         product.klass_name = [
-          'Product', name.gsub(' - ', '_').gsub('-', '_').gsub(' ', '_').classify
+          'Product', product.name.gsub(' - ', '_').gsub('-', '_').gsub(' ', '_').classify
         ].join('::')
       end
       
