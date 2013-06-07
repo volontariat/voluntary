@@ -1,21 +1,24 @@
-## voluntary (unreleased) ##
+## unreleased ##
 
-## voluntary 0.0.3 (November 19, 2012) ##
+## 0.1.0.rc1 (June 7, 2013) ##
+
+*   Updates twitter bootstrap and jquery ui.
+*   Removes rails_info dependency.
+*   Paints navigation black and more responsive.
+*   Allow mixin of cancan authorization abilities in products and client applications.
+*   Several small bug fixes and cleanup.
+*   Removes "twitter" (auth) dependencies
+
+## 0.0.3 (November 19, 2012) ##
 
 *   Adds vendor_extensions to gem specification's directories.
 
-    *Mathias Gawlista*
+## 0.0.2 (November 19, 2012) ##
 
-## voluntary 0.0.2 (November 19, 2012) ##
-
-*   Fixes some bugs regarding integration of product engines
+*   Fixes some bugs regarding integration of product engines.
 
 *   Adds product dummy generator.
 
-    *Mathias Gawlista*
-
-## voluntary 0.0.1 (November 11, 2012) ##
+## 0.0.1 (November 11, 2012) ##
 
 *   Initial version.
-
-    *Mathias Gawlista*

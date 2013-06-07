@@ -41,7 +41,7 @@ GIT
 PATH
   remote: .
   specs:
-    voluntary (0.0.3)
+    voluntary (0.1.0.rc1)
       activerecord-import
       acts-as-taggable-on
       acts_as_api
@@ -595,7 +595,7 @@ DEPENDENCIES
   rack-ssl
   recaptcha
   rspec-instafail (>= 0.1.7)
-  rspec-rails (~> 2.10)
+  rspec-rails (~> 2.0)
   ruby-debug
   selenium-webdriver (~> 2.22.1)
   settingslogic!
