@@ -21,7 +21,6 @@ Feature: Manage areas
   Scenario: Delete area
     Then I can't delete areas
     
-  @javascript
   Scenario: Nest area
     Given an area named "General"
     When I am on the area page
