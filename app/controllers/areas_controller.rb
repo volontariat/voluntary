@@ -8,7 +8,7 @@ class AreasController < ApplicationController
   respond_to :html, :js, :json
   
   def index
-    @areas = Area.order(:name)
+    @areas = Area.roots
       
     respond_to do |format|
       format.html
@@ -18,10 +18,11 @@ class AreasController < ApplicationController
   
   def show
     @area = Area.find(params[:id])
+    @areas = @area.children
   end
   
   def new
-    @area = Area.new
+    @area = Area.new(params[:area])
   end
   
   def create
