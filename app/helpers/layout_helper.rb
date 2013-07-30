@@ -2,6 +2,20 @@ module LayoutHelper
   def breadcrumbs
     result = render_navigation context: :main, renderer: :breadcrumbs_without_method_links, join_with: ' &gt; '
     result && result.split('<a').length > 2 ? result : ''
+    
+    if respond_to?(:resource) && resource.respond_to?(:ancestors)
+      breadcrumbs_with_ancestors(result)
+    else
+      result
+    end
+  end
+  
+  def breadcrumbs_with_ancestors(links)
+    links = links.split(' &gt; ')
+    current_resource_link = links.pop
+    links += resource.ancestors.map {|ancestor| link_to ancestor.name, ancestor }
+    links << current_resource_link
+    raw links.join(' &gt; ')    
   end
   
   def sidenav
