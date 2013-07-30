@@ -21,11 +21,11 @@ class Shared::Collection::TablePresenter < Presenter
   
   def new_link(options = {})
     return '' unless append_new_link
-    
+
     path = if current_parent
       send(
-        "new_#{root_model_class_name(current_parent).tableize.singularize}_#{type.gsub('.', '_').singularize}_path(current_parent)", 
-        options
+        "new_#{root_model_class_name(current_parent).tableize.singularize}_#{type.gsub('.', '_').singularize}_path", 
+        current_parent, options
       )
     else
       send("new_#{type.gsub('.', '_').singularize}_path", options)
