@@ -21,4 +21,7 @@ pickle-email-*.html
 /dummy/log/*
 /dummy/tmp/*
 /dummy/db/structure.sql
+/dummy/*.log
+/dummy/db/schema.rb
 /pkg/
+.rvmrc

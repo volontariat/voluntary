@@ -31,7 +31,7 @@ group :test do
 end
 
 group :development, :test do
-  gem "debugger", :platforms => :mri_19
+  #gem "debugger", :platforms => :mri_19
   gem "ruby-debug", :platforms => :mri_18
 end
 

@@ -19,13 +19,16 @@ class Shared::Collection::TablePresenter < Presenter
     content_tag :td, render('shared/resource/actions', type: type, resource: resource)
   end
   
-  def new_link
+  def new_link(options = {})
     return '' unless append_new_link
-    
+
     path = if current_parent
-      eval("new_#{root_model_class_name(current_parent).tableize.singularize}_#{type.gsub('.', '_').singularize}_path(current_parent)")
+      send(
+        "new_#{root_model_class_name(current_parent).tableize.singularize}_#{type.gsub('.', '_').singularize}_path", 
+        current_parent, options
+      )
     else
-      eval("new_#{type.gsub('.', '_').singularize}_path")
+      send("new_#{type.gsub('.', '_').singularize}_path", options)
     end
     
     link_to t("#{type}.new.title"), path

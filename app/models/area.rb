@@ -8,7 +8,7 @@ class Area < ActiveRecord::Base
   
   validates :name, presence: true, uniqueness: true
   
-  attr_accessible :name
+  attr_accessible :name, :parent_id
   
   extend FriendlyId
   
