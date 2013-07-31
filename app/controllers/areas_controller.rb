@@ -19,6 +19,7 @@ class AreasController < ApplicationController
   def show
     @area = Area.find(params[:id])
     @areas = @area.children
+    @projects = @area.projects
   end
   
   def new
