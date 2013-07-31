@@ -10,3 +10,7 @@
 <%= render 'shared/collection/table', 
   type: 'areas', collection: @areas, columns: ['name', 'users_count'], options: { area: { parent_id: @area.id } }
 %>
+
+<%= render 'shared/collection/table', 
+    type: 'projects', collection: @projects, columns: ['name', 'product_id'] 
+  %>
