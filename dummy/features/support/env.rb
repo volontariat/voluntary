@@ -24,6 +24,10 @@ Capybara.default_selector = :css
 
 Capybara.javascript_driver = ENV['JAVASCRIPT_DRIVER'] ? ENV['JAVASCRIPT_DRIVER'].to_sym : :webkit
 
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+
 Capybara.add_selector(:row) do
   xpath { |num| ".//tbody/tr[#{num}]" }
 end

@@ -4,7 +4,7 @@ Feature: Manage areas
   wants to add an area
   
   Background:
-  
+       
     Given a user named "user"
     And I log in as "user"
   
@@ -20,3 +20,12 @@ Feature: Manage areas
 
   Scenario: Delete area
     Then I can't delete areas
+    
+  Scenario: Nest area
+    Given an area named "General"
+    When I am on the area page
+    And I follow "New Area"
+    And I fill in "Name" with "Child"
+    And I press "Create"
+    Then I should see "Creation successful"
+    And I should see "Areas > General > Child"
