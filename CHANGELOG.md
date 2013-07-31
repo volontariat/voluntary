@@ -1,5 +1,9 @@
 ## unreleased ##
 
+## 0.1.0.rc2 (July 31, 2013) ##
+
+*   Support nesting of areas. #1 
+  
 ## 0.1.0.rc1 (June 7, 2013) ##
 
 *   Updates twitter bootstrap and jquery ui.
