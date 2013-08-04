@@ -63,7 +63,7 @@ Run this in your console:
   gem update bundler
   gem install rails --no-ri --no-rdoc -v=3.2.13
   cd ..
-  rails plugin new voluntary_music_research --database=postgresql --skip-javascript --skip-test-unit --dummy-path=dummy --full
+  rails plugin new voluntary_product_name --database=postgresql --skip-javascript --skip-test-unit --dummy-path=dummy --full
   cd voluntary_product_name
   # Add voluntary gem as a dependency to gemspec.
   # Add development dependencies to gemspec, see voluntary_text_creation.
