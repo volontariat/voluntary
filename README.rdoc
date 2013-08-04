@@ -61,7 +61,7 @@ Run this in your console:
   cd voluntary_product_name
   rvm --create use --rvmrc 1.9.3@voluntary_product_name
   gem update bundler
-  gem install rails --no-ri --no-rdoc
+  gem install rails --no-ri --no-rdoc -v=3.2.13
   cd ..
   rails plugin new voluntary_music_research --database=postgresql --skip-javascript --skip-test-unit --dummy-path=dummy --full
   cd voluntary_product_name
