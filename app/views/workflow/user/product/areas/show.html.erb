@@ -1,0 +1,14 @@
+<h3><%= params[:product_id] == 'no-name' ? 'No Name' : @product.name %></h3>
+
+<%= render 'shared/collection/table',
+  type: 'areas', collection: @areas, columns: {
+  	'name' => ->(resource) do
+  	  link_to resource.name, product_area_workflow_user_index_path(params[:product_id], resource)
+    end, 'users_count' => nil 
+  }
+%>
+
+<%= render 'shared/collection/table', 
+  type: 'projects', collection: @projects, columns: ['name']
+%>
+
