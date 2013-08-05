@@ -8,7 +8,11 @@
   }
 %>
 
-<%= render 'shared/collection/table', 
-  type: 'projects', collection: @projects, columns: ['name']
+<%= render 'shared/collection/table',
+  type: 'projects', collection: @projects, columns: {
+  	'name' => ->(resource) do
+  	  link_to resource.name, user_project_workflow_user_index_path(resource)
+    end
+  }
 %>
 
