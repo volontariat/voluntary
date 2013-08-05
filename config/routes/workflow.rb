@@ -12,6 +12,8 @@ namespace 'workflow' do
       match 'products/:id' => 'products#show', as: :product
       match 'products/:product_id/areas/:id' => 'user/product/areas#show', as: :product_area
       
+      match 'projects/:id' => 'user/projects#show', as: :user_project
+      
       match 'stories/:story_id/tasks' => 'tasks#index', as: :tasks
       match 'stories/:story_id/tasks/next' => 'tasks#next', as: :next_task
       put 'tasks/:id' => 'tasks#update', as: :update_task
