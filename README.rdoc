@@ -65,14 +65,15 @@ Run this in your console:
   cd ..
   rails plugin new voluntary_product_name --database=postgresql --skip-javascript --skip-test-unit --dummy-path=dummy --full
   cd voluntary_product_name
-  # Add voluntary gem as a dependency to gemspec.
+  # Add voluntary gem as a dependency to gemspec ('0.1.0.rc2').
   # Add development dependencies to gemspec, see voluntary_text_creation.
   bundle install
   cd dummy
+  # change config/boot.rb to require bundler through the else case mentioned here: https://github.com/volontariat/voluntary_classified_advertising/blob/master/dummy/config/boot.rb
   rails g voluntary:product_dummy # confirm all overwrite questions
   # Add "gemspec path: File.expand_path(File.dirname(__FILE__) + '/../')" to the top of the dummy's Gemfile
   bundle install # if it hangs at Fetching source index stop it and deactivate gems until it works and add them back one by one
-  >> migrations of voluntary and voluntary_* gems <<
+  rake railties:install:migrations
   # database.yml erstellen
   # optional: bundle exec rake db:migrate
   # add "require 'voluntary'" to ../lib/voluntary_product_name.rb
