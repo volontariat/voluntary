@@ -60,6 +60,9 @@ class Product
   def user; User.find(offeror_id); end
   def user=(value); self.user_id = value.id; end
   
+  # has_many (SQL)
+  def areas; Area.where(id: area_ids); end
+  
   private
   
   def english_name_available?
