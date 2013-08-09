@@ -22,12 +22,15 @@ module Voluntary
         
         # model 
         gem 'settingslogic', git: 'https://github.com/binarylogic/settingslogic.git'
-        gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on.git'
+        
+        # TODO: check if we need edge version
+        #gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on.git'
         
         # view 
         gem 'acts_as_markup', git: 'git://github.com/vigetlabs/acts_as_markup.git'
         gem 'auto_html', git: 'git://github.com/Applicat/auto_html'
         gem 'recaptcha', require: 'recaptcha/rails'
+        gem "will_paginate", github: "mislav/will_paginate"
         
         # queue
         

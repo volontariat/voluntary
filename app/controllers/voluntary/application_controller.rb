@@ -86,7 +86,11 @@ class Voluntary::ApplicationController < ActionController::Base
   end
   
   def not_found(e)
-    logger.info "not found (#{e.inspect})"
-    redirect_to root_path, notice: t('general.exceptions.not_found')
+    if Rails.env.development?
+      raise e
+    else
+      logger.info "not found (#{e.inspect})"
+      redirect_to root_path, notice: t('general.exceptions.not_found')
+    end
   end
 end

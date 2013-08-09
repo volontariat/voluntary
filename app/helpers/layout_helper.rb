@@ -18,9 +18,10 @@ module LayoutHelper
     raw links.join(' &gt; ')    
   end
   
-  def sidenav
+  def sidenav(links_count = 2)
+    links_count ||= 2
     result = render_navigation context: :main, renderer: :twitter_sidenav, level: @twitter_sidenav_level
-    result && result.split('<a').length > 2 ? result : ''
+    result && result.scan('<a').length >= links_count ? result : ''
   end
   
   def footer_navigation

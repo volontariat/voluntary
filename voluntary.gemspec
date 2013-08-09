@@ -43,11 +43,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'acts_as_list'
   s.add_dependency 'activerecord-import'
   s.add_dependency 'koala'
-  s.add_dependency 'ransack' 
+  s.add_dependency 'ransack'
   s.add_dependency 'faker' # needed not just for testing but for rake db:seed, too
   s.add_dependency 'paper_trail'
   s.add_dependency 'mongoid-history'
-  s.add_dependency 'acts-as-taggable-on'
+  s.add_dependency 'acts-as-taggable-on', '2.4.1'
 
   # mongo model
   s.add_dependency 'mongoid_slug'
@@ -130,6 +130,7 @@ Gem::Specification.new do |s|
   # group :test
   s.add_development_dependency 'capybara', '~> 1.1.2'
   s.add_development_dependency 'capybara-webkit'
+  s.add_development_dependency 'cucumber-rails', '1.3.0'
   s.add_development_dependency 'cucumber-rails-training-wheels'
   s.add_development_dependency 'timecop'
   s.add_development_dependency 'factory_girl_rails', '1.7.0'
