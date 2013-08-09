@@ -1,0 +1,38 @@
+"stories/new"->"StoriesController": "#new"
+  "StoriesController"->"StoriesController": "#render_wizard"
+  "StoriesController"->"StoryPresenter": ".new"
+  "StoryPresenter"->"StoriesController": "@presenter"
+  "StoriesController"->"general/wizard": "#render"
+    "general/wizard"->"Wizard::\nController::\nConcerns::Steps": "#wizard_steps"
+    
+    loop wizard_step in wizard_steps
+      "general/wizard"->"WizardHelper": "#section_header"
+      
+      alt "WizardHelper#future_step?(wizard_step)"
+    		"general/wizard"->"WizardHelper": "nothing"
+    	else
+    	  "general/wizard"->"WizardHelper": "#step_pane"
+      	  WizardHelper->StoryPresenter: "#{wizard_step}"
+      	    StoryPresenter->#{Product||}\nStoryPresenter::\nSteps::\n#{wizard_step}\nPresenter: ".new"
+      	  StoryPresenter->WizardHelper: "@step_presenter"
+      	  WizardHelper->"wizard_step_partial": "#render"
+      	    note right of wizard_step_partial: submit form
+      	    "wizard_step_partial"->"StoriesController": "#create"
+    	end
+   end
+
+note right of StoriesController: #redirect
+"StoriesController"->"StoriesController": "#edit"
+
+StoriesController->"wizard_step_partial": "#render"
+
+note right of wizard_step_partial: submit form
+"wizard_step_partial"->"StoriesController": "#update"
+	    
+  alt "Current event already processed?"
+    StoriesController->Story: "#save"
+  else
+    StoriesController->Story: "#{event}"
+    
+    
+ 

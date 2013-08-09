@@ -10,6 +10,12 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_and_belongs_to_many :areas
   
+  scope :for_product_id, ->(product_id) do
+    product_id = product_id.to_s
+    product_id = product_id == 'no-name' ? '' : product_id
+    where(product_id: product_id)
+  end
+  
   accepts_nested_attributes_for :areas, allow_destroy: true
   
   validates :user_id, presence: true
