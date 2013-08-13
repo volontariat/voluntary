@@ -15,8 +15,8 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib,vendor_extensions}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency 'rails', '~> 3.2.13'
-
+  s.add_dependency 'rails', '~> 3.2.14'
+  
   # core
   s.add_dependency 'pg'
   s.add_dependency 'mongoid', '~> 3.0.0'
@@ -47,16 +47,17 @@ Gem::Specification.new do |s|
   s.add_dependency 'faker' # needed not just for testing but for rake db:seed, too
   s.add_dependency 'paper_trail'
   s.add_dependency 'mongoid-history'
-  s.add_dependency 'acts-as-taggable-on'
+  s.add_dependency 'acts-as-taggable-on', '2.4.1'
 
   # mongo model
   s.add_dependency 'mongoid_slug'
 
   # controller
   s.add_dependency 'has_scope'
-  
   s.add_dependency 'friendly_id', '~> 4.0.0' # use 4.x for Rails 3 and later 5.x for Rails 4
   s.add_dependency 'wicked'
+  s.add_dependency 'rails-api'
+  s.add_dependency 'versionist'
 
   # view
   s.add_dependency 'simple-navigation'  
@@ -130,6 +131,7 @@ Gem::Specification.new do |s|
   # group :test
   s.add_development_dependency 'capybara', '~> 1.1.2'
   s.add_development_dependency 'capybara-webkit'
+  s.add_development_dependency 'cucumber-rails', '1.3.0' 
   s.add_development_dependency 'cucumber-rails-training-wheels'
   s.add_development_dependency 'timecop'
   s.add_development_dependency 'factory_girl_rails', '1.7.0'
