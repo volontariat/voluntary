@@ -30,7 +30,7 @@ class Vacancy < ActiveRecord::Base
     limit - candidatures.accepted.count
   end
   
-  private
+  protected
   
   def set_defaults
     if project
