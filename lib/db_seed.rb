@@ -1,7 +1,12 @@
 require 'faker'
 
 class DbSeed
-  USER_ROLES = {}
+  USER_ROLES = {
+    master: {},
+    admin: {},
+    project_owner: {},
+    user: {}
+  }
   
   attr_accessor :logger, :user_roles
   
