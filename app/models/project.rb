@@ -74,6 +74,6 @@ class Project < ActiveRecord::Base
   end
   
   def destroy_non_active_records
-    stories.all.map(&:destroy)
+    stories.destroy_all
   end
 end
