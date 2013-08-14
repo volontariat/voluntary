@@ -12,6 +12,12 @@ module Voluntary
       def gem_dependencies
         create_file 'Gemfile', ''
         
+        append_file 'Gemfile', :verbose => true do
+          <<-EOH
+gemspec path: File.expand_path(File.dirname(__FILE__) + "/../")
+          EOH
+        end
+        
         add_source "http://rubygems.org"
         add_source "http://gems.github.com"
         
