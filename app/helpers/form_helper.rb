@@ -12,7 +12,8 @@ module FormHelper
     
     id = new_object.object_id
 
-    fields = f.fields_for(association, new_object, child_index: id) do |builder|
+    #fields = f.fields_for(association, new_object, child_index: id) do |builder|
+    fields = f.simple_fields_for(association) do |builder|
       render_product_specific_partial_if_available(
         new_object, "#{controller_name}/#{association.to_s.singularize}_fields",
         f: builder
