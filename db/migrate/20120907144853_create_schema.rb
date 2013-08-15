@@ -1,5 +1,9 @@
+require Rails.root.join('spec', 'support', 'mongo_database_cleaner')
+
 class CreateSchema < ActiveRecord::Migration
   def up
+    MongoDatabaseCleaner.clean
+    
     create_table :users do |t|
       t.string :name
       t.string :slug
