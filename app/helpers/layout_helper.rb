@@ -1,7 +1,7 @@
 module LayoutHelper
   def breadcrumbs
     result = render_navigation context: :main, renderer: :breadcrumbs_without_method_links, join_with: ' &gt; '
-    result && result.split('<a').length > 2 ? result : ''
+    result = result && result.scan('<a').length > 1 ? result : ''
     
     if respond_to?(:resource) && resource.respond_to?(:ancestors)
       breadcrumbs_with_ancestors(result)
