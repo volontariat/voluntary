@@ -1,5 +1,9 @@
+require Rails.root.join('spec', 'support', 'mongo_database_cleaner')
+
 class CreateSchema < ActiveRecord::Migration
   def up
+    MongoDatabaseCleaner.clean
+    
     create_table :users do |t|
       t.string :name
       t.string :slug
@@ -209,6 +213,8 @@ class CreateSchema < ActiveRecord::Migration
     add_index :friendly_id_slugs, :sluggable_id
     add_index :friendly_id_slugs, [:slug, :sluggable_type], :unique => true
     add_index :friendly_id_slugs, :sluggable_type
+    
+    DbSeed.new.create_fixtures
   end
   
   def down
