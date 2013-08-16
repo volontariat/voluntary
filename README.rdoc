@@ -77,7 +77,7 @@ Run this in your console:
   bundle install # if it hangs at Fetching source index stop it and deactivate gems until it works and add them back one by one
   rake railties:install:migrations
   # change database names to #{product_name}_#{environment} and customize user credentials in config/mongoid.yml
-  rake db:migrate
+  rake db:migrate && rake db:test:clone_structure
   bundle exec rails s
   
 = License 
