@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include ::Applicat::Mvc::Model::Resource::Base
+  include List
   
   belongs_to :main_role, class_name: 'Role'
   belongs_to :profession
