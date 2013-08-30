@@ -20,7 +20,7 @@ module StateMachines::Story
         end
         
         state :tasks_defined do
-          validates_associated :tasks
+          #validates_associated :tasks
           validate :presence_of_tasks
         end
         
@@ -40,7 +40,15 @@ module StateMachines::Story
       private
       
       def presence_of_tasks
-        unless tasks.any?
+        self.tasks.delete_if{|t| t.name.blank? && t.text.blank? }
+        
+        if tasks.select{|t| !t.valid?}.any?
+          errors[:base] << I18n.t(
+            'activerecord.errors.models.story.attributes.base.invalid_tasks'
+          )
+        end
+        
+        if tasks.none?
           errors[:base] << I18n.t(
             'activerecord.errors.models.story.attributes.base.missing_tasks'
           )

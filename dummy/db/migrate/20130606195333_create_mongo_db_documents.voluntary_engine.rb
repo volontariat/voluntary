@@ -2,7 +2,7 @@
 class CreateMongoDbDocuments < ActiveRecord::Migration
   def change
     create_table :mongo_db_documents do |t|
-      t.integer :mongo_db_object_id
+      t.string :mongo_db_object_id
       t.string :klass_name
       t.string :name
       t.string :slug
