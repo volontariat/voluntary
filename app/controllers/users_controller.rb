@@ -18,7 +18,6 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @presenter = Resources::User::FormPresenter.new(self.view_context, resource: resource)
   end
   
   def preferences
@@ -48,5 +47,6 @@ class UsersController < ApplicationController
   
   def find_resource
     @user = User.find(params[:id])
+    @presenter = Resources::User::FormPresenter.new(self.view_context, resource: resource)
   end
 end
