@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   
   # authentication / authorization
 
-  s.add_dependency 'devise'
+  s.add_dependency 'devise', '~> 2'
   s.add_dependency 'cancan'
   s.add_dependency 'omniauth', '1.0.3'
   s.add_dependency 'omniauth-facebook'
@@ -104,6 +104,7 @@ Gem::Specification.new do |s|
   # view
   s.add_dependency 'jquery-rails'
   s.add_dependency 'jquery-ui-bootstrap-rails-asset'
+  s.add_dependency 'bootstrap-sass-rails', '~> 2'
   s.add_dependency 'auto_html'
   
   # ffi dependency older than the one from selenium-webdriver
