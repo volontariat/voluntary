@@ -1,5 +1,9 @@
 ## unreleased ##
 
+## 0.1.0.rc4 (September 9, 2013) ##
+
+*   Select product in /workflow/user/products/:product_id/areas/:id
+
 ## 0.1.0.rc3 (September 6, 2013) ##
 
 *   Fixes invalid user update form by initializing presenter.
