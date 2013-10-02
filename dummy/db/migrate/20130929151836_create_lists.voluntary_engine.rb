@@ -1,3 +1,4 @@
+# This migration comes from voluntary_engine (originally 20130817090734)
 class CreateLists < ActiveRecord::Migration
   def up
     create_table :lists, force:  true do |t|
