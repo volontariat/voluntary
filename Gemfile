@@ -8,10 +8,10 @@ gemspec
 gem "rack-cors", "~> 0.2.4", :require => "rack/cors"
 gem "thin", "~> 1.3.1", :require => false
 gem "settingslogic", :git => "https://github.com/binarylogic/settingslogic.git"
-gem "acts_as_markup", :git => "git://github.com/vigetlabs/acts_as_markup.git"
+gem "acts_as_markup"#, :git => "git://github.com/vigetlabs/acts_as_markup.git"
 gem "auto_html", :git => "git://github.com/Applicat/auto_html"
 gem "recaptcha", :require => "recaptcha/rails"
-gem "sinatra", :require => false
+#gem "sinatra", :require => false
 gem "addressable", "~> 2.2", :require => "addressable/uri"
 gem "jasmine", :git => "https://github.com/pivotal/jasmine-gem.git"
 
