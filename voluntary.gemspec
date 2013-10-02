@@ -15,8 +15,8 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib,vendor_extensions}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency 'rails', '~> 3.2.14'
-  
+  s.add_dependency 'rails', '~> 3.2.13'
+
   # core
   s.add_dependency 'pg'
   s.add_dependency 'mongoid', '~> 3.0.0'
@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   
   # authentication / authorization
 
-  s.add_dependency 'devise'
+  s.add_dependency 'devise', '~> 2'
   s.add_dependency 'cancan'
   s.add_dependency 'omniauth', '1.0.3'
   s.add_dependency 'omniauth-facebook'
@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'acts_as_list'
   s.add_dependency 'activerecord-import'
   s.add_dependency 'koala'
-  s.add_dependency 'ransack' 
+  s.add_dependency 'ransack'
   s.add_dependency 'faker' # needed not just for testing but for rake db:seed, too
   s.add_dependency 'paper_trail'
   s.add_dependency 'mongoid-history'
@@ -54,6 +54,7 @@ Gem::Specification.new do |s|
 
   # controller
   s.add_dependency 'has_scope'
+  
   s.add_dependency 'friendly_id', '~> 4.0.0' # use 4.x for Rails 3 and later 5.x for Rails 4
   s.add_dependency 'wicked'
   s.add_dependency 'rails-api'
@@ -105,6 +106,7 @@ Gem::Specification.new do |s|
   # view
   s.add_dependency 'jquery-rails'
   s.add_dependency 'jquery-ui-bootstrap-rails-asset'
+  s.add_dependency 'bootstrap-sass-rails', '~> 2'
   s.add_dependency 'auto_html'
   
   # ffi dependency older than the one from selenium-webdriver
@@ -131,7 +133,7 @@ Gem::Specification.new do |s|
   # group :test
   s.add_development_dependency 'capybara', '~> 1.1.2'
   s.add_development_dependency 'capybara-webkit'
-  s.add_development_dependency 'cucumber-rails', '1.3.0' 
+  s.add_development_dependency 'cucumber-rails', '1.3.0'
   s.add_development_dependency 'cucumber-rails-training-wheels'
   s.add_development_dependency 'timecop'
   s.add_development_dependency 'factory_girl_rails', '1.7.0'
