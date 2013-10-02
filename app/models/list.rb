@@ -7,7 +7,7 @@ class List < ActiveRecord::Base
   validates :topic, presence: true, uniqueness: { scope: [:adjective, :scope] }
   validates :scope, presence: true
   
-  pusherable "#{Rails.env}_channel"
+  #pusherable "#{Rails.env}_channel"
   
   def self.find_or_create_by_params(params)
     attributes = (params[:user_list_item] || params[:list_item] || params).clone
