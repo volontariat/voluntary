@@ -1,3 +1,3 @@
 class Thing < ActiveRecord::Base
-  include BaseThing
+  include Concerns::Model::BaseThing
 end

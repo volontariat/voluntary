@@ -1,5 +1,5 @@
 class ListItem < ActiveRecord::Base
-  include BaseListItem
+  include Concerns::Model::BaseListItem
   
   attr_accessible :list_id, :thing, :thing_type, :thing_id, :best, :stars
   
