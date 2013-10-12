@@ -1,5 +1,9 @@
 ## unreleased ##
 
+## 0.1.0 (October 13, 2013) ##
+
+*   voluntary_translation support with new model column.
+
 ## 0.1.0.rc4 (September 9, 2013) ##
 
 *   Select product in /workflow/user/products/:product_id/areas/:id
