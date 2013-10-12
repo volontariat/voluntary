@@ -151,6 +151,7 @@ Gem::Specification.new do |s|
   # in production environments by default.
   # group :assets
   s.add_dependency 'sass-rails',     '~> 3.2.3'
+  s.add_dependency 'sass', '3.2.10'
   s.add_dependency 'coffee-rails',   '~> 3.2.1'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   s.add_dependency 'handlebars_assets'

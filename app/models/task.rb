@@ -33,8 +33,8 @@ class Task
   
   validates :story_id, presence: true
   validates :offeror_id, presence: true
-  validates :name, presence: true, uniqueness: { scope: :story_id }
   validates :text, presence: true, if: ->(t) { t.class.name == 'Task' }
+  validate :name_valid?
   
   after_initialize :cache_associations
   before_validation :cache_associations  
@@ -58,6 +58,19 @@ class Task
       "#{product.class.name}::Result".constantize rescue Result
     else
       Result
+    end
+  end
+  
+  protected
+  
+  # validates :name, presence: true, uniqueness: { scope: :story_id }
+  def name_valid?
+    if name.present?
+      if Task.where(name: name, story_id: story_id).any?
+        errors.add(:name, I18n.t('errors.messages.taken'))
+      end
+    else
+      errors.add(:name, I18n.t('errors.messages.blank'))
     end
   end
   

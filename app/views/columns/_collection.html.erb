@@ -1,0 +1,12 @@
+<% options ||= {} %>
+<% options = {
+  current_parent: parent, show_title: true, append_new_link: true,
+  columns: ['key', 'text']
+}.merge(options) %>
+<%= render partial: 'shared/collection/table', locals: { 
+  type: 'columns', collection: collection, columns: options[:columns], 
+  options: {
+    append_new_link: options[:append_new_link], show_title: options[:show_title],
+    current_parent: options[:current_parent]
+  }
+} %>

@@ -43,7 +43,6 @@ class StoriesController < ApplicationController
   
   def update
     @story.attributes = params[:story]
-    
     success = params[:next_step] == '1' ? @story.send(step) : @story.save
     
     if success

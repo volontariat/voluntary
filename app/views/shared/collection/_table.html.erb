@@ -33,4 +33,6 @@
 </table>
 <% end %>
 
-<%= table_presenter.new_link(options) %>
+<% unless options[:append_new_link] == false %>
+  <%= table_presenter.new_link(options) %>
+<% end %>
