@@ -51,7 +51,8 @@ class Story
   def next_task_for_user(user)
     return nil if (users_without_tasks_ids || []).include?(user.id)
     
-    task = tasks.assigned.where(user_id: user.id).first
+    task = tasks.assigned.not.in(state: ['under_supervision', 'completed']).
+           where(user_id: user.id).first
     
     return task if task
     
