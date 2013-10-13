@@ -15,11 +15,11 @@ class Area < ActiveRecord::Base
   friendly_id :name, :use => :slugged
   
   def self.find_by_product_id(product_id)
-    roots.joins(:projects).merge(Project.for_product_id(product_id)).group('areas.id')
+    roots.joins(:projects).merge(Project.for_product_id(product_id))
   end
   
   def children_for_product_id(product_id)
-    children.joins(:projects).merge(Project.for_product_id(product_id)).group('areas.id')
+    children.joins(:projects).merge(Project.for_product_id(product_id))
   end
     
   def products
