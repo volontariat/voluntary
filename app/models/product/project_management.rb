@@ -6,7 +6,7 @@ module Product::ProjectManagement
   end
   
   module ClassMethods
-    def stories(id, user, page)
+    def stories(id, user)
       collection = if id == 'no-name'
         Story.exists(_type: false)
       else
@@ -19,7 +19,7 @@ module Product::ProjectManagement
         end
       end
       
-      collection.where(:users_without_tasks_ids.ne => user.id)#.page(page).per(1)
+      collection.where(:users_without_tasks_ids.ne => user.id)
     end
   end
     

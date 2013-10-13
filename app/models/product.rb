@@ -40,7 +40,7 @@ class Product
     struct
   end
   
-  def self.stories(id, user, page)
+  def self.stories(id, user)
     collection = if id == 'no-name'
       Story.exists(_type: false)
     else
@@ -53,7 +53,11 @@ class Product
       end
     end
     
-    collection.where(:users_without_tasks_ids.ne => user.id)#.page(page).per(1)
+    collection.where(:users_without_tasks_ids.ne => user.id)
+  end
+  
+  def stories_for_user(user)
+    self.class.stories(id, user)
   end
   
   # belongs_to (SQL)
