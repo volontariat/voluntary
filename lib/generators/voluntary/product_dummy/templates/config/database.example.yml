@@ -21,7 +21,7 @@ production:
   encoding: utf8
   pool: 5
   host: localhost
-  username: volontariat
+  username: root
   password:
   
 cucumber:

@@ -1,18 +1,19 @@
 module FormHelper
   def link_to_add_fields(name, f, association, options = {})
     attributes = { 
-      "#{root_model_class_name(f.object).tableize.singularize}_id".to_sym => f.object.id
+      "#{root_model_class_name(f.object).tableize.singularize}".to_sym => f.object 
     }
     
     new_object = if f.object.respond_to? "#{association.to_s.singularize}_class"
-      f.object.tasks.new(attributes)
+      f.object.send("#{association.to_s.singularize}_class").new(attributes) 
     else
       f.object.send(association).new(attributes)
     end
     
     id = new_object.object_id
 
-    fields = f.fields_for(association, new_object, child_index: id) do |builder|
+    #fields = f.fields_for(association, new_object, child_index: id) do |builder|
+    fields = f.simple_fields_for(association) do |builder|
       render_product_specific_partial_if_available(
         new_object, "#{controller_name}/#{association.to_s.singularize}_fields",
         f: builder
