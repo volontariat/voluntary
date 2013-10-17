@@ -65,6 +65,8 @@ class Task
   
   # validates :name, presence: true, uniqueness: { scope: :story_id }
   def name_valid?
+    return unless name_changed?
+    
     if name.present?
       if Task.where(name: name, story_id: story_id).any?
         errors.add(:name, I18n.t('errors.messages.taken'))
