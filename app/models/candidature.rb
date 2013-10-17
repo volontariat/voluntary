@@ -27,6 +27,10 @@ class Candidature < ActiveRecord::Base
     vacancy.project
   end
   
+  def product
+    project.product
+  end
+  
   private
   
   def set_offeror
