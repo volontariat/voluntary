@@ -61,7 +61,7 @@ class Story
     if task
       task.user_id = user.id
     
-      return task.errors.full_messages.join('<br/>') unless task.assign
+      raise task.errors.full_messages.join('<br/>') unless task.assign
     else
       self.users_without_tasks_ids ||= []
       self.users_without_tasks_ids << user.id
