@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   
   has_many :offeror_vacancies, source: :offeror, class_name: 'Vacancy'
   has_many :offeror_candidatures, source: :offeror, class_name: 'Candidature'
-  has_many :candidatures
+  has_many :candidatures, as: :resource
   
   accepts_nested_attributes_for :areas, allow_destroy: true
   

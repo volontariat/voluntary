@@ -18,7 +18,8 @@
             <%= render partial: 'shared/collection/table', locals: { 
               type: 'candidatures', collection: @candidatures[state], 
               columns: { 
-                'project_id' => 'vacancy.project', 'vacancy_id' => '', 'name' => 'user.name', 'user_id' => ''
+                'project_id' => 'vacancy.project', 'vacancy_id' => '', 'name' => 'user.name', 
+                'resource_id' => ''
               },
               options: {show_title: false, append_new_link: false }
             } %>

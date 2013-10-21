@@ -12,11 +12,15 @@ class CandidaturesController < ApplicationController
   respond_to :html, :js, :json
   
   def index
-    @candidatures = @vacancy ? @vacancy.candidatures.includes(:vacancy, :user) : Candidature.includes(:vacancy, :user).all
+    @candidatures = if @vacancy
+      @vacancy.candidatures.includes(:vacancy, :resource)
+    else 
+      Candidature.includes(:vacancy, :resource).all
+    end
   end
   
   def show
-    @candidature = Candidature.includes(:vacancy, :user, :comments).find(params[:id])
+    @candidature = Candidature.includes(:vacancy, :resource, :comments).find(params[:id])
     @vacancy = @candidature.vacancy
     @comments = @candidature.comments
   end
@@ -28,7 +32,8 @@ class CandidaturesController < ApplicationController
   
   def create
     @candidature = Candidature.new(params[:candidature])
-    @candidature.user_id = current_user.id
+    @candidature.resource_type = 'User'
+    @candidature.resource_id = current_user.id
     
     if @candidature.save
       redirect_to @candidature, notice: t('general.form.successfully_created')

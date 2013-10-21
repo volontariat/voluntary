@@ -3,15 +3,9 @@ class CandidatureObserver < ActiveRecord::Observer
   end
   
   def before_transition(object, transition)
-    #object.event = transition.event.to_s
-    #object.from_state = transition.from
   end
  
   def after_transition(object, transition)
-    #object.initiator_user = object.initiator_user
-    #object.trigger = object.trigger
-    #object.trigger_object = object.trigger_object
-            
     case transition.to
       when 'accepted'
         ProjectUser.find_or_create_by_project_id_and_vacancy_id_and_user_id!(

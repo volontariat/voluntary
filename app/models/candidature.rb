@@ -3,7 +3,7 @@ class Candidature < ActiveRecord::Base
   
   belongs_to :vacancy
   belongs_to :offeror, class_name: 'User'
-  belongs_to :user
+  belongs_to :resource, polymorphic: true
 
   has_many :comments, as: :commentable, dependent: :destroy
 
@@ -11,7 +11,7 @@ class Candidature < ActiveRecord::Base
 
   validates :vacancy_id, presence: true
   validates :offeror_id, presence: true
-  validates :user_id, presence: true, uniqueness: { scope: :vacancy_id }
+  validates :resource_id, presence: true, uniqueness: { scope: [:resource_type, :vacancy_id] }
   #validates :name, presence: true, uniqueness: { scope: :vacancy_id }
   validates :text, presence: true
   

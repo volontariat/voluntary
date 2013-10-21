@@ -30,11 +30,13 @@ class Ability
       can [:update, :cancel, :review], Task, user_id: user.id
       
       { 
-        user_id: [Product, Project, Candidature, Comment, ProjectUser, Result], 
+        user_id: [Product, Project, Comment, ProjectUser, Result], 
         offeror_id: [Vacancy, Story, Task]
       }.each do |attribute, classes|
         can :restful_actions, classes, attribute => user.id   
       end
+      
+      can :restful_actions, Candidature, resource_type: 'User', resource_id: user.id
       
       can Candidature::EVENTS, Candidature, offeror_id: user.id
       can Vacancy::EVENTS, Vacancy, offeror_id: user.id

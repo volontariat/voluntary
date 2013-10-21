@@ -14,7 +14,7 @@ class Workflow::CandidaturesController < ApplicationController
   private
   
   def state_action
-    @candidatures = current_user.offeror_candidatures.where(state: action_name).includes(:vacancy, :user)
+    @candidatures = current_user.offeror_candidatures.where(state: action_name).includes(:vacancy, :resource)
     render 'candidatures/index'
   end
 end

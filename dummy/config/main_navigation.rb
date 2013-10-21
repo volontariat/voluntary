@@ -158,7 +158,7 @@ SimpleNavigation::Configuration.run do |navigation|
           
             unless (@candidature.new_record? rescue true)
               candidatures.item(
-                :show, t('activerecord.models.candidature') + " of #{@candidature.user.name} @ #{@candidature.vacancy.project.name}", 
+                :show, t('activerecord.models.candidature') + " of #{@candidature.resource.name} @ #{@candidature.vacancy.project.name}", 
                 candidature_path(@candidature) 
               ) do |candidature|
                 if can? :destroy, @candidature
