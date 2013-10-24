@@ -20,7 +20,7 @@ class Vacancy < ActiveRecord::Base
   validates :text, presence: true
   validates :limit, presence: true
   
-  attr_accessible :project_id, :name, :text, :limit
+  attr_accessible :project_id, :name, :text, :limit, :candidatures_attributes
   
   extend FriendlyId
   
