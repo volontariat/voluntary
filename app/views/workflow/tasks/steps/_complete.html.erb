@@ -1,7 +1,11 @@
-<%= render 'workflow/tasks/work_head', resource: resource %>
+<%= render_product_specific_partial_if_available(
+  resource, 'workflow/tasks/work_head' 
+) %>
 
 <%= simple_form_for(resource, url: update_task_workflow_user_index_path(resource), html: {class: 'form-horizontal'}) do |f| %>
-  <%= render 'workflow/tasks/work_form', f: f, resource: resource %>
+  <%= render_product_specific_partial_if_available(
+    resource, 'workflow/tasks/work_form', f: f, resource: resource 
+  ) %>
   
   <div class="form-actions">
     <%= f.button :submit %>
