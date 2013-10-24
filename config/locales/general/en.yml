@@ -3,6 +3,8 @@ en:
     index:
       title: Home
     new: New
+    denied: Denied
+    accepted: Accepted
     edit: Edit
     destroy: Destroy
     remove: Remove
@@ -44,6 +46,7 @@ en:
     attributes:
       general:
         name: Name 
+        text: Text
         parent: Parent
         project_id: Project
         state: State
