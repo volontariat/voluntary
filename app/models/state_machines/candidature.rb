@@ -18,7 +18,7 @@ module StateMachines::Candidature
         end
         
         event :deny do
-          transition :new => :denied
+          transition [:new, :accepted] => :denied
         end
         
         event :quit do
