@@ -61,6 +61,41 @@ class Task
     end
   end
   
+  def with_result?
+    true
+  end
+  
+  def before_transition(transition)
+    self.event = transition.event.to_s
+    self.state_before = transition.from
+    
+    case transition.event
+    when :assign
+      self.author_id = self.user_id
+    when :cancel
+      self.unassigned_user_ids ||= []
+      self.unassigned_user_ids << self.user_id
+      self.user_id = nil
+      self.author_id = nil
+      self.result.text = nil if self.result
+    when :review
+      self.user_id = self.offeror_id
+    when :follow_up
+      self.user_id = self.author_id
+    end
+  end
+  
+  def after_transition(transition)
+    case transition.event
+    when :follow_up
+      self.story.activate if self.story.completed?
+    when :complete
+      if self.story.tasks.complete.count == self.story.tasks.count
+        self.story.complete
+      end
+    end
+  end
+  
   protected
   
   # validates :name, presence: true, uniqueness: { scope: :story_id }
