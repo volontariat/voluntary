@@ -13,9 +13,8 @@ class Candidature < ActiveRecord::Base
   validates :offeror_id, presence: true
   validates :resource_id, presence: true, uniqueness: { scope: [:resource_type, :vacancy_id] }
   #validates :name, presence: true, uniqueness: { scope: :vacancy_id }
-  validates :text, presence: true
   
-  attr_accessible :vacancy_id, :name, :text
+  attr_accessible :vacancy, :vacancy_id, :name, :text
   
   #extend FriendlyId
   #friendly_id :name, use: :slugged
