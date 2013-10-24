@@ -78,7 +78,7 @@ class Workflow::TasksController < ApplicationController
     method = params[:event] ? params[:event].keys.first : 'save'
     success = false
     
-    if @result.valid?
+    if (@task.with_result? && @result.valid?) || (!@task.with_result? && @task.valid?)
       success = if params[:next_step] == '1' || (params[:event] && params[:event][:next])
         @task.send(step) 
       elsif (method == 'save' && can?(:update, @task)) || can?(method.to_sym, @task)
@@ -90,7 +90,7 @@ class Workflow::TasksController < ApplicationController
     
     render 'edit' and return unless success
         
-    @result.save
+    @result.save if @task.with_result?
     
     if params[:event] && params[:event][:next]
       redirect_to(
