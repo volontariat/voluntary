@@ -1,28 +1,29 @@
 development:
- adapter: postgresql
- database: voluntary_development
- encoding: unicode
- pool: 5
- username: root
- password:
-
-test: &TEST
- adapter: postgresql
- database: voluntary_test
- username: root
- password:
- encoding: unicode
- pool: 5
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: voluntary_production
+  adapter: mysql2
   encoding: utf8
-  host: localhost
+  reconnect: false
+  database: voluntary_development
   pool: 5
   username: root
-  password:
+  password: 
+
+test: &TEST
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: voluntary_test
+  pool: 5
+  username: root
+  password: 
+ 
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: voluntary_production
+  pool: 5
+  username: root
+  password: 
   
 cucumber:
  <<: *TEST

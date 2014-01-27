@@ -1,0 +1,5 @@
+gemspec path: File.expand_path(File.dirname(__FILE__) + "/../")
+
+group :development do
+  gem 'mysql2'
+end
