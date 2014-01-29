@@ -48,7 +48,7 @@ module ApplicationHelper
   
   def general_attribute?(attribute)
     begin
-      t("activerecord.attributes.general.#{attribute}", raise: true)
+      I18n.t("activerecord.attributes.general.#{attribute}", raise: true)
       true
     rescue
       false

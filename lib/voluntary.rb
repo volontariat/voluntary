@@ -1,3 +1,7 @@
+# controller
+require 'rails-api'
+
+# misc
 require 'pg'
 require 'mongoid'
 require 'foreman'
