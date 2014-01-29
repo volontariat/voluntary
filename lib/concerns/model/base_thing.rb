@@ -17,8 +17,6 @@ module Concerns
         
         validates :name, presence: true, uniqueness: true
         
-        acts_as_list
-        
         #pusherable "#{Rails.env}_channel"
       end
       
