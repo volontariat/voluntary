@@ -15,11 +15,11 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib,vendor_extensions}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency 'rails', '~> 3.2.13'
+  s.add_dependency 'rails', '~> 3.2.16'
 
   # core
   s.add_dependency 'pg'
-  s.add_dependency 'mongoid', '~> 3.0.0'
+  s.add_dependency 'mongoid', '~> 3.1.0'
   s.add_dependency 'foreman', '0.46'
   s.add_dependency 'rails_autolink'
   s.add_dependency 'remotipart', '~> 1.0'
@@ -66,7 +66,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'simple_form'
   s.add_dependency 'country_select'
   s.add_dependency 'diffy'
-
+  s.add_dependency 'font-awesome-rails'
+  
   # Could not find a valid   s.add_dependency 'mobile_fu' (>= 0) in any repository
   #  s.add_dependency 'mobile-fu'
 

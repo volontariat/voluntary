@@ -57,6 +57,7 @@ require 'coffee-rails'
 require 'handlebars_assets'
 require 'uglifier'
 require 'coffee-script'
+require 'font-awesome-rails'
 
 require 'voluntary/helpers/application'
 require 'voluntary/helpers/collection'
