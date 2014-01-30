@@ -4,8 +4,8 @@ require File.expand_path('../boot', __FILE__)
 require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
-require "active_resource/railtie"
 require "sprockets/railtie"
+
 # require "rails/test_unit/railtie"
 
 Bundler.require
@@ -61,7 +61,6 @@ module Dummy
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
-    config.middleware.insert_after Rack::ETag, ActionDispatch::BestStandardsSupport
     config.middleware.insert_after Rack::Runtime, Rack::MethodOverride
     config.middleware.insert_after ActiveRecord::QueryCache, ActionDispatch::Cookies
     config.middleware.insert_after ActionDispatch::Cookies, ActionDispatch::Session::CookieStore
