@@ -1,6 +1,8 @@
 class AreasController < ApplicationController
   include Applicat::Mvc::Controller::Resource
   
+  before_filter :find_area
+  
   load_and_authorize_resource
   
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
@@ -17,7 +19,6 @@ class AreasController < ApplicationController
   end
   
   def show
-    @area = Area.find(params[:id])
     @areas = @area.children
     @projects = @area.projects
   end
@@ -37,12 +38,9 @@ class AreasController < ApplicationController
   end
   
   def edit
-    @area = Area.find(params[:id])
   end
   
   def update
-    @area = Area.find(params[:id])
-    
     if @area.update_attributes(params[:area])
       redirect_to @area, notice: t('general.form.successfully_updated')
     else
@@ -51,7 +49,6 @@ class AreasController < ApplicationController
   end
 
   def destroy
-    @area = Area.find(params[:id])
     @area.destroy
     redirect_to areas_url, notice: t('general.form.destroyed')
   end
@@ -64,5 +61,9 @@ class AreasController < ApplicationController
   
   def not_found
     redirect_to areas_path, notice: t('areas.exceptions.not_found')
+  end
+  
+  def find_area
+    @area = Area.friendly.find(params[:id]) if params[:id].present?
   end
 end

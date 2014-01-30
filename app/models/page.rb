@@ -3,6 +3,7 @@ class Page
   include Mongoid::Timestamps
   #include Mongoid::History::Trackable
   include Mongoid::Slug
+  include ActiveModel::MassAssignmentSecurity
   
   include StateMachines::Page
   
@@ -15,7 +16,7 @@ class Page
   
   attr_accessible :name, :text
   
-  scope :active, where(state: 'active')
+  scope :active, -> { where(state: 'active') }
   
   validates :user_id, presence: true
   validates :name, presence: true, uniqueness: true

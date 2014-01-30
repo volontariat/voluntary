@@ -1,6 +1,7 @@
 class Product
   include Mongoid::Document
   include Mongoid::Timestamps
+  include ActiveModel::MassAssignmentSecurity
   
   field :_id, type: String, default: -> { name.to_s.parameterize }
   field :user_id, type: Integer

@@ -10,7 +10,7 @@ class Vacancy < ActiveRecord::Base
   has_many :candidatures, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   
-  scope :open, where(state: 'open')
+  scope :open, -> { where(state: 'open') }
   
   validates :project_id, presence: true
   validates :offeror_id, presence: true

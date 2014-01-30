@@ -71,7 +71,7 @@ Devise.setup do |config|
   # from others authentication tools as :clearance_sha1, :authlogic_sha512 (then
   # you should set stretches above to 20 for default behavior) and :restful_authentication_sha1
   # (then you should set stretches to 10, and copy REST_AUTH_SITE_KEY to pepper)
-  config.encryptor = :bcrypt
+  #config.encryptor = :bcrypt
 
   # Setup a pepper to generate the encrypted password.
   config.pepper = "065eb8798b181ff0ea2c5c16aee0ff8b70e04e2ee6bd6e08b49da46924223e39127d5335e466207d42bf2a045c12be5f90e92012a4f05f7fc6d9f3c875f4c95b"
@@ -136,10 +136,6 @@ Devise.setup do |config|
   # change their passwords.
   config.reset_password_within = 6.hours
 
-  # ==> Configuration for :token_authenticatable
-  # Defines name of the authentication token params key
-  config.token_authentication_key = :auth_token
-  
   # TODO: works at least for diaspora repository
   #config.stateless_token = true
 
@@ -189,5 +185,6 @@ Devise.setup do |config|
   #   end
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
+  config.secret_key = '3c4cb1dfba4a47b762c39100e0aeaf377be5dc503304a13e94825eb07d922c493d268daabffed67826c1041269ee3168d2156862ab2d9691445d79ab051fc8be'
 end
 

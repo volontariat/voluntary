@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
   include Applicat::Mvc::Controller::Resource
   
+  before_filter :find_project
+  
   load_and_authorize_resource
   
   respond_to :html, :js, :json
@@ -11,7 +13,7 @@ class ProjectsController < ApplicationController
   end
   
   def show
-    @project = Project.includes(:areas, :comments).find(params[:id])
+    @project = Project.includes(:areas, :comments).friendly.find(params[:id])
     @comments = @project.comments
   end
   
@@ -31,12 +33,9 @@ class ProjectsController < ApplicationController
   end
   
   def edit
-    @project = Project.find(params[:id])
   end
   
   def update
-    @project = Project.find(params[:id])
-    
     if @project.update_attributes(params[:project])
       redirect_to @project, notice: t('general.form.successfully_updated')
     else
@@ -45,12 +44,17 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find(params[:id])
     @project.destroy
     redirect_to projects_url, notice: t('general.form.destroyed')
   end
   
   def resource
     @project
+  end
+  
+  private
+  
+  def find_project
+    @project = Project.friendly.find(params[:id]) if params[:id].present?
   end
 end

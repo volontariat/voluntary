@@ -1,6 +1,8 @@
 class VacanciesController < ApplicationController
   include Applicat::Mvc::Controller::Resource
   
+  before_filter :find_vacancy
+  
   load_and_authorize_resource
   
   before_filter :find_project, only: [:index, :new, :edit]
@@ -12,7 +14,6 @@ class VacanciesController < ApplicationController
   end
   
   def show
-    @vacancy = Vacancy.includes(:project, :candidatures, :comments).find(params[:id])
     @comments = @vacancy.comments
   end
   
@@ -40,11 +41,11 @@ class VacanciesController < ApplicationController
   end
   
   def edit
-    @vacancy = Vacancy.find(params[:id])
+    @vacancy = Vacancy.friendly.find(params[:id])
   end
   
   def update
-    @vacancy = Vacancy.find(params[:id])
+    @vacancy = Vacancy.friendly.find(params[:id])
     
     if @vacancy.update_attributes(params[:vacancy])
       redirect_to @vacancy, notice: t('general.form.successfully_updated')
@@ -54,7 +55,7 @@ class VacanciesController < ApplicationController
   end
 
   def destroy
-    @vacancy = Vacancy.find(params[:id])
+    @vacancy = Vacancy.friendly.find(params[:id])
     @vacancy.destroy
     redirect_to vacancies_url, notice: t('general.form.destroyed')
   end
@@ -73,7 +74,15 @@ class VacanciesController < ApplicationController
   
   private
   
+  def find_vacancy
+    return unless params[:id].present?
+    
+    @vacancy = Vacancy
+    @vacancy = @vacancy.includes(:project, :candidatures, :comments) if action_name == 'show'
+    @vacancy = @vacancy.friendly.find(params[:id])
+  end
+  
   def find_project
-    @project = params[:project_id].present? ? Project.find(params[:project_id]) : nil
+    @project = params[:project_id].present? ? Project.friendly.find(params[:project_id]) : nil
   end
 end

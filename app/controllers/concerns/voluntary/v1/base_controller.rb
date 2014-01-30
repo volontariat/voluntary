@@ -32,7 +32,10 @@ module Voluntary
         
         return if parent_type.blank?
         
-        parent = parent_type.classify.constantize.find(id)
+        parent = parent_type.classify.constantize
+        parent = parent.friendly if parent.respond_to? :friendly
+        parent = parent.find(id)
+        
         root_model_class_name = Voluntary::Helpers::Application.root_model_class_name_helper(parent)
         eval("@#{root_model_class_name.tableize.singularize} = parent") 
         
