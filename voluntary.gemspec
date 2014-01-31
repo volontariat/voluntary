@@ -113,7 +113,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'capistrano', '~> 3.1.0'
 
   # view
-  s.add_dependency 'jquery-rails', '~> 3.1.0'
+  
+  # includes jquery 1.11.0 which is not supported by ember.js
+  #s.add_dependency 'jquery-rails', '~> 3.1.0'
+  s.add_dependency 'jquery-rails', '2.2.2'
   s.add_dependency 'jquery-ui-bootstrap-rails-asset', '~> 0.0.3'
   s.add_dependency 'bootstrap-sass-rails', '~> 2.3.2.1'
   s.add_dependency 'auto_html', '~> 1.5.3'
