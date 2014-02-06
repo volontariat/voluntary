@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
   
-  cattr_accessor :after_initialize_callbacks
+  @@after_initialize_callbacks = []
   
   def initialize(user, options = {})
     controller_namespace = options[:controller_namespace] || ""
@@ -47,20 +47,17 @@ class Ability
         can [:manage, :moderate, :administrate, :supervisor], :all
       end
     end
-    
-    self.class.run_after_initialize_callbacks(user, options)
+     
+    self.class.run_after_initialize_callbacks(self, user, options)
   end
   
   def self.add_after_initialize_callback(proc)
-    after_initialize_callbacks ||= []
-    after_initialize_callbacks << proc
+    @@after_initialize_callbacks << proc
   end
   
-  def self.run_after_initialize_callbacks(user, options = {})
-    after_initialize_callbacks ||= []
-    
-    after_initialize_callbacks.each do |callback|
-      eval("#{callback}(user, options)")
+  def self.run_after_initialize_callbacks(ability, user, options = {})
+    @@after_initialize_callbacks.each do |callback|
+      callback.call(ability, user, options)
     end
   end
 end
