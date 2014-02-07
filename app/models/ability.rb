@@ -43,7 +43,7 @@ class Ability
       can Story::EVENTS, Story, offeror_id: user.id
       can Task::EVENTS + [:update], Task, offeror_id: user.id
       
-      if user.name == 'Master'
+      if user.roles.where(name: 'Master').any?
         can [:manage, :moderate, :administrate, :supervisor], :all
       end
     end
