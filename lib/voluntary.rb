@@ -75,6 +75,10 @@ require 'voluntary/helpers/wizard'
 require 'db_seed'
 require 'volontariat_seed'
 
+if Rails.env == 'test'
+  require 'voluntary/test/rspec_helpers/factories'
+end
+
 require 'voluntary/engine'
 
 module Voluntary
