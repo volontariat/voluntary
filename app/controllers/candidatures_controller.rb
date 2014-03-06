@@ -1,9 +1,10 @@
 class CandidaturesController < ApplicationController
   include Applicat::Mvc::Controller::Resource
   
-  load_and_authorize_resource
-  
+  before_filter :find_candidature, only: [:show, :edit, :update, :destroy]
   before_filter :find_vacancy, only: [:index, :new, :edit]
+  
+  load_and_authorize_resource
   
   transition_actions Candidature::EVENTS
   
@@ -15,12 +16,11 @@ class CandidaturesController < ApplicationController
     @candidatures = if @vacancy
       @vacancy.candidatures.includes(:vacancy, :resource)
     else 
-      Candidature.includes(:vacancy, :resource).all
+      Candidature.includes(:vacancy, :resource).where(resource_type: 'User').all
     end
   end
   
   def show
-    @candidature = Candidature.includes(:vacancy, :resource, :comments).find(params[:id])
     @vacancy = @candidature.vacancy
     @comments = @candidature.comments
   end
@@ -43,12 +43,9 @@ class CandidaturesController < ApplicationController
   end
   
   def edit
-    @candidature = Candidature.find(params[:id])
   end
   
   def update
-    @candidature = Candidature.find(params[:id])
-    
     if @candidature.update_attributes(params[:candidature])
       redirect_to @candidature, notice: t('general.form.successfully_updated')
     else
@@ -57,7 +54,6 @@ class CandidaturesController < ApplicationController
   end
 
   def destroy
-    @candidature = Candidature.find(params[:id])
     @candidature.destroy
     redirect_to candidatures_url, notice: t('general.form.destroyed')
   end
@@ -78,7 +74,11 @@ class CandidaturesController < ApplicationController
   
   private
   
+  def find_candidature
+    @candidature = Candidature.includes(:vacancy, :resource, :comments).friendly.find(params[:id])
+  end
+  
   def find_vacancy
-    @vacancy = params[:vacancy_id].present? ? Vacancy.find(params[:vacancy_id]) : nil
+    @vacancy = params[:vacancy_id].present? ? Vacancy.friendly.find(params[:vacancy_id]) : nil
   end
 end
