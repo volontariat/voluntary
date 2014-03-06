@@ -2,6 +2,7 @@ class Column
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Slug
+  include ActiveModel::MassAssignmentSecurity
   
   include Model::MongoDb::Customizable
   
