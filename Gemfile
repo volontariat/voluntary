@@ -35,7 +35,7 @@ gem 'jasmine', git: 'https://github.com/pivotal/jasmine-gem.git'
 #  gem 'markerb', git: 'https://github.com/plataformatec/markerb.git'
 
 # view
-gem "will_paginate", github: "mislav/will_paginate"
+gem "will_paginate", github: 'mislav/will_paginate'
 
 group :development do
   gem 'mysql2', '~> 0.3.13'

@@ -80,7 +80,8 @@ Gem::Specification.new do |s|
   # Could not find a valid   s.add_dependency 'mobile_fu' (>= 0) in any repository
   #  s.add_dependency 'mobile-fu'
 
-  s.add_dependency 'will_paginate', '~> 3.0.5'
+  # 3.0.5 from 3-0-stable branch currently drops mongoid support that's why 3.0.4
+  s.add_dependency 'will_paginate', '~> 3.0.4'
   s.add_dependency 'gon', '~> 5.0.1'
 
   # file uploading
