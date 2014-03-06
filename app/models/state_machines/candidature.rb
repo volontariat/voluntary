@@ -30,7 +30,7 @@ module StateMachines::Candidature
             when 'accepted'
               ProjectUser.find_or_create_by_project_id_and_vacancy_id_and_user_id!(
                 project_id: object.vacancy.project_id, vacancy_id: object.vacancy_id, 
-                user_id: object.user_id
+                user_id: object.resource_id
               )
               
               if object.vacancy.limit == object.vacancy.candidatures.accepted.count

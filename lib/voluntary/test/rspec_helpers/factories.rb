@@ -54,7 +54,7 @@ module Voluntary
             end
             
             factory_girl.factory :candidature do
-              association :user
+              association :resource, factory: :user
               association :vacancy
               sequence(:name) { |n| "candidature #{n}" }
               text Faker::Lorem.sentences(20).join(' ')
