@@ -15,6 +15,10 @@ class ReplaceUserByPolymorphicResourceInCandidatures < ActiveRecord::Migration
     Candidature.update_all('resource_id = user_id')
     
     remove_column :candidatures, :user_id
+    
+    remove_index :candidatures, [:user_id, :vacancy_id]
+    
+    add_index :candidatures, [:resource_id, :resource_type, :vacancy_id], unique: true, name: 'index_candidatures_on_resource_and_vacancy'
   end
 
   def down
@@ -28,10 +32,14 @@ class ReplaceUserByPolymorphicResourceInCandidatures < ActiveRecord::Migration
     
     add_column :candidatures, :user_id, :integer
     
+    add_index :candidatures, [:user_id, :vacancy_id]
+    
     Candidature.where('resource_type = "User"').update_all('user_id = resource_id')
     Candidature.where('resource_type <> "User"').destroy_all
     
     remove_column :candidatures, :resource_type
     remove_column :candidatures, :resource_id
+    
+    remove_index :candidatures, [:resource_id, :resource_type, :vacancy_id]
   end
 end
