@@ -3,7 +3,7 @@ get 'workflow' => 'workflow#index', as: :workflow
 namespace 'workflow' do
   resources :project_owner, only: :index do
     collection do
-      match 'tasks/:id/edit' => 'tasks#edit', as: :edit_task
+      get 'tasks/:id/edit' => 'tasks#edit', as: :edit_task
     end
   end
   
@@ -28,7 +28,7 @@ namespace 'workflow' do
   
   resources :vacancies, controller: 'vacancies', only: :index do
     collection do
-      match '/' => 'vacancies#open', as: :open
+      get '/' => 'vacancies#open', as: :open
       
       get :autocomplete
       
