@@ -6,6 +6,7 @@ Feature: Manage areas
   Background:
   
     Given a user named "Master"
+    And current user has role "Master"
     And I log in as "Master"
 
   Scenario: Edit area

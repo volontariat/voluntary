@@ -32,11 +32,8 @@ Feature: Manage candidatures
   @javascript
   Scenario: Delete candidature
     Given a user named "user 2"
-    And the following candidatures:
-      | name | vacancy | user |
-      | candidature 1 | vacancy 1 | user |
-      | candidature 2 | vacancy 1 | user 2 |
+    And 2 candidatures
     When I delete the 1st "candidature"
     Then I should see the following candidatures:
-      | Name | User | Vacancy | Project | |
+      | Name | Resource | Vacancy | Project | |
       | candidature 2 | user 2 | vacancy 1 | project 1 | Actions | 
