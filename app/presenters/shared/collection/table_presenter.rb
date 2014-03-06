@@ -14,7 +14,7 @@ class Shared::Collection::TablePresenter < Presenter
   end
   
   def actions
-    return '' unless show_actions
+    return content_tag(:td, '') unless show_actions
     
     content_tag :td, render('shared/resource/actions', type: type, resource: resource)
   end
