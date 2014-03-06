@@ -49,7 +49,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'foreigner', '~> 1.1.0'
   s.add_dependency 'ancestry', '~> 2.0.0'
   s.add_dependency 'state_machine', '~> 1.2.0'
-  s.add_dependency 'acts_as_list', '~> 0.3.0'
+  s.add_dependency 'acts_as_list', '~> 0.4.0'
   s.add_dependency 'activerecord-import', '~> 0.4.1'
   s.add_dependency 'koala', '~> 1.8.0'
   s.add_dependency 'ransack', '~> 1.1.0'
