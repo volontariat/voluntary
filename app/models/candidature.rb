@@ -16,8 +16,8 @@ class Candidature < ActiveRecord::Base
   
   attr_accessible :vacancy, :vacancy_id, :name, :text
   
-  #extend FriendlyId
-  #friendly_id :name, use: :slugged
+  extend FriendlyId
+  friendly_id :name, use: :slugged
   
   before_validation :set_offeror
   
