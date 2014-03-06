@@ -7,7 +7,7 @@ class Vacancy < ActiveRecord::Base
   belongs_to :resource, polymorphic: true
   belongs_to :project_user
   
-  has_many :candidatures, as: :resource, dependent: :destroy
+  has_many :candidatures, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   
   accepts_nested_attributes_for :candidatures, allow_destroy: true, reject_if: ->(t) { t['name'].blank? }
