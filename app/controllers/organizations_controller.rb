@@ -1,6 +1,8 @@
 class OrganizationsController < ApplicationController
   include Applicat::Mvc::Controller::Resource
   
+  before_filter :find_organization
+  
   load_and_authorize_resource
   
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
@@ -18,7 +20,6 @@ class OrganizationsController < ApplicationController
   end
   
   def show
-    @organization = Organization.find(params[:id])
   end
   
   def new
@@ -36,12 +37,9 @@ class OrganizationsController < ApplicationController
   end
   
   def edit
-    @organization = Organization.find(params[:id])
   end
   
   def update
-    @organization = Organization.find(params[:id])
-    
     if @organization.update_attributes(params[:organization])
       redirect_to @organization, notice: t('general.form.successfully_updated')
     else
@@ -50,7 +48,6 @@ class OrganizationsController < ApplicationController
   end
 
   def destroy
-    @organization = Organization.find(params[:id])
     @organization.destroy
     redirect_to organizations_url, notice: t('general.form.destroyed')
   end
@@ -63,5 +60,9 @@ class OrganizationsController < ApplicationController
   
   def not_found
     redirect_to organizations_path, notice: t('organizations.exceptions.not_found')
+  end
+  
+  def find_organization
+    @organization = Organization.friendly.find(params[:id]) if params[:id].present?
   end
 end

@@ -28,8 +28,11 @@ class DbSeed
     @users = {}
     
     self.class::USER_ROLES.each do |role,attributes|
+      name = role.to_s.humanize 
+      name += ' user' unless name == 'User'
+      
       @users[role] = attributes
-      @users[role][:id] = User.find_by_name(role.to_s.humanize).id
+      @users[role][:id] = User.find_by_name(name).id
     end
     
     @users
@@ -73,11 +76,15 @@ class DbSeed
   
   def create_users
     self.class::USER_ROLES.each do |role, settings|
+      name = role.to_s.humanize 
+      name += ' user' unless name == 'User'
+      
       attributes = {
-        name: role.to_s.humanize, first_name: 'Mister', last_name: role.to_s.humanize, email: "#{role}@volontari.at",
+        name: name, first_name: 'Mister', last_name: role.to_s.humanize, email: "#{role}@volontari.at",
         password: "#{role}2012", language: 'en', country: 'Germany', interface_language: 'en'
       }
       attributes[:password_confirmation] = attributes[:password]
+      
       create_record(User, attributes) # events: ['skip_confirmation!']
     end
   end

@@ -11,8 +11,8 @@ class Vacancy < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   
   accepts_nested_attributes_for :candidatures, allow_destroy: true, reject_if: ->(t) { t['name'].blank? }
+  scope :open, -> { where(state: 'open') }
   
-  scope :open, where(state: 'open')
   
   validates :project_id, presence: true
   validates :offeror_id, presence: true

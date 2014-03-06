@@ -1,6 +1,10 @@
 # This migration comes from voluntary_engine (originally 20120907144853)
+require Rails.root.join('spec', 'support', 'mongo_database_cleaner')
+
 class CreateSchema < ActiveRecord::Migration
   def up
+    MongoDatabaseCleaner.clean
+    
     create_table :users do |t|
       t.string :name
       t.string :slug

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   include ::Applicat::Mvc::Model::Resource::Base
+  include User::Listable
+  include User::Extensions
   
   belongs_to :main_role, class_name: 'Role'
   belongs_to :profession
@@ -26,7 +28,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :password, :password_confirmation, :remember_me, :text, :language, :first_name, :last_name, 
                   :salutation, :marital_status, :family_status, :date_of_birth, :place_of_birth, :citizenship, 
                   :email, :country, :language, :interface_language, :foreign_language_tokens, :profession_id, 
-                  :employment_relationship, :area_tokens,
+                  :employment_relationship, :area_tokens, :remember_me
                   # preferences
                   :main_role_id
        
@@ -90,6 +92,6 @@ class User < ActiveRecord::Base
   private
   
   def set_main_role
-    self.update_attribute :main_role_id, Role.find_or_create_by_name('User').id
+    self.update_attribute :main_role_id, Role.find_or_create_by(name: 'User').id
   end
 end

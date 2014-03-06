@@ -1,3 +1,7 @@
+# controller
+require 'rails-api'
+
+# misc
 require 'pg'
 require 'mongoid'
 require 'foreman'
@@ -30,7 +34,6 @@ require 'country_select'
 require 'diffy'
 require 'will_paginate'
 require 'will_paginate/mongoid'
-require 'client_side_validations'
 require 'gon'
 require 'carrierwave'
 require 'fog'
@@ -58,6 +61,7 @@ require 'coffee-rails'
 require 'handlebars_assets'
 require 'uglifier'
 require 'coffee-script'
+require 'font-awesome-rails'
 
 require 'voluntary/helpers/application'
 require 'voluntary/helpers/collection'
@@ -71,6 +75,10 @@ require 'voluntary/helpers/wizard'
 
 require 'db_seed'
 require 'volontariat_seed'
+
+if Rails.env == 'test'
+  require 'voluntary/test/rspec_helpers/factories'
+end
 
 require 'voluntary/engine'
 

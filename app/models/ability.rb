@@ -1,6 +1,8 @@
 class Ability
   include CanCan::Ability
-
+  
+  @@after_initialize_callbacks = []
+  
   def initialize(user, options = {})
     controller_namespace = options[:controller_namespace] || ""
     project = options[:project] || nil
@@ -43,9 +45,21 @@ class Ability
       can Story::EVENTS, Story, offeror_id: user.id
       can Task::EVENTS + [:update], Task, offeror_id: user.id
       
-      if user.name == 'Master'
+      if user.roles.where(name: 'Master').any?
         can [:manage, :moderate, :administrate, :supervisor], :all
       end
+    end
+     
+    self.class.run_after_initialize_callbacks(self, user, options)
+  end
+  
+  def self.add_after_initialize_callback(proc)
+    @@after_initialize_callbacks << proc
+  end
+  
+  def self.run_after_initialize_callbacks(ability, user, options = {})
+    @@after_initialize_callbacks.each do |callback|
+      callback.call(ability, user, options)
     end
   end
 end

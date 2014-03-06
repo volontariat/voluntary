@@ -35,6 +35,11 @@ module StateMachines::Story
         event :close do
           transition :completed => :closed
         end
+        
+        before_transition do |object, transition|
+          object.event = transition.event.to_s
+          object.state_before = transition.from
+        end
       end
       
       private

@@ -1,6 +1,8 @@
 class ProfessionsController < ApplicationController
   include Applicat::Mvc::Controller::Resource
   
+  before_filter :find_profession
+  
   load_and_authorize_resource
   
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
@@ -17,7 +19,6 @@ class ProfessionsController < ApplicationController
   end
   
   def show
-    @profession = Profession.find(params[:id])
   end
   
   def new
@@ -35,12 +36,9 @@ class ProfessionsController < ApplicationController
   end
   
   def edit
-    @profession = Profession.find(params[:id])
   end
   
   def update
-    @profession = Profession.find(params[:id])
-    
     if @profession.update_attributes(params[:profession])
       redirect_to @profession, notice: t('general.form.successfully_updated')
     else
@@ -49,7 +47,6 @@ class ProfessionsController < ApplicationController
   end
 
   def destroy
-    @profession = Profession.find(params[:id])
     @profession.destroy
     redirect_to professions_url, notice: t('general.form.destroyed')
   end
@@ -62,5 +59,9 @@ class ProfessionsController < ApplicationController
   
   def not_found
     redirect_to professions_path, notice: t('professions.exceptions.not_found')
+  end
+  
+  def find_profession
+    @profession = Profession.friendly.find(params[:id]) if params[:id].present?
   end
 end

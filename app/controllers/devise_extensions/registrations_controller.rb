@@ -10,14 +10,14 @@ class DeviseExtensions::RegistrationsController < Devise::RegistrationsControlle
   
   # POST /resource
   def create
-    build_resource
+    build_resource(params[:user])
 
     captcha_verified = if Rails.env == 'production'
       verify_recaptcha(model: resource, message: I18n.t('general.exceptions.wrong_recaptcha'))
     else
       true
     end
-    
+     
     if captcha_verified && resource.save
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?

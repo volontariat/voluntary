@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   private
   
   def find_resource
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     @presenter = Resources::User::FormPresenter.new(self.view_context, resource: resource)
   end
 end

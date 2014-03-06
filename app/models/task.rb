@@ -3,6 +3,7 @@ class Task
   include Mongoid::Timestamps
   include Mongoid::Slug
   #include Mongoid::History::Trackable
+  include ActiveModel::MassAssignmentSecurity
   
   include Model::MongoDb::Customizable
   include Model::MongoDb::Commentable
@@ -25,11 +26,11 @@ class Task
    
   attr_accessible :story, :story_id, :name, :text, :result_attributes
   
-  scope :current, where(state: 'new')
-  scope :unassigned, where(user_id: nil)
-  scope :assigned, ne(user_id: nil)
-  scope :complete, where(state: 'completed')
-  scope :incomplete, ne(state: 'completed')
+  scope :current, -> { where(state: 'new') }
+  scope :unassigned, -> { where(user_id: nil) }
+  scope :assigned, -> { ne(user_id: nil) }
+  scope :complete, -> { where(state: 'completed') }
+  scope :incomplete, -> { ne(state: 'completed') }
   
   validates :story_id, presence: true
   validates :offeror_id, presence: true

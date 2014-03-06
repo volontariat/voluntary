@@ -2,6 +2,7 @@ class Story
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Slug
+  include ActiveModel::MassAssignmentSecurity
   
   include Model::MongoDb::Customizable
   include StateMachines::Story
@@ -25,7 +26,7 @@ class Story
   
   attr_accessible :project_id, :name, :text, :tasks_attributes
   
-  scope :active, where(state: 'active')
+  scope :active, -> { where(state: 'active') }
   
   validates :project_id, presence: true
   validates :offeror_id, presence: true

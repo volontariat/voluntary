@@ -8,7 +8,7 @@ module Applicat
 
             acts_as_list
 
-            default_scope :order => 'position'
+            default_scope -> { order('position') }
             
             def add_child(element,position=nil)
               #need to add errors to @element.errors and return something

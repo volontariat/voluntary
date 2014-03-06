@@ -2,6 +2,7 @@ class Result
   include Mongoid::Document
   include Mongoid::Timestamps
   #include Mongoid::History::Trackable
+  include ActiveModel::MassAssignmentSecurity
   
   include Model::MongoDb::Customizable
   include Model::MongoDb::Commentable

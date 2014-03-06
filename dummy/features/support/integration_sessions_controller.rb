@@ -5,8 +5,8 @@ class IntegrationSessionsController < ActionController::Base
   end
   
   def create
-    logger.info User.find(params[:user_id]).inspect
-    sign_in_and_redirect User.find(params[:user_id])
+    logger.info User.friendly.find(params[:user_id]).inspect
+    sign_in_and_redirect User.friendly.find(params[:user_id])
   end
 end
 
