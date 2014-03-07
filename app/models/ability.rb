@@ -19,7 +19,7 @@ class Ability
     alias_action :read, :assign_actions, to: :supervisor
     
     can :read, [
-      Area, Profession, Product, Project, Vacancy, Candidature, Story, Task, Result, Comment
+      Area, Organization, Profession, Product, Project, Vacancy, Candidature, Story, Task, Result, Comment
     ]
     can [:read, :check_name, :check_url, :check_email, :check_email_unblocked], User
     can :show, Page
@@ -32,7 +32,7 @@ class Ability
       can [:update, :cancel, :review], Task, user_id: user.id
       
       { 
-        user_id: [Product, Project, Comment, ProjectUser, Result], 
+        user_id: [Product, Organization, Project, Comment, ProjectUser, Result], 
         offeror_id: [Vacancy, Story, Task]
       }.each do |attribute, classes|
         can :restful_actions, classes, attribute => user.id   
