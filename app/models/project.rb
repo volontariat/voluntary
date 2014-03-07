@@ -33,7 +33,7 @@ class Project < ActiveRecord::Base
   
   friendly_id :name, use: :slugged
   
-  PARENT_TYPES = ['area', 'product', 'user']
+  PARENT_TYPES = ['area', 'product', 'user', 'organization']
   
   # belongs_to (Mongo DB)
   def product
