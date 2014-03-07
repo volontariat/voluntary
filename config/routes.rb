@@ -37,6 +37,15 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :organizations do
+    resources :projects
+    
+    collection do
+      put :update_multiple
+      get :autocomplete
+    end
+  end
+  
   resources :projects do
     resources :users, only: :index
     resources :vacancies, only: [:index, :new]
