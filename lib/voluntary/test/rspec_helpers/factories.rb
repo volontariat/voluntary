@@ -35,6 +35,11 @@ module Voluntary
               end
             end
             
+            factory_girl.factory :organization do
+              association :user
+              sequence(:name) { |n| "area #{n}" }
+            end
+            
             factory_girl.factory :project do
               association :user
               sequence(:name) { |n| "project #{n}#{r_str}" }
