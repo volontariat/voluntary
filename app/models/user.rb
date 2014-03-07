@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :areas
   has_and_belongs_to_many :projects
   
+  has_many :organizations, dependent: :destroy
   has_many :offeror_vacancies, source: :offeror, class_name: 'Vacancy'
   has_many :offeror_candidatures, source: :offeror, class_name: 'Candidature'
   has_many :candidatures, as: :resource
