@@ -18,7 +18,8 @@ class ProjectsController < ApplicationController
   end
   
   def new
-    @project = Project.new
+    @parent = find_parent Project::PARENT_TYPES
+    @project = @parent ? @parent.projects.new : Project.new
   end
   
   def create
