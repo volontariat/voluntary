@@ -7,9 +7,3 @@ Given /^a product named "([^\"]*)"$/ do |name|
   
   @product.reload
 end
-
-Then /^I should see the following products:$/ do |expected_table|
-  rows = find('table').all('tr')
-  table = rows.map { |r| r.all('th,td').map { |c| c.text.strip } }
-  expected_table.diff!(table)
-end

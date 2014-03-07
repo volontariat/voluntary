@@ -25,9 +25,3 @@ end
 Given /^a story without tasks named "([^\"]*)"$/ do |name|
   new_story(name, factory: :story_without_tasks)
 end
-
-Then /^I should see the following stories:$/ do |expected_table|
-  rows = find('table').all('tr')
-  table = rows.map { |r| r.all('th,td').map { |c| c.text.strip } }
-  expected_table.diff!(table)
-end

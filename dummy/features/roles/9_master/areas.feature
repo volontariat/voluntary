@@ -25,6 +25,6 @@ Feature: Manage areas
       |area 2|
     When I delete the 1st "area"
     Then I should see "Resource destroyed successfully"
-    Then I should see the following areas:
+    Then I should see the following table:
       |Name | Users Count | |
       |area 2 | 0 | Actions | 

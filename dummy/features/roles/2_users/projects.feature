@@ -36,6 +36,6 @@ Feature: Manage projects
       |project 2| @me |
     When I delete the 1st "project"
     Then I should see "Resource destroyed successfully"
-    Then I should see the following projects:
+    Then I should see the following table:
       |Name | |
       |project 2| Actions | 

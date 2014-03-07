@@ -46,6 +46,6 @@ Feature: Manage vacancies
     And I am on the vacancies page
     When I delete the 1st "vacancy"
     Then I should see "Resource destroyed successfully"
-    Then I should see the following vacancies:
+    Then I should see the following table:
       |Name | Project | |
       | vacancy 2 | project 1 | Actions | 

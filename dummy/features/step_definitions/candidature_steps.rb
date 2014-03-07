@@ -35,9 +35,3 @@ Given /^2 candidatures$/ do
   FactoryGirl.create(:candidature, name: 'candidature 1', vacancy_id: Vacancy.find_by_name('vacancy 1').id, resource_type: 'User', resource_id: User.find_by_name('user').id)
   FactoryGirl.create(:candidature, name: 'candidature 2', vacancy_id: Vacancy.find_by_name('vacancy 1').id, resource_type: 'User', resource_id: User.find_by_name('user 2').id)
 end
-
-Then /^I should see the following candidatures:$/ do |expected_table|
-  rows = find('table').all('tr')
-  table = rows.map { |r| r.all('th,td').map { |c| c.text.strip } }
-  expected_table.diff!(table)
-end

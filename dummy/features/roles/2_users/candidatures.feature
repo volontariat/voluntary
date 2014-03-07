@@ -34,6 +34,6 @@ Feature: Manage candidatures
     Given a user named "user 2"
     And 2 candidatures
     When I delete the 1st "candidature"
-    Then I should see the following candidatures:
+    Then I should see the following table:
       | Name | Resource | Vacancy | Project | |
       | candidature 2 | user 2 | vacancy 1 | project 1 | Actions | 
