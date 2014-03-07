@@ -6,6 +6,17 @@ module Voluntary
           primary.dom_class = 'nav'
           primary.item :root, I18n.t('general.index.title'), root_path
           
+          [:areas, :products, :organizations, :projects, :vacancies, :users, :workflow, :authentication].each do |resource|
+            instance_exec primary, &::Voluntary::Navigation.menu_code(resource)
+          end
+        end
+      end
+    end
+    
+    def self.menu_code(resource)
+      case resource
+      when :areas
+        Proc.new do |primary|
           primary.item :areas, I18n.t('areas.index.title'), areas_path do |areas|
             areas.item :new, I18n.t('general.new'), new_area_path
             
@@ -22,7 +33,9 @@ module Voluntary
               end
             end
           end
-          
+        end
+      when :products 
+        Proc.new do |primary|
           primary.item :products, I18n.t('products.index.title'), products_path do |products|
             products.item :new, I18n.t('general.new'), new_product_path
             
@@ -39,7 +52,9 @@ module Voluntary
               end
             end
           end
-          
+        end
+      when :organizations
+        Proc.new do |primary|
           primary.item :organizations, I18n.t('organizations.index.title'), organizations_path do |organizations|
             organizations.item :new, I18n.t('general.new'), new_organization_path
             
@@ -55,7 +70,9 @@ module Voluntary
               end
             end
           end
-          
+        end
+      when :projects
+        Proc.new do |primary|
           primary.item :projects, I18n.t('projects.index.title'), projects_path do |projects|
             projects.item :new, I18n.t('general.new'), new_project_path
             
@@ -158,7 +175,9 @@ module Voluntary
               end
             end  
           end
-          
+        end
+      when :vacancies
+        Proc.new do |primary|
           primary.item :vacancies, I18n.t('vacancies.index.title'), vacancies_path do |vacancies|
             vacancies.item :new, I18n.t('general.new'), new_vacancy_path
             
@@ -208,7 +227,9 @@ module Voluntary
               end
             end  
           end
-          
+        end
+      when :users
+        Proc.new do |primary|
           primary.item :users, I18n.t('users.index.title'), users_path do |users|
             unless (@user.new_record? rescue true) || current_user.try(:id) == @user.id
               users.item :show, I18n.t('general.details'), "#{user_path(@user)}#top"
@@ -217,7 +238,9 @@ module Voluntary
               users.item :candidatures, I18n.t('candidatures.index.title'), user_candidatures_path(@user)
             end
           end
-       
+        end
+      when :workflow
+        Proc.new do |primary|
           if user_signed_in?
             primary.item :workflow, I18n.t('workflow.index.title'), workflow_path do |workflow|
               workflow.item :project_owner, I18n.t('workflow.project_owner.index.title'), workflow_project_owner_index_path do |project_owner|
@@ -258,7 +281,11 @@ module Voluntary
                 end
               end
             end
-                  
+          end
+        end
+      when :authentication
+        Proc.new do |primary|
+          if user_signed_in?
             primary.item :profile, I18n.t('users.show.title'), user_path(current_user) do |profile|
               profile.item :show, I18n.t('users.show.title'), user_path(current_user) do |user|
                 user.item :show, I18n.t('users.show.title'), "#{user_path(current_user)}#top"
