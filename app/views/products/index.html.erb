@@ -1,5 +1,54 @@
-<%= form_tag update_multiple_products_path, method: :post do %>
-  <%= render partial: 'shared/collection/table', locals: { 
-    type: 'products', collection: @products, columns: ['name'] 
-  } %>
+<h3><%= t("products.index.title") %></h3>
+<% if @products.none? || @products.select{|e| e.id.present? }.none? %>
+<p><%= I18n.t("products.index.empty_@products")%></p>
+<% else %>
+<table class="table table-striped">
+  <thead>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <th><%= t("activerecord.attributes.product.name") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @products.select{|e| e.id.present? }.each do |product| %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td>
+        <%= link_to product.name, product_path(product) %>
+      </td>
+      <td>
+      	<% if !product.is_a?(Column) && (
+					can?(:destroy, product) || can?(:edit, product) || (
+				      product.respond_to?(:state_events) && product.state_events.select{|event| can? event, product }.any?
+				    )
+				) %>
+				<div class="dropdown">
+				  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= t('general.actions') %></a>
+				  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+				  <% if can? :destroy, product %>    
+				    <li>
+				      <%= link_to(
+				        t('general.destroy'), product_path(product.id), id: "product_#{product.id}", method: :delete, 
+				        confirm: t('general.questions.are_you_sure'),
+				        onclick: "delete_link('product_#{product.id}'); return false;"
+				      ) 
+				      %>
+				    </li>
+				  <% end %>
+				  <% if can? :edit, product %>    
+				    <li><%= link_to t('general.edit'), eval("edit_product_path(product)") %></li>
+				  <% end %>
+				  <% if product.respond_to? :state_events %>
+				  <li class="divider"></li>
+				  <% end %>
+				  <%= render 'shared/resource/event_elements', resource: product, type: 'products' %>
+				  </ul>
+				</div>
+				<% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 <% end %>
+
+<%= link_to t("products.new.title"), products_path %>
