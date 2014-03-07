@@ -2,6 +2,7 @@
   <%= render partial: 'shared/form/error_messages', locals: { resource: @project } %>
   
   <div class="form-inputs">
+  	<%= f.input :organization_id, collection: current_user.organizations %>
     <%= f.input :product_id, collection: Product.all %>
     <%= f.input :name %>  
     <%= f.input :text, input_html: {style: 'width: 500px; height:300px;'} %>
