@@ -63,6 +63,7 @@ require 'uglifier'
 require 'coffee-script'
 require 'font-awesome-rails'
 
+require 'voluntary/navigation'
 require 'voluntary/helpers/application'
 require 'voluntary/helpers/collection'
 require 'voluntary/helpers/comments'
