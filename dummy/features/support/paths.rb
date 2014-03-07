@@ -37,6 +37,16 @@ module NavigationHelpers
     when /the edit product page/
       edit_product_path(@product)
 
+    # organization  
+    when /the organizations page/
+      organizations_path
+    
+    when /the organization page/
+      organization_path(@organization)
+      
+    when /the edit organization page/
+      edit_organization_path(@organization)
+
     # projects
     when /the project page/
       project_path(@project)
