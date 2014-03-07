@@ -27,7 +27,7 @@ class OrganizationsController < ApplicationController
   end
   
   def create
-    @organization = Organization.new(params[:organization])
+    @organization = current_user.organizations.new(params[:organization])
     
     if @organization.save
       redirect_to @organization, notice: t('general.form.successfully_created')
