@@ -2,9 +2,9 @@
   <div class="navbar-inner">
     <div class="container">
       <a id="plattform_brand" class="brand" href="#">Volontari.at /</a>
-      <a id="product_brand" class="brand" href="#">Core</a>
+      <a id="product_brand" class="brand" href="<%= navigation_product_path %>"><%= navigation_product_name %></a>
       
-      <%= render_navigation context: :main, expand_all: false, renderer: :bootstrap %>
+      <%= render_navigation context: application_navigation, expand_all: false, renderer: :bootstrap %>
     </div>
   </div>
 </div>

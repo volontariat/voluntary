@@ -8,7 +8,7 @@ module Voluntary
         rescue_from ActiveRecord::RecordNotFound, with: :not_found
         rescue_from Mongoid::Errors::DocumentNotFound, with: :not_found
         
-        helper_method :parent
+        helper_method :parent, :application_navigation, :navigation_product_path, :navigation_product_name
       end
       
       def parent
@@ -16,6 +16,18 @@ module Voluntary
       end
       
       protected
+      
+      def application_navigation
+        :main
+      end
+      
+      def navigation_product_path
+        '/'
+      end
+      
+      def navigation_product_name
+        'Core'
+      end
       
       def current_ability
         Ability.new(current_user, controller_namespace: current_namespace)
