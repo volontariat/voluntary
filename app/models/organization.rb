@@ -7,6 +7,7 @@ class Organization < ActiveRecord::Base
   
   has_many :projects
   
+  validates :user_id, presence: true
   validates :name, presence: true, uniqueness: true
   
   attr_accessible :name
