@@ -6,7 +6,7 @@ class CreateProfessions < ActiveRecord::Migration
       t.timestamps
     end
     
-    remove_column :users, :profession
+    remove_column :users, :profession, :string
     add_column :users, :profession_id, :integer
     add_index :users, :profession_id
   end

@@ -68,7 +68,9 @@ class DbSeed
     Role.import([:name], self.class::USER_ROLES.keys.map{|role| [role.to_s.humanize]})
     
     self.class::USER_ROLES.keys.each do |role|
-      attributes = { name: role.to_s.humanize, public: [:project_owner, :user].include?(role) }
+      attributes = { name: role.to_s.humanize }
+      
+      attributes[:public] = [:project_owner, :user].include?(role) if Role.new.respond_to? :public
       
       "Role::#{role.to_s.classify}".constantize.create(attributes)
     end
@@ -83,6 +85,8 @@ class DbSeed
         name: name, first_name: 'Mister', last_name: role.to_s.humanize, email: "#{role}@volontari.at",
         password: "#{role}2012", language: 'en', country: 'Germany', interface_language: 'en'
       }
+      
+      attributes.reject!{|key,value| !User.new.respond_to? key }
       attributes[:password_confirmation] = attributes[:password]
       
       create_record(User, attributes) # events: ['skip_confirmation!']
@@ -109,7 +113,7 @@ class DbSeed
     
     send_events(record, events) if events.any?
     
-    record.save! if record.new_record?
+    record.save!(validate: false) if record.new_record?
     
     record
   end

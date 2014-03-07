@@ -92,6 +92,6 @@ class User < ActiveRecord::Base
   private
   
   def set_main_role
-    self.update_attribute :main_role_id, Role.find_or_create_by(name: 'User').id
+    self.update_attribute :main_role_id, Role.find_or_create_by(name: 'User').id if self.respond_to? :main_role_id
   end
 end
