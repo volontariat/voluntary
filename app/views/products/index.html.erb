@@ -1,6 +1,6 @@
 <h3><%= t("products.index.title") %></h3>
 <% if @products.none? || @products.select{|e| e.id.present? }.none? %>
-<p><%= I18n.t("products.index.empty_@products")%></p>
+<p><%= I18n.t("products.index.empty_collection")%></p>
 <% else %>
 <table class="table table-striped">
   <thead>
