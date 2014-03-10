@@ -40,7 +40,5 @@ class ReplaceUserByPolymorphicResourceInCandidatures < ActiveRecord::Migration
     
     remove_column :candidatures, :resource_type
     remove_column :candidatures, :resource_id
-    
-    remove_index :candidatures, [:resource_id, :resource_type, :vacancy_id]
   end
 end
