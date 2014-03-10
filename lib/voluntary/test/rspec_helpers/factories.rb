@@ -26,8 +26,8 @@ module Voluntary
             
             factory_girl.factory :product do
               name 'Product'
-              user_id FactoryGirl.create(:user, password: 'password', password_confirmation: 'password').id
-              area_ids [Area.first.try(:id) || FactoryGirl.create(:area).id]
+              user_id { FactoryGirl.create(:user, password: 'password', password_confirmation: 'password').id }
+              area_ids { [Area.first.try(:id) || FactoryGirl.create(:area).id] }
               text Faker::Lorem.sentences(5).join(' ')
               
               after_build do |product|
