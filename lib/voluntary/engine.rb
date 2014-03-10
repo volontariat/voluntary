@@ -5,6 +5,10 @@ module Voluntary
     config.autoload_paths << File.expand_path("../..", __FILE__)
     config.i18n.load_path += Dir[File.expand_path("../../../config/locales/**/*.{rb,yml}", __FILE__)]
     
+    config.generators do |g|
+      g.orm :active_record
+    end
+    
     initializer "voluntary.add_middleware" do |config|
       config.middleware.insert_after Rack::Runtime, Rack::MethodOverride
       config.middleware.insert_after ActiveRecord::QueryCache, ActionDispatch::Cookies
