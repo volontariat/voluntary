@@ -6,7 +6,7 @@ module ActiveModel
       return record_class if record_or_class.is_a?(Class)
 
       model_name = convert_to_model(record_or_class).class.model_name
-      new_record_or_class = Voluntary::Helpers::Application.root_model_class_name_helper(model_name.constantize.new).constantize.new
+      new_record_or_class = Voluntary::ApplicationHelper.root_model_class_name_helper(model_name.constantize.new).constantize.new
       
       convert_to_model(new_record_or_class).class.model_name
     end

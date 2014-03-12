@@ -48,7 +48,7 @@ module Voluntary
         parent = parent.friendly if parent.respond_to? :friendly
         parent = parent.find(id)
         
-        root_model_class_name = Voluntary::Helpers::Application.root_model_class_name_helper(parent)
+        root_model_class_name = Voluntary::ApplicationHelper.root_model_class_name_helper(parent)
         eval("@#{root_model_class_name.tableize.singularize} = parent") 
         
         parent
