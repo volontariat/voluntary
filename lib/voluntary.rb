@@ -64,15 +64,6 @@ require 'coffee-script'
 require 'font-awesome-rails'
 
 require 'voluntary/navigation'
-require 'voluntary/helpers/application'
-require 'voluntary/helpers/collection'
-require 'voluntary/helpers/comments'
-require 'voluntary/helpers/form'
-require 'voluntary/helpers/language'
-require 'voluntary/helpers/layout'
-require 'voluntary/helpers/product'
-require 'voluntary/helpers/show'
-require 'voluntary/helpers/wizard'
 
 require 'db_seed'
 require 'volontariat_seed'
@@ -84,16 +75,4 @@ end
 require 'voluntary/engine'
 
 module Voluntary
-end
-
-if defined?(ActionView::Base)
-  ActionView::Base.send :include, Voluntary::Helpers::Application
-  ActionView::Base.send :include, Voluntary::Helpers::Collection
-  ActionView::Base.send :include, Voluntary::Helpers::Comments
-  ActionView::Base.send :include, Voluntary::Helpers::Form
-  ActionView::Base.send :include, Voluntary::Helpers::Language
-  ActionView::Base.send :include, Voluntary::Helpers::Layout
-  ActionView::Base.send :include, Voluntary::Helpers::Product
-  ActionView::Base.send :include, Voluntary::Helpers::Show
-  ActionView::Base.send :include, Voluntary::Helpers::Wizard
 end

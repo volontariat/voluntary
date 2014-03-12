@@ -15,5 +15,17 @@ module Voluntary
       config.middleware.insert_after ActionDispatch::Cookies, ActionDispatch::Session::CookieStore
       config.middleware.insert_after ActionDispatch::Session::CookieStore, ActionDispatch::Flash
     end
+    
+    initializer "voluntary.add_view_helpers" do |config|
+      ActionView::Base.send :include, Voluntary::ApplicationHelper
+      ActionView::Base.send :include, Voluntary::CollectionHelper
+      ActionView::Base.send :include, Voluntary::CommentsHelper
+      ActionView::Base.send :include, Voluntary::FormHelper
+      ActionView::Base.send :include, Voluntary::LanguageHelper
+      ActionView::Base.send :include, Voluntary::LayoutHelper
+      ActionView::Base.send :include, Voluntary::ProductHelper
+      ActionView::Base.send :include, Voluntary::ShowHelper
+      ActionView::Base.send :include, Voluntary::WizardHelper
+    end
   end
 end
