@@ -48,7 +48,7 @@ module ApplicationHelper
   
   def general_attribute?(attribute)
     begin
-      I18n.t("activerecord.attributes.general.#{attribute}", raise: true)
+      I18n.t("attributes.#{attribute}", raise: true)
       true
     rescue
       false
@@ -59,7 +59,7 @@ module ApplicationHelper
     current_resource = current_resource || resource
     
     t("activerecord.attributes.#{root_model_class_name(current_resource).underscore}.#{attribute}",
-      default: t("activerecord.attributes.general.#{attribute}")
+      default: t("attributes.#{attribute}")
     )
   end
 end

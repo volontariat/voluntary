@@ -49,7 +49,7 @@ module Voluntary
     
     def general_attribute?(attribute)
       begin
-        I18n.t("activerecord.attributes.general.#{attribute}", raise: true)
+        I18n.t("attributes.#{attribute}", raise: true)
         true
       rescue
         false
@@ -58,8 +58,8 @@ module Voluntary
     
     def attribute_translation(attribute, current_resource = nil)
       current_resource = current_resource || resource
-      t("activerecord.attributes.#{root_model_class_name(current_resource).underscore.gsub('/', '_')}.#{attribute}",
-        default: t("activerecord.attributes.general.#{attribute}")
+      t("activerecord.attributes.#{root_model_class_name(current_resource).underscore}.#{attribute}",
+        default: t("attributes.#{attribute}")
       )
     end
   end

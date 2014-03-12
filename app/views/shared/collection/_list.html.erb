@@ -10,7 +10,7 @@
       <th>
     <% (columns.is_a?(Hash) ? columns.keys : columns).each do |column| %>
         <strong><%= t(
-          "activerecord.attributes.general.#{column}", 
+          "attributes.#{column}", 
           default: t("activerecord.attributes.#{type.singularize}.#{column}")
         ) %>:</strong> 
         

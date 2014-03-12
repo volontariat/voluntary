@@ -32,7 +32,7 @@ module ShowHelper
     end
     
     title = if general_attribute?(:parent)
-      t("activerecord.attributes.general.#{association}")
+      t("attributes.#{association}")
     else
       if resource.send(association) 
         t("activerecord.models.#{root_model_class_name(resource.send(association)).underscore}")

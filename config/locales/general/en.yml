@@ -14,7 +14,7 @@ en:
     list_action: Back to the overview
     details: Details
     form:
-      errors_count: '%{count} prohibited this product from being saved:'
+      errors_count: '%{count} prohibited this object from being saved:'
       successfully_created: Creation successful
       successfully_updated: Update successful
       destroyed: Resource destroyed successfully.
@@ -29,6 +29,15 @@ en:
       not_found: Resource not found.
     notifications:
       event_successful: "%{event} successful."  
+   
+  attributes:  
+    name: Name 
+    text: Text
+    parent: Parent
+    project_id: Project
+    state: State
+    user_id: User
+    vacancy_id: Vacancy  
       
   activerecord:
     models:
@@ -45,14 +54,6 @@ en:
       vacancy: Vacancy
       
     attributes:
-      general:
-        name: Name 
-        text: Text
-        parent: Parent
-        project_id: Project
-        state: State
-        user_id: User
-        vacancy_id: Vacancy
       comment:
         name: Subject
       vacancy:
