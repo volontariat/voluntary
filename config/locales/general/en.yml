@@ -38,7 +38,8 @@ en:
     state: State
     user_id: User
     vacancy_id: Vacancy  
-      
+    roles: Roles
+    
   activerecord:
     models:
       area: Area
