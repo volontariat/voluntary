@@ -18,6 +18,13 @@ module Voluntary
               #after_create do |user|
               #  User.confirm_by_token(user.confirmation_token)
               #end
+              
+              factory :master_user do
+                after_create do |user|
+                  role = Role.find_or_create_by_name('Master')
+                  user.roles << role
+                end
+              end
             end
             
             factory_girl.factory :area do
