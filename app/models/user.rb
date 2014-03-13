@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
     options
   end
   
+  def is_master?
+    roles.where(name: 'Master').any?
+  end
+  
   def languages
     (foreign_languages || []) + [language]
   end
@@ -88,6 +92,10 @@ class User < ActiveRecord::Base
   
   def area_tokens
     areas
+  end
+  
+  def full_name
+    [first_name, last_name].join(' ')
   end
   
   private
