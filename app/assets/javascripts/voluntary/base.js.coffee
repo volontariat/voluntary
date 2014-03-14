@@ -7,7 +7,36 @@ $(document).ready ->
     $(v).accordion({ autoHeight: false });
     
   $('.tabs').each (k, v) ->
-    $(v).tabs({ autoHeight: false });
+    $(v).tabs
+      autoHeight: false
+      
+      beforeLoad: (event, ui) ->
+        ui.jqXHR.error ->
+          json = null
+          
+          try
+            json = jQuery.parseJSON(ui.jqXHR.responseText)
+          catch e
+          
+          error = if json && json['error'] then json['error'] else 'Something went wrong'
+          
+          ui.panel.html error
+    
+  $(document).on "click", ".ui-tabs-panel .pagination a", (event) ->
+    event.preventDefault()
+    
+    $.get($(this).attr('href'), (data) ->
+      $($('.ui-tabs-panel[style*="display: block"]')[0]).html(data)
+    ).fail (jqXHR, textStatus, errorThrown) ->
+      json = null
+      
+      try
+        json = jQuery.parseJSON(jqXHR.responseText)
+      catch e
+        
+      error = if json && json['error'] then json['error'] else 'Something went wrong'
+    
+      $($('.ui-tabs-panel[style*="display: block"]')[0]).html(error)
     
   $('form').on 'click', '.remove_fields', (event) ->
     #$(this).prev('input[type=hidden]').val('1')
