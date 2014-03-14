@@ -42,6 +42,7 @@
     </div>
   </div>
   <%= javascript_include_tag 'voluntary/application' %>
+  <%= yield :javascript_includes %>
   <%= csrf_meta_tags %>
   <%= javascript_tag do %>
     <%= yield :top_javascript %>
