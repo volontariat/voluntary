@@ -10,7 +10,7 @@
     <li>
       <%= link_to(
         t('general.destroy'), resource, id: "#{resource.class.name.tableize.singularize}_#{resource.id}", method: :delete, 
-        confirm: t('general.questions.are_you_sure'),
+        data: { confirm: t('general.questions.are_you_sure') },
         onclick: "delete_link('#{resource.class.name.tableize.singularize}_#{resource.id}'); return false;"
       ) 
       %>

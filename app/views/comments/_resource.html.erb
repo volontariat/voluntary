@@ -11,6 +11,6 @@
       "new_#{resource.commentable_type.tableize.singularize}_comment_path(resource.commentable, comment: { parent_id: resource.id })" 
     ), class: 'new_comment' %> |
     <%= link_to t('general.edit'), edit_comment_path(resource), class: 'edit_comment' %> |
-    <%= link_to t('general.destroy'), resource, confirm: t('general.questions.are_you_sure'), method: :delete, class: 'destroy_comment' %>
+    <%= link_to t('general.destroy'), resource, data: { confirm: t('general.questions.are_you_sure') }, method: :delete, class: 'destroy_comment' %>
   </div>
 </div>

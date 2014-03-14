@@ -28,7 +28,7 @@
 				    <li>
 				      <%= link_to(
 				        t('general.destroy'), product_path(product.id), id: "product_#{product.id}", method: :delete, 
-				        confirm: t('general.questions.are_you_sure'),
+				        data: { confirm: t('general.questions.are_you_sure') },
 				        onclick: "delete_link('product_#{product.id}'); return false;"
 				      ) 
 				      %>
