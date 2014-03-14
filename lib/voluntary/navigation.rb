@@ -44,6 +44,10 @@ module Voluntary
                 area.item :edit, I18n.t('general.edit'), edit_area_path(@area) if can? :edit, @area
                 area.item :users, I18n.t('users.index.title'), area_users_path(@area)
                 area.item :projects, I18n.t('projects.index.title'), area_projects_path(@area)  
+                
+                if options[:after_resource_has_many]
+                  instance_exec area, {}, &options[:after_resource_has_many]
+                end
               end
             end
           end
@@ -63,6 +67,10 @@ module Voluntary
                 product.item :edit, I18n.t('general.edit'), edit_product_path(@product)  if can? :edit, @product
                   
                 product.item :projects, I18n.t('projects.index.title'), product_projects_path(@product)   
+                
+                if options[:after_resource_has_many]
+                  instance_exec product, {}, &options[:after_resource_has_many]
+                end
               end
             end
           end
@@ -190,6 +198,10 @@ module Voluntary
                     comments.item(:edit, I18n.t('general.edit'), edit_comment_path(@comment))
                   end
                 end
+                
+                if options[:after_resource_has_many]
+                  instance_exec project, {}, &options[:after_resource_has_many]
+                end
               end
             end  
           end
@@ -242,6 +254,10 @@ module Voluntary
                     comments.item(:edit, I18n.t('general.edit'), edit_comment_path(@comment)) 
                   end
                 end 
+                
+                if options[:after_resource_has_many]
+                  instance_exec vacancy, {}, &options[:after_resource_has_many]
+                end
               end
             end  
           end
@@ -254,6 +270,10 @@ module Voluntary
               
               users.item :projects, I18n.t('projects.index.title'), user_projects_path(@user)
               users.item :candidatures, I18n.t('candidatures.index.title'), user_candidatures_path(@user)
+              
+              if options[:after_resource_has_many]
+                instance_exec users, {}, &options[:after_resource_has_many]
+              end
             end
           end
         end
