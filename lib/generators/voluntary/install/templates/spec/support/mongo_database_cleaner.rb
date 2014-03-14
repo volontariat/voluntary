@@ -1,16 +1,26 @@
 class MongoDatabaseCleaner
   def self.clean
-    Dir["#{Rails.root}/app/models/**/*.*"].each do |path_name|
-      path_name.gsub!("#{Rails.root.to_s}/app/models/", '')
+    root = Rails.root
+    
+    Dir["#{root}/app/models/**/*.*"].each do |name|
+      path_name = name.gsub("#{root}/app/models/", '')
       path_name = path_name.split('/')
+      
+      next if path_name.try(:first) == 'concerns'
+      
       klass = path_name.pop.sub(/\.rb$/,'').camelize
       
       unless path_name.none?
         klass = [path_name.map(&:camelize).join('::'), klass].join('::')
       end
       
-      klass = klass.constantize
-     
+      begin
+        klass = klass.constantize
+      rescue Exception => e
+        raise e
+        raise [klass, root, name, path_name].inspect
+      end
+      
       next if klass.respond_to?(:table_name) || !klass.respond_to?(:delete_all)
       
       klass.delete_all
