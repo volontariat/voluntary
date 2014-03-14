@@ -69,7 +69,7 @@ module Voluntary
       def access_denied
         message = I18n.t('general.exceptions.access_denied')
         
-        if request.format.try('json?')
+        if request.format.try('json?') || request.xhr?
           render status: 403, json: { error: message } and return
         else
           flash[:alert] = message
