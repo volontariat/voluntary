@@ -62,5 +62,18 @@ module Voluntary
         default: t("attributes.#{attribute}")
       )
     end
+    
+    def polymorphic_or_resource_path(record)
+      begin 
+        polymorphic_path(record) 
+      rescue NoMethodError
+        resource_path(record)
+      end
+    end
+    
+    def resource_path(record)
+      klass = ::Voluntary::ApplicationHelper.root_model_class_name_helper(record)
+      eval("#{klass.tableize.singularize}_path(record)")
+    end
   end
 end

@@ -28,7 +28,15 @@ module Voluntary
           association = eval("resource.#{alternative_value}") if alternative_value.present?
         end
         
-        association ? link_to(association.name, association) : value
+        if association
+          begin
+            link_to(association.name, association)
+          rescue NoMethodError
+            link_to(association.name, resource_path(association))
+          end
+        else
+          value
+        end
       else
         resource.send(column) 
       end

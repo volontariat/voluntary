@@ -4,7 +4,8 @@
 </h3>
 
 <dl class="dl-horizontal">
-  <%= show_associations :product, :user, :organization, :areas %>
+	<%= show_attribute(:product, title: t("attributes.product"), value: link_to(resource.product.name, product_path(resource.product))) if resource.product.present? %>
+  <%= show_associations :user, :organization, :areas %>
   <%= show_actions %>
 </dl>
 
