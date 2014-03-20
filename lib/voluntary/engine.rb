@@ -9,6 +9,10 @@ module Voluntary
       g.orm :active_record
     end
     
+    config.to_prepare do
+      Voluntary::Navigation::Base.add_product('no-name', I18n.t('workflow.user.products.no_name.title'))
+    end
+    
     initializer "voluntary.add_middleware" do |config|
       config.middleware.insert_after Rack::Runtime, Rack::MethodOverride
       config.middleware.insert_after ActiveRecord::QueryCache, ActionDispatch::Cookies

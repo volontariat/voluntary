@@ -1,7 +1,16 @@
 module Voluntary
   module Navigation
     class Base
+      @@products = {}
       @@menu_options = {}
+      
+      def self.add_product(slug, text)
+        @@products[slug] = text
+      end
+      
+      def self.products
+        @@products
+      end
       
       def self.add_menu_option(resource, option, value)
         @@menu_options[resource] ||= {}
@@ -296,9 +305,7 @@ module Voluntary
               end
               
               workflow.item :user, I18n.t('workflow.user.index.title'), workflow_user_index_path do |user|
-                { 
-                  'no-name' => I18n.t('workflow.user.products.no_name.title')
-                }.each do |slug, text|
+                ::Voluntary::Navigation::Base.products.each do |slug, text|
                   user.item slug.gsub('-', '_').to_sym, text, product_workflow_user_index_path(slug) do |product|
                     product_slug = @story ? (@story.product.try(:to_param) || 'no-name') : 'no-name'
                     
