@@ -5,6 +5,6 @@
   	'name' => ->(resource) do
   	  link_to resource.name, product_area_workflow_user_index_path(params[:id], resource)	
     end, 'users_count' => nil 
-  }
+  }, options: { append_new_link: false }
 %>
 
