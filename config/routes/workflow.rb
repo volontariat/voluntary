@@ -16,7 +16,7 @@ namespace 'workflow' do
       
       get 'stories/:story_id/tasks' => 'tasks#index', as: :tasks
       get 'stories/:story_id/tasks/next' => 'tasks#next', as: :next_task
-      put 'tasks/:id' => 'tasks#update', as: :update_task
+      patch 'tasks/:id' => 'tasks#update', as: :update_task
       get 'tasks/:id/edit' => 'tasks#edit', as: :edit_task
           
       get 'tasks/:id/assign' => 'tasks#assign', as: :assign_task
