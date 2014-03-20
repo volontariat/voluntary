@@ -10,7 +10,7 @@ module Voluntary
     end
     
     config.to_prepare do
-      Voluntary::Navigation::Base.add_product('no-name', I18n.t('workflow.user.products.no_name.title'))
+      Voluntary::Navigation::Base.add_product('no-name', 'workflow.user.products.no_name.title')
     end
     
     initializer "voluntary.add_middleware" do |config|

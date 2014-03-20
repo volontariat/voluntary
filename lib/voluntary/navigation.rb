@@ -305,7 +305,9 @@ module Voluntary
               end
               
               workflow.item :user, I18n.t('workflow.user.index.title'), workflow_user_index_path do |user|
-                ::Voluntary::Navigation::Base.products.each do |slug, text|
+                ::Voluntary::Navigation::Base.products.each do |slug, key|
+                  text = I18n.t(key)
+                  
                   user.item slug.gsub('-', '_').to_sym, text, product_workflow_user_index_path(slug) do |product|
                     product_slug = @story ? (@story.product.try(:to_param) || 'no-name') : 'no-name'
                     
