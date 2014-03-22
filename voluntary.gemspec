@@ -111,7 +111,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'http_accept_language', '~> 1.0.2'
   s.add_dependency 'typhoeus', '~> 0.5.3'
-  s.add_dependency 'capistrano', '~> 3.1.0'
+  s.add_dependency 'capistrano', '~> 2.15.5'
 
   # view
   s.add_dependency 'jquery-rails'
