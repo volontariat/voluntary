@@ -1,5 +1,13 @@
 ## unreleased ##
 
+## 0.2.0 (March 22, 2014) ##
+
+*   Rails 4 upgrade.
+*   Adds new resource organization.
+*   after initialize callback for authorization ability.rb
+*   after_resource_has_many callback for main navigation
+*   Several bugfixes and small features.
+
 ## 0.1.0 (October 13, 2013) ##
 
 *   voluntary_translation support with new model column.
