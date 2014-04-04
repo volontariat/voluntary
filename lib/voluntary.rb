@@ -62,6 +62,7 @@ require 'handlebars_assets'
 require 'uglifier'
 require 'coffee-script'
 require 'font-awesome-rails'
+require 'thor'
 
 require 'voluntary/navigation'
 
