@@ -10,7 +10,11 @@ en:
       index:
         title: Project Owner
         tasks: Tasks
-        
+
+    organization_owner:
+      index:
+        title: Organization Owner
+       
     user:
       general:
         steps:
