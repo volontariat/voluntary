@@ -17,7 +17,7 @@
     </li>
   <% end %>
   <% if can? :edit, resource %>    
-    <li><%= link_to t('general.edit'), eval("edit_#{type.singularize}_path(resource)") %></li>
+    <li><%= link_to t('general.edit'), eval("edit_#{type.gsub('/', '_').singularize}_path(resource)") %></li>
   <% end %>
   <% if resource.respond_to? :state_events %>
   <li class="divider"></li>
