@@ -161,7 +161,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'timecop', '~> 0.6.1'
   s.add_development_dependency 'factory_girl_rails', '~> 1.7.0'
   s.add_development_dependency 'fixture_builder', '~> 0.3.3'
-  s.add_development_dependency 'fuubar', '~> 1.1.0'
   s.add_development_dependency 'selenium-webdriver', '~> 2.22.1'
   s.add_development_dependency 'spork', '~> 1.0rc2'
   s.add_development_dependency 'guard-rspec', '~> 3.0.2'
