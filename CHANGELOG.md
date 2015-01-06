@@ -1,5 +1,9 @@
 ## unreleased ##
 
+## 0.2.1 (January 6, 2015) ##
+
+*   Small changes not worth mentioning.
+
 ## 0.2.0 (March 22, 2014) ##
 
 *   Rails 4 upgrade.
