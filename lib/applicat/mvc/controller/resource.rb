@@ -13,7 +13,7 @@ module Applicat::Mvc::Controller::Resource
         params[:controller].classify.constantize.
         select(:name).order(:name).where("name LIKE ?", "%#{params[:term]}%").
         map(&:name)
-      )
+      ), root: false
     end
   end
 end
