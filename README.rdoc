@@ -65,24 +65,23 @@ Run this in your console:
   cd ..
   rails plugin new voluntary_product_name --database=postgresql --skip-javascript --skip-test-unit --dummy-path=dummy --full
   cd voluntary_product_name
-  # Add voluntary gem as a dependency to gemspec ('0.1.0.rc2').
+  # Add voluntary gem as a dependency to gemspec ('~> 0.2.1').
   # add "require 'voluntary'" to lib/voluntary_product_name.rb
-  # Still needed?: Add development dependencies to dummy Gemfile, see voluntary_text_creation.
   # bundle install
   cd dummy
+  # Add development dependencies to dummy Gemfile, see voluntary_text_creation. 
+  bundle install
   # change config/boot.rb to require bundler like here: https://github.com/volontariat/voluntary_scholarship/blob/master/dummy/config/boot.rb
   # change database names to #{product_name}_#{environment} and customize user credentials in config/database.yml
   # add gitignore file from voluntary: https://github.com/volontariat/voluntary/blob/master/.gitignore
-  rake db:create:all && rails g voluntary:product_dummy # confirm all overwrite questions
-  # Add "gemspec path: File.expand_path(File.dirname(__FILE__) + '/../')" to the top of the dummy's Gemfile
-  bundle install # if it hangs at Fetching source index stop it and deactivate gems until it works and add them back one by one
+  bundle exec rake db:create:all && bundle exec rails g voluntary:product_dummy # confirm all overwrite questions except of Gemfile
   cd ..
   rails g migration add_product_name_product
   # fill migration file with template: https://github.com/volontariat/voluntary_scholarship/blob/master/db/migrate/20140306201232_add_scholarship_product.rb
   cd dummy
-  rake railties:install:migrations
+  bundle exec rake railties:install:migrations
   # change database names to #{product_name}_#{environment} and customize user credentials in dummy/config/mongoid.yml
-  rake db:migrate && rake db:test:clone_structure
+  bundle exec rake db:migrate && bundle exec rake db:test:clone_structure
   # create a class for your new product under app/models/product/product_name.rb like: https://github.com/volontariat/voluntary_scholarship/blob/master/app/models/product/scholarship.rb
   bundle exec rails s
   
