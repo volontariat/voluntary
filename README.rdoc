@@ -66,7 +66,7 @@ Run this in your console:
   rails plugin new voluntary_product_name --database=postgresql --skip-javascript --skip-test-unit --dummy-path=dummy --full
   cd voluntary_product_name
   # Add voluntary gem as a dependency to gemspec ('~> 0.2.1').
-  # Add development dependencies from the following gemspec to product's gemspec: https://github.com/volontariat/voluntary_scholarship/blob/master/voluntary_scholarship.gemspec
+  # Add development dependencies from the following gemspec to product's gemspec: https://github.com/volontariat/voluntary/blob/master/voluntary.gemspec
   # add "require 'voluntary'" to lib/voluntary_product_name.rb
   # bundle install
   cd dummy
