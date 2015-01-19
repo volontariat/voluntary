@@ -10,7 +10,8 @@ class User
           user.first_name = auth.info.first_name
           user.last_name = auth.info.last_name 
           user.email = auth.info.email
-          #user.username = auth.info.nickname
+          user.lastfm_user_name = auth.info.nickname if user.provider == 'lastfm'
+          user
         end
       end
       
@@ -28,6 +29,10 @@ class User
   end
     
   def password_required?
+    super && provider.blank?
+  end
+
+  def email_required?
     super && provider.blank?
   end
   

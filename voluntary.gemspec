@@ -40,6 +40,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'omniauth', '~> 1.2.2'
   s.add_dependency 'omniauth-facebook', '~> 2.0.0'
   s.add_dependency 'omniauth-google-oauth2', '~> 0.2.6'
+  s.add_dependency 'omniauth-lastfm', '~> 0.0.6'
   
   # cannot load such file -- devise/schema (LoadError)
   #  s.add_dependency 'devise_rpx_connectable'

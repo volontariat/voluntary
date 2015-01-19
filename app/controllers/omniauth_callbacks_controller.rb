@@ -1,7 +1,7 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def all
     user = User.from_omniauth(request.env['omniauth.auth'])
-    
+
     if user.persisted?
       kind = case request.env['omniauth.auth']['provider']
       when 'google_oauth2' then 'Google'
@@ -18,4 +18,5 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   
   alias_method :facebook, :all
   alias_method :google_oauth2, :all
+  alias_method :lastfm, :all
 end
