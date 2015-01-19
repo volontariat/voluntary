@@ -4,15 +4,20 @@ class User
     
     module ClassMethods
       def from_omniauth(auth)
-        where(auth.slice(:provider, :uid)).first_or_create do |user|
+        user = User.where(provider: auth.provider, uid: auth.uid).first
+        
+        unless user
+          user = User.new
           user.provider = auth.provider
           user.uid = auth.uid
           user.first_name = auth.info.first_name
           user.last_name = auth.info.last_name 
           user.email = auth.info.email
           user.lastfm_user_name = auth.info.nickname if user.provider == 'lastfm'
-          user
+          user.save
         end
+        
+        user
       end
       
       def new_with_session(params, session)
