@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include ::Applicat::Mvc::Model::Resource::Base
   include User::Listable
   include User::Extensions
+  include User::Omniauthable
   
   belongs_to :main_role, class_name: 'Role'
   belongs_to :profession
@@ -19,12 +20,12 @@ class User < ActiveRecord::Base
   
   serialize :foreign_languages
   
-  validates :name, presence: true, uniqueness: true
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :language, presence: true
-  validates :country, presence: true
-  validates :interface_language, presence: true
+  validates :name, presence: true, uniqueness: true, if: 'provider.blank?'
+  validates :first_name, presence: true, if: 'provider.blank?'
+  validates :last_name, presence: true, if: 'provider.blank?'
+  validates :language, presence: true, if: 'provider.blank?'
+  validates :country, presence: true, if: 'provider.blank?'
+  validates :interface_language, presence: true, if: 'provider.blank?'
         
   attr_accessible :name, :password, :password_confirmation, :remember_me, :text, :language, :first_name, :last_name, 
                   :salutation, :marital_status, :family_status, :date_of_birth, :place_of_birth, :citizenship, 
@@ -36,7 +37,8 @@ class User < ActiveRecord::Base
   # :timeoutable, :token_authenticatable, :lockable,
   # :lock_strategy => :none, :unlock_strategy => :nones
   devise :database_authenticatable, :registerable,# :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable 
+         :recoverable, :rememberable, :trackable, :validatable
+  devise :omniauthable, omniauth_providers: [:google_oauth2]
   
   extend FriendlyId
   

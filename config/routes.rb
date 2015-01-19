@@ -9,6 +9,7 @@ end
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'devise_extensions/registrations',
+    omniauth_callbacks: 'omniauth_callbacks'
   }
 
   resources :areas do

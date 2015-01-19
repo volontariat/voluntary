@@ -20,6 +20,7 @@ pickle-email-*.html
 /config/database.yml
 /dummy/.bundle
 /dummy/config/database.yml
+/dummy/config/initializers/google.rb
 /dummy/log/*
 /dummy/tmp/
 /dummy/db/structure.sql
