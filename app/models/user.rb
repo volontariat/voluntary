@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   # :lock_strategy => :none, :unlock_strategy => :nones
   devise :database_authenticatable, :registerable,# :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, omniauth_providers: [:google_oauth2]
+  devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   
   extend FriendlyId
   
