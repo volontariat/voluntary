@@ -116,18 +116,16 @@ Gem::Specification.new do |s|
   # view
   s.add_dependency 'jquery-rails'
   s.add_dependency 'jquery-ui-bootstrap-rails-asset'
-  s.add_dependency 'auto_html'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'jquery-ui-bootstrap-rails-asset'
   s.add_dependency 'bootstrap-sass-rails', '~> 2'
-  s.add_dependency 'auto_html'
+  s.add_dependency 'auto_html', '~> 1.6.4'
   
   # includes jquery 1.11.0 which is not supported by ember.js
   #s.add_dependency 'jquery-rails', '~> 3.1.0'
   s.add_dependency 'jquery-rails', '2.2.2'
   s.add_dependency 'jquery-ui-bootstrap-rails-asset', '~> 0.0.3'
   s.add_dependency 'bootstrap-sass-rails', '~> 2.3.2.1'
-  s.add_dependency 'auto_html', '~> 1.5.3'
   
   # TODO: get rid of exception wrong number of arguments (3 for 2) for form_for
   #s.add_dependency 'client_side_validations', '~> 3.2.6'
