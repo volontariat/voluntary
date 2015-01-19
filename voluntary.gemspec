@@ -34,13 +34,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'messagebus_ruby_api', '~> 1.0.3'
   
   # authentication / authorization
-
   s.add_dependency 'devise', '~> 3.2.2'
   s.add_dependency 'devise-encryptable', '~> 0.1.2'
   s.add_dependency 'cancan', '~> 1.6.10'
-  s.add_dependency 'omniauth', '~> 1.0.3'
-  s.add_dependency 'omniauth-facebook', '~> 1.6.0'
-  s.add_dependency 'omniauth-tumblr', '~> 1.1'
+  s.add_dependency 'omniauth', '~> 1.2.2'
+  s.add_dependency 'omniauth-facebook', '~> 2.0.0'
+  s.add_dependency 'omniauth-google-oauth2', '~> 0.2.6'
   
   # cannot load such file -- devise/schema (LoadError)
   #  s.add_dependency 'devise_rpx_connectable'
