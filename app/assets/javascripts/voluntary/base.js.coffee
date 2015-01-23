@@ -26,7 +26,9 @@ $(document).ready ->
     event.preventDefault()
     
     $.get($(this).attr('href'), (data) ->
-      $($('.ui-tabs-panel[style*="display: block"]')[0]).html(data)
+      panel = $('.ui-tabs-panel[style*="display: block"]')[0]
+      panel = $('.ui-tabs-panel')[0] unless panel
+      $(panel).html(data)
     ).fail (jqXHR, textStatus, errorThrown) ->
       json = null
       
@@ -68,3 +70,25 @@ $(document).ready ->
     
   $( ".datepicker" ).each (k, v) ->
     $(v).datepicker({ dateFormat: "yy-mm-dd", changeYear: true, yearRange: "c-100:c+10" });
+    
+  $(document.body).on "click", ".remote_links", (event) ->
+    $this = $(this)
+    
+    $.ajax(url: $this.attr('href'), type: "GET", dataType: "html").success (data) ->
+      $($this.data("replace")).html(data)
+      
+    event.preventDefault()
+    
+  $(document.body).on "click", ".remote_modal_link", (event) ->
+    $this = $(this)
+    
+    $.ajax(url: $this.attr('href'), type: "GET", dataType: "html").success (data) ->
+      $('#bootstrap_modal').html(data)
+      $('#bootstrap_modal').modal('show')
+      
+    event.preventDefault()
+    
+  $(document.body).on "click", "#close_bootstrap_modal_button", (event) ->
+    $('#bootstrap_modal').modal('hide')
+    event.preventDefault()
+    
