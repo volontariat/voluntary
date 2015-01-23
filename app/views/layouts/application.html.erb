@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= t('layout.title') %></title>
+  <title><%= (yield(:title).blank? ? '' : yield(:title) + ' - ') + t('layout.title') %></title>
   <meta charset='utf-8'>
   <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,8 @@
   <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet"/>
 </head>
 <body>
+  <div id="bootstrap_modal" class="modal hide fade"></div>
+  
   <%= render 'layouts/shared/navigation' %>
   
   <section id="dialog">
