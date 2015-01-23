@@ -133,7 +133,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:new, :edit, :create, :update, :destroy]
   
   resources :users do
-    resources :projects, only: :index
+    resources :projects, only: [:index, :new]
     resources :candidatures, only: :index
     
     collection do
