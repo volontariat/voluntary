@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   include User::Listable
   include User::Extensions
   include User::Omniauthable
+  include User::Liking
   
   belongs_to :main_role, class_name: 'Role'
   belongs_to :profession

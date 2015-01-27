@@ -1,0 +1,50 @@
+<table class="likes_and_dislikes_table" data-target_type="<%= target.class.name %>" data-target_id="<%= target.id %>">
+  <tr>
+<% if user_signed_in? %>
+    <td style="padding-right: 5px">
+      <a 
+        href="#" class="like_link" 
+        data-disliked="<%= (likes[target.id].present? && !likes[target.id].positive?).inspect %>" 
+        style="<%= likes[target.id].present? && likes[target.id].positive? ? 'display:none;' : '' %>"
+      >
+        <%= t('likes.actions.like') %>
+      </a>
+      <a 
+        href="#" class="undo_like_link" 
+        style="<%= likes[target.id].present? && likes[target.id].positive? ? '' : 'display:none;' %>"
+      >
+        <%= t('likes.actions.undo_like') %>
+      </a>
+    </td>
+<% end %>    
+    <td>
+      <i class="icon-thumbs-up"></i>
+    </td>
+    <td class="likes_counter_column" style="padding-right: 5px">
+      <%= target.likes_count %>
+    </td>
+<% if user_signed_in? %>    
+    <td style="padding-right: 5px">
+      <a 
+        href="#" class="dislike_link" 
+        data-liked="<%= (likes[target.id].present? && likes[target.id].positive?).inspect %>" 
+        style="<%= likes[target.id].present? && !likes[target.id].positive? ? 'display:none;' : '' %>"
+      >
+        <%= t('likes.actions.dislike') %>
+      </a>
+      <a 
+        href="#" class="undo_dislike_link" 
+        style="<%= likes[target.id].present? && !likes[target.id].positive? ? '' : 'display:none;' %>"
+      >
+        <%= t('likes.actions.undo_dislike') %>
+      </a>      
+    </td> 
+<% end %>    
+    <td>
+      <i class="icon-thumbs-down"></i>
+    </td>
+    <td class="dislikes_counter_column">
+      <%= target.dislikes_count %>
+    </td> 
+  </tr>
+</table>

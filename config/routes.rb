@@ -155,4 +155,8 @@ Rails.application.routes.draw do
       get :autocomplete
     end
   end
+  
+  post 'like/:target_type/:target_id' => 'likes#create'
+  post 'dislike/:target_type/:target_id' => 'likes#create'
+  post 'unlike/:target_type/:target_id' => 'likes#destroy'
 end

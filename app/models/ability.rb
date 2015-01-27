@@ -27,9 +27,9 @@ class Ability
     if user.present?
       can :destroy, User, id: user.id
       
-      can [:new, :create], [Area, Profession, Project, Vacancy, Candidature, Comment]
+      can [:new, :create], [Area, Profession, Project, Vacancy, Candidature, Comment, Like]
       can :assign, Task
-      can [:update, :cancel, :review], Task, user_id: user.id
+      can [:update, :cancel, :review], [Task, Like], user_id: user.id
       
       { 
         user_id: [Product, Organization, Project, Comment, ProjectUser, Result], 

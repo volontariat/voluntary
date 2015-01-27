@@ -1,0 +1,7 @@
+en:
+  likes:
+    actions:
+      like: Like
+      dislike: Dislike
+      undo_like: Unlike
+      undo_dislike: Undo Dislike
