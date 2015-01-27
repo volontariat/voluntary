@@ -2,6 +2,7 @@ en:
   general:
     index:
       title: Home
+    search: Search
     new: New
     denied: Denied
     accepted: Accepted
