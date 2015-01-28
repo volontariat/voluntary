@@ -75,5 +75,9 @@ module Voluntary
       klass = ::Voluntary::ApplicationHelper.root_model_class_name_helper(record)
       eval("#{klass.tableize.singularize}_path(record)")
     end
+    
+    def name_with_apostrophe(value)
+      value =~ /s$/i ? "#{value}'" : "#{value}'s"
+    end
   end
 end
