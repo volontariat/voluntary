@@ -15,6 +15,7 @@ en:
     error: Error
     list_action: Back to the overview
     details: Details
+    export: Export
     form:
       errors_count: '%{count} prohibited this object from being saved:'
       successfully_created: Creation successful
