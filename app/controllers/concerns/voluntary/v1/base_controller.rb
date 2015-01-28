@@ -8,9 +8,17 @@ module Voluntary
         rescue_from ActiveRecord::RecordNotFound, with: :not_found
         rescue_from Mongoid::Errors::DocumentNotFound, with: :not_found
         
-        helper_method :parent, :application_navigation, :navigation_product_path, :navigation_product_name
+        helper_method :parent, :application_navigation, :navigation_product_path, :navigation_product_name, :voluntary_application_stylesheets, :voluntary_application_javascripts
       end
       
+      def voluntary_application_stylesheets
+        ['voluntary/application', 'application'] 
+      end
+    
+      def voluntary_application_javascripts
+        ['voluntary/application', 'application'] 
+      end
+          
       def parent
         @parent
       end
