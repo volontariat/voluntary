@@ -9,9 +9,16 @@ $(document).ready ->
   $('.tabs').each (k, v) ->
     $(v).tabs
       autoHeight: false
-      
+      beforeActivate: (event, ui) ->
+        unless ui.newTab.find('a').attr('href').indexOf('#') == 0
+          ui.newTab.find('.ajax_spinner').show()
+          ui.newPanel.empty()
+          
       beforeLoad: (event, ui) ->
         ui.jqXHR.error ->
+          unless ui.tab.find('a').attr('href').indexOf('#') == 0
+            ui.tab.find('.ajax_spinner').hide()
+          
           json = null
           
           try
@@ -21,6 +28,10 @@ $(document).ready ->
           error = if json && json['error'] then json['error'] else 'Something went wrong'
           
           ui.panel.html error
+    
+      load: (event, ui) ->
+        unless ui.tab.find('a').attr('href').indexOf('#') == 0
+          ui.tab.find('.ajax_spinner').hide()
     
   $(document).on "click", ".ui-tabs-panel .pagination a", (event) ->
     event.preventDefault()
