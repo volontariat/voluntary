@@ -1,5 +1,19 @@
 ## unreleased ##
 
+## 0.2.2 (February 5, 2015) ##
+
+*   #17 Show progress spinner gif for Ajax tabs.
+*   Implements option to render custom breadcrumbs.
+*   Makes stylesheets and javascripts of application layout variable.
+*   Adds new view helper name_with_apostrophe.
+*   Yield page title and search in application layout.
+*   Disable scrolling in modal windows because of autocomplete lists cut off before.
+*   Sets global font size from 10px to 12px.
+*   Fixes ui tab paging links. Implements remote links and remote modal link handler.
+*   #14 last.fm authentication.
+*   #13 Facebook authentication.
+*   #12 Google authentication.
+
 ## 0.2.1 (January 6, 2015) ##
 
 *   Small changes not worth mentioning.
