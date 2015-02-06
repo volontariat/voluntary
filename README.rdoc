@@ -12,7 +12,7 @@ Run this in your console:
 
   rvm --create use 1.9.3@your_crowdsourcing_platform_name
   gem update bundler
-  gem install rails -v 3.2.14 --no-rdoc --no-ri  
+  gem install rails -v 4.0.13 --no-rdoc --no-ri  
   rails new your_crowdsourcing_platform_name
   cd your_crowdsourcing_platform_name
 
