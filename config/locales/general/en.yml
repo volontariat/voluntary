@@ -3,6 +3,7 @@ en:
     index:
       title: Home
     search: Search
+    submit: Submit
     new: New
     denied: Denied
     accepted: Accepted
@@ -16,6 +17,9 @@ en:
     list_action: Back to the overview
     details: Details
     export: Export
+    join: Join
+    leave: Leave
+    join_or_leave: Join or Leave
     form:
       errors_count: '%{count} prohibited this object from being saved:'
       successfully_created: Creation successful
