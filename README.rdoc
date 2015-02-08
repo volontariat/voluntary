@@ -12,7 +12,7 @@ Run this in your console:
 
   rvm --create use 1.9.3@your_crowdsourcing_platform_name
   gem update bundler
-  gem install rails -v 3.2.14 --no-rdoc --no-ri  
+  gem install rails -v 4.0.13 --no-rdoc --no-ri  
   rails new your_crowdsourcing_platform_name
   cd your_crowdsourcing_platform_name
 
@@ -74,9 +74,9 @@ Run this in your console:
   bundle install
   # change config/boot.rb to require bundler like here: https://github.com/volontariat/voluntary_scholarship/blob/master/dummy/config/boot.rb
   # change database names to #{product_name}_#{environment} and customize user credentials in config/database.yml
-  # add gitignore file from voluntary: https://github.com/volontariat/voluntary/blob/master/.gitignore
   bundle exec rake db:create:all && bundle exec rails g voluntary:product_dummy # confirm all overwrite questions except of Gemfile
   cd ..
+  # add gitignore file from voluntary: https://github.com/volontariat/voluntary/blob/master/.gitignore
   rails g migration add_product_name_product
   # fill migration file with template: https://github.com/volontariat/voluntary_scholarship/blob/master/db/migrate/20140306201232_add_scholarship_product.rb
   cd dummy
