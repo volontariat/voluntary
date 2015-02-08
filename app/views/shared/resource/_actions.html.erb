@@ -1,3 +1,4 @@
+<% namespace ||= nil %>
 <% if !resource.is_a?(Column) && (
 	can?(:destroy, resource) || can?(:edit, resource) || (
       resource.respond_to?(:state_events) && resource.state_events.select{|event| can? event, resource }.any?
@@ -8,8 +9,9 @@
   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
   <% if can? :destroy, resource %>    
     <li>
+      <% working_resource = namespace.present? ? [namespace, resource] : resource %>
       <%= link_to(
-        t('general.destroy'), polymorphic_or_resource_path(resource), id: "#{resource.class.name.tableize.singularize}_#{resource.id}", method: :delete, 
+        t('general.destroy'), polymorphic_or_resource_path(working_resource), id: "#{resource.class.name.tableize.singularize}_#{resource.id}", method: :delete, 
         data: { confirm: t('general.questions.are_you_sure') },
         onclick: "delete_link('#{resource.class.name.tableize.singularize}_#{resource.id}'); return false;"
       ) 
@@ -17,7 +19,7 @@
     </li>
   <% end %>
   <% if can? :edit, resource %>    
-    <li><%= link_to t('general.edit'), eval("edit_#{type.gsub('/', '_').singularize}_path(resource)") %></li>
+    <li><%= link_to t('general.edit'), eval("edit_#{(namespace.present? ? namespace.to_s + '_' : '')}#{type.gsub('/', '_').singularize}_path(resource)") %></li>
   <% end %>
   <% if resource.respond_to? :state_events %>
   <li class="divider"></li>
