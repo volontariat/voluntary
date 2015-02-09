@@ -1,0 +1,17 @@
+<% name ||= id %>
+<% required ||= false %>
+<% required_class = required ? ' required' : ' optional' %>
+<% value ||= true %>
+<div class="control-group radio_buttons <%= required_class %> <%= id %>">
+  <label class="radio_buttons <%= required_class %> control-label"><%= label %></label>
+  <div class="controls">
+    <label class="radio">
+      <input type="radio" value="true" name="<%= name %>" id="<%= id %>_true"<%= value ? ' checked="checked"' : '' %> class="radio_buttons <%= required_class %>"/>
+      Yes
+    </label>
+    <label class="radio">
+      <input type="radio" value="false" name="<%= name %>" id="<%= id %>_false"<%= value ? '' : ' checked="checked"' %>  class="radio_buttons <%= required_class %>"/>
+      No
+    </label>
+  </div>
+</div>
