@@ -1,6 +1,6 @@
 <% id ||= field.match(/id="([^"]*)"/)[1] %>
 <% required ||= false %>
-<% required_class = required ? ' required' : '' %>
+<% required_class = required ? ' required' : ' optional' %>
 <div class="control-group string<%= required_class %> <%= id %>">
   <label for="<%= id %>" class="string<%= required_class %> control-label">
     <% if required %><abbr title="required">*</abbr><% end %> <%= label %>
