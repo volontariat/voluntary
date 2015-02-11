@@ -47,6 +47,7 @@ en:
     vacancy_id: Vacancy  
     roles: Roles
     position: Position
+    date: Date
     
   activerecord:
     models:
