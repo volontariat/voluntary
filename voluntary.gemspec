@@ -119,6 +119,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails'
   s.add_dependency 'jquery-ui-bootstrap-rails-asset'
   s.add_dependency 'bootstrap-sass-rails', '~> 2'
+  s.add_dependency 'bootstrap-datetimepicker-rails', '~> 0.0.11'
   s.add_dependency 'auto_html', '~> 1.6.4'
   
   # includes jquery 1.11.0 which is not supported by ember.js

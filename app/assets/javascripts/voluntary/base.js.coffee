@@ -82,6 +82,8 @@ $(document).ready ->
   $( ".datepicker" ).each (k, v) ->
     $(v).datepicker({ dateFormat: "yy-mm-dd", changeYear: true, yearRange: "c-100:c+10" });
     
+  $('.datetime_picker').datetimepicker()
+    
   $(document.body).on "click", ".remote_links", (event) ->
     $this = $(this)
     
