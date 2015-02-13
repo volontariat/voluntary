@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :areas do
     resources :users, only: :index
-    resources :projects, only: :index
+    resources :projects, only: [:index, :new]
     
     collection do
       put :update_multiple
