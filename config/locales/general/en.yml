@@ -48,6 +48,7 @@ en:
     roles: Roles
     position: Position
     date: Date
+    trend: Trend
     
   activerecord:
     models:
