@@ -173,7 +173,7 @@ Gem::Specification.new do |s|
   # Gems used only for assets and not required  
   # in production environments by default.
   # group :assets
-  s.add_dependency 'sass-rails',     '~> 4.0.0'
+  s.add_dependency 'sass-rails',     '~> 4.0.5'
   s.add_dependency 'coffee-rails',   '~> 4.0.0'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   s.add_dependency 'handlebars_assets', '~> 0.15'
