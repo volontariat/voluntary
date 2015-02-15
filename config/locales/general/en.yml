@@ -35,8 +35,9 @@ en:
       access_denied: Access denied
       not_found: Resource not found.
     notifications:
-      event_successful: "%{event} successful."  
-   
+      event_successful: "%{event} successful."
+    sort_through_round_robin_tournament: Sort through round robin tournament
+    
   attributes:  
     name: Name 
     text: Text
