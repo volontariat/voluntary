@@ -1,7 +1,10 @@
 window.Voluntary or= {}; window.Voluntary.DomManipulation or= {}
 
 window.Voluntary.DomManipulation.CompetitiveList = class CompetitiveList
-  constructor: ->
+  constructor: (options) ->
+    window.competitiveListOptions = options
+    window.competitiveListOptions ||= {}
+    
     $(document.body).on "click", ".competitive_list_start_link", (event) ->
       event.preventDefault()
       window.Voluntary.DomManipulation.CompetitiveList.start()
@@ -119,8 +122,13 @@ window.Voluntary.DomManipulation.CompetitiveList = class CompetitiveList
         competitorDomElement = $('#competitor_' + competitorId)
         checked = ' checked="checked"'
         checked = '' if i == 1
-        radioButtons += '<input type="radio" ' + checked + ' name="winner" value="' + competitorId + '" style="position:relative; left: -10px; top:-5px "/>' +
-        $(competitorDomElement).find('.competitorName').html()
+        radioButtons += '<input type="radio" ' + checked + ' name="winner" value="' + competitorId + '" style="position:relative; left: -10px; top:-5px "/>'
+        
+        if window.competitiveListOptions['competitor_name_proc'] == undefined || $(competitorDomElement).find('.competitor_name').data('proc-argument') == undefined
+          radioButtons += $(competitorDomElement).find('.competitor_name').html()  
+        else
+          radioButtons += window.competitiveListOptions['competitor_name_proc']($(competitorDomElement).find('.competitor_name').data('proc-argument'))
+        
         radioButtons += '&nbsp;&nbsp;VS.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' if i == 0
         i += 1
         
