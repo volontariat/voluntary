@@ -104,4 +104,9 @@ $(document).ready ->
   $(document.body).on "click", "#close_bootstrap_modal_button", (event) ->
     $('#bootstrap_modal').modal('hide')
     event.preventDefault()
-    
+
+  $(document.body).on "click", "#toggle_checkboxes_checkbox", (event) ->
+    if $('.toggleable_checkbox:checked').length == 0
+      $('.toggleable_checkbox').prop('checked', true)
+    else
+      $('.toggleable_checkbox').prop('checked', false)
