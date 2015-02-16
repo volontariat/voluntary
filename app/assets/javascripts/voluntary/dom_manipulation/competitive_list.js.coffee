@@ -74,7 +74,7 @@ window.Voluntary.DomManipulation.CompetitiveList = class CompetitiveList
     
     $.each array, (index, workingItem) ->
       unless JSON.stringify(workingItem) == JSON.stringify(item)
-        list.push newItem
+        list.push workingItem
         
     return list
           
