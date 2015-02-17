@@ -170,7 +170,7 @@ window.Voluntary.DomManipulation.CompetitiveList = class CompetitiveList
     window.matchesWon[loserId] = window.matchesWon[loserId] - 1
     window.outmatchedCompetitorsByCompetitor[winnerId] ||= []
     window.outmatchedCompetitorsByCompetitor[winnerId] = window.Voluntary.DomManipulation.CompetitiveList.removeItemFromArray(window.outmatchedCompetitorsByCompetitor[winnerId], loserId)
-    window.defeatedCompetitorsByCompetitor[otherLoserId] = window.Voluntary.DomManipulation.CompetitiveList.removeItemFromArray(window.outmatchedCompetitorsByCompetitor[loserId], winnerId)
+    window.defeatedCompetitorsByCompetitor[loserId] = window.Voluntary.DomManipulation.CompetitiveList.removeItemFromArray(window.outmatchedCompetitorsByCompetitor[loserId], winnerId)
     
   @defeatedCompetitorsByCompetitor: (competitorId) ->
     window.defeatedCompetitorsByCompetitor[competitorId] ||= []
