@@ -1,0 +1,31 @@
+<% namespace ||= nil %>
+<% message = flash[:notice].present? ? flash[:notice].clone : nil %>
+<% flash.delete(:notice) %>
+<% message = flash[:alert].present? ? flash[:alert].clone : message %>
+<% flash.delete(:alert) %>
+<% ajax_data ||= {} %>
+<% ajax_method ||= :get %>
+
+<% if @path.present? %>
+  $.ajax({ url: "<%= @path %>", data: <%= raw ajax_data.to_json %>, type: "<%= ajax_method.to_s.upcase %>", dataType: "script"}).done(function(data) {
+    eval(data);
+    <%= message.present? ? raw('alert("' + message + '");') : '' %>
+  })
+  .fail(function(data) {
+    <%= message.present? ? raw('alert("' + message + '");') : '' %>
+    alert("Failed to load <%= @path %>!");
+  });
+<% elsif @template.present? %>
+  $("#bootstrap_modal").html("<%= escape_javascript(
+    render(
+      partial: 'shared/layouts/twitter_bootstrap/modal', 
+      locals: { 
+        title: title, 
+        body: render(template: "#{namespace}#{@template}.html")  
+      }
+    ) 
+  ) %>");
+  <%= message.present? ? raw('alert("' + message + '");') : '' %>
+<% elsif message.present? %>
+  <%= message.present? ? raw('alert("' + message + '");') : '' %>
+<% end %>
