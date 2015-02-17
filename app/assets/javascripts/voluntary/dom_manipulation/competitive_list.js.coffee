@@ -105,40 +105,59 @@ window.Voluntary.DomManipulation.CompetitiveList = class CompetitiveList
       
       return false
     else  
-      radioButtons = ""
+      radioButtons = []
+      competitorStrings = []
       i = 0
       
       $.each window.currentMatch['competitors'], (index, competitorId) ->
+        console.log i
         competitorDomElement = $('#competitor_' + competitorId)
         checked = ' checked="checked"'
         checked = '' if i == 1
-        radioButtons += '<input type="radio" ' + checked + ' name="winner" value="' + competitorId + '" style="position:relative; left: -10px; top:-5px "/>'
+        radioButtons.push ('<input type="radio" ' + checked + ' name="winner" value="' + competitorId + '" style="position:relative; top:-5px "/>')
         
         if window.competitiveListOptions['competitor_name_proc'] == undefined || $(competitorDomElement).find('.competitor_name').data('proc-argument') == undefined
-          radioButtons += $(competitorDomElement).find('.competitor_name').html()  
+          competitorStrings.push $(competitorDomElement).find('.competitor_name').html()  
         else
-          radioButtons += window.competitiveListOptions['competitor_name_proc']($(competitorDomElement).find('.competitor_name').data('proc-argument'))
-        
-        radioButtons += '&nbsp;&nbsp;VS.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' if i == 0
+          competitorStrings.push window.competitiveListOptions['competitor_name_proc']($(competitorDomElement).find('.competitor_name').data('proc-argument'))
+          
         i += 1
         
-      $('#bootstrap_modal').html(
-        '<form class="form-inline" style="margin:0px;">' +
-        '<div class="modal-header">' +
-        '<button type="button" id="close_bootstrap_modal_button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-        '<h3>Appoint Winner (' + window.matchesLeft + ' matches left)</h3>' +
-        '</div>' +
-        '<div class="modal-body" style="overflow-y:none;">' +
-        '<div class="controls" style="margin-left:50px">' + radioButtons + '</div>' +
-        '</div>' +
-        '<div class="modal-footer" style="text-align:left;">' +
-        '<p>' +
-        '<button type="button" class="cancel_tournament_button" class="btn">Cancel</button> &nbsp;&nbsp;&nbsp;&nbsp; ' +
-        '<button type="button" class="select_winner_button" class="btn btn-primary">Submit</button>' +
-        '</p>' +
-        '</form>'
-      )  
+      html = """
+<form class="form-inline" style="margin:0px;">
+  <div class="modal-header">
+    <button type="button" id="close_bootstrap_modal_button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Appoint Winner (#{window.matchesLeft} matches left)</h3>
+  </div>
+  <div class="modal-body" style="overflow-y:none;">
+    <div class="controls" style="margin-left:50px">
+      <table><tr>      
+          <td style="width:325px">
+            #{competitorStrings[0]}
+          </td>
+          <td>#{radioButtons[0]}</td>
+          <td>&nbsp;&nbsp;VS.&nbsp;&nbsp;&nbsp;</td>
+          <td>#{radioButtons[1]}</td>
+          <td>
+            &nbsp;&nbsp;&nbsp;
+          </td>
+          <td style="width:325px">
+            #{competitorStrings[1]}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer" style="text-align:left;">
+    <p>
+      <button type="button" class="cancel_tournament_button" class="btn">Cancel</button> &nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" class="select_winner_button" class="btn btn-primary">Submit</button>
+    </p>
+  </form>
+"""
+      $('#bootstrap_modal').html(html)
       
+
       return true
     
   @letWinnerWinMatchesAgainstCompetitorsWhichLoseAgainstLoser: (winnerId, loserId) ->
