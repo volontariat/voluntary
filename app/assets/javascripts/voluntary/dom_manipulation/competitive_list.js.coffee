@@ -110,7 +110,6 @@ window.Voluntary.DomManipulation.CompetitiveList = class CompetitiveList
       i = 0
       
       $.each window.currentMatch['competitors'], (index, competitorId) ->
-        console.log i
         competitorDomElement = $('#competitor_' + competitorId)
         checked = ' checked="checked"'
         checked = '' if i == 1
