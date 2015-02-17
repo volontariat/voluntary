@@ -58,7 +58,7 @@ window.Voluntary.DomManipulation.CompetitiveList = class CompetitiveList
       )
       
       if notExistingCompetitors.length > 0
-        window.Voluntary.DomManipulation.CompetitiveList.removeItemFromArray(window.matches, match)
+        window.matches = window.Voluntary.DomManipulation.CompetitiveList.removeItemFromArray(window.matches, match)
       else
         window.competitorsOfCompetitor[match['competitors'][0]] ||= []
         window.competitorsOfCompetitor[match['competitors'][0]].push match['competitors'][1]
