@@ -97,7 +97,7 @@ $(document).ready ->
     
     $.ajax(url: $this.attr('href'), type: "GET", dataType: "html").success (data) ->
       $('#bootstrap_modal').html(data)
-      $('#bootstrap_modal').modal('show')
+      $('#bootstrap_modal').modal(show: true, keyboard: false)
       
     event.preventDefault()
     
