@@ -101,6 +101,10 @@ class User < ActiveRecord::Base
     [first_name, last_name].join(' ')
   end
   
+  def best_available_name
+    lastfm_user_name || full_name
+  end
+  
   private
   
   def set_main_role
