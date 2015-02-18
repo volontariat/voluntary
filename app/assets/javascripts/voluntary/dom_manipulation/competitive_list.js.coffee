@@ -1,106 +1,112 @@
-window.Voluntary or= {}; window.Voluntary.DomManipulation or= {}
-
-window.Voluntary.DomManipulation.CompetitiveList = class CompetitiveList
+class @CompetitiveList
+  competitiveListOptions: []
+  competitors: []
+  competitorsOfCompetitor: {}
+  defeatedCompetitorsByCompetitor: {}
+  outmatchedCompetitorsByCompetitor: {}
+  matchesLeft: 0
+  currentMatch: null
+  currentMatchIndex: 0
+  
   constructor: (options) ->
-    window.competitiveListOptions = options
-    window.competitiveListOptions ||= {}
+    @competitiveListOptions = options
+    @competitiveListOptions ||= {}
     
-    $(document.body).on "click", ".competitive_list_start_link", (event) ->
+    $(document.body).on "click", ".competitive_list_start_link", (event) =>
       event.preventDefault()
-      window.Voluntary.DomManipulation.CompetitiveList.start()
+      @start()
       
-    $(document.body).on "click", ".cancel_tournament_button", (event) ->
+    $(document.body).on "click", ".cancel_tournament_button", (event) =>
       event.preventDefault()
-      window.Voluntary.DomManipulation.CompetitiveList.cancelTournament()   
+      @cancelTournament()   
       
-    $(document.body).on "click", ".select_winner_button", (event) ->
+    $(document.body).on "click", ".select_winner_button", (event) =>
       event.preventDefault()
-      window.Voluntary.DomManipulation.CompetitiveList.appointWinnerOfMatchByInput()
+      @appointWinnerOfMatchByInput()
     
-  @start: () ->     
+  start: () ->     
     matchesAlreadyExist = false
     window.matches ||= []
     
     if window.matches.length > 0
       matchesAlreadyExist = true
       
-    window.competitors = jQuery.map($('.competitive_list li'), (c) ->
+    @competitors = jQuery.map($('.competitive_list li'), (c) ->
       return $(c).data('id')
     )
-    window.competitorsOfCompetitor = {} 
-    window.defeatedCompetitorsByCompetitor = {}
-    window.outmatchedCompetitorsByCompetitor = {}
-    window.matchesWon = {}
+    @competitorsOfCompetitor = {}
+    @defeatedCompetitorsByCompetitor = {}
+    @outmatchedCompetitorsByCompetitor = {}
     
     if matchesAlreadyExist
       if confirm('Remove previous results and start over?')
         window.matches = []
       else
-        window.Voluntary.DomManipulation.CompetitiveList.removeMatchesOfNonExistingCompetitors() 
+        @removeMatchesOfNonExistingCompetitors() 
     
-    window.Voluntary.DomManipulation.CompetitiveList.generateMatches()
+    @generateMatches()
     
     matchesWithoutWinner = jQuery.map(window.matches, (m) ->
       if m['winner_competitor'] == undefined
         return m
     )
     
-    window.matchesLeft = matchesWithoutWinner.length
+    @matchesLeft = matchesWithoutWinner.length
     
-    if window.Voluntary.DomManipulation.CompetitiveList.nextMatch()
+    if @nextMatch()
       $('#bootstrap_modal').modal('show')
       
-  @removeMatchesOfNonExistingCompetitors: () ->
-    $.each window.matches, (index, match) ->
-      notExistingCompetitors = jQuery.map(match['competitors'], (c) ->
-        if $.inArray(c, window.competitors) == -1
+  removeMatchesOfNonExistingCompetitors: () ->
+    $.each window.matches, (index, match) =>
+      notExistingCompetitors = jQuery.map(match['competitors'], (c) =>
+        if $.inArray(c, @competitors) == -1
           return c
       )
       
       if notExistingCompetitors.length > 0
-        window.matches = window.Voluntary.DomManipulation.CompetitiveList.removeItemFromArray(window.matches, match)
+        window.matches = @removeItemFromArray(window.matches, match)
       else
-        window.competitorsOfCompetitor[match['competitors'][0]] ||= []
-        window.competitorsOfCompetitor[match['competitors'][0]].push match['competitors'][1]
-        window.competitorsOfCompetitor[match['competitors'][1]] ||= []
-        window.competitorsOfCompetitor[match['competitors'][1]].push match['competitors'][0]
+        @competitorsOfCompetitor[match['competitors'][0]] ||= []
+        @competitorsOfCompetitor[match['competitors'][0]].push match['competitors'][1]
+        @competitorsOfCompetitor[match['competitors'][1]] ||= []
+        @competitorsOfCompetitor[match['competitors'][1]].push match['competitors'][0]
         
         unless match['winner_competitor'] == undefined
-          loserId = window.Voluntary.DomManipulation.CompetitiveList.otherCompetitorOfMatch(match, match['winner_competitor'])
-          window.Voluntary.DomManipulation.CompetitiveList.incrementMatchesWon(match['winner_competitor'], loserId)
+          loserId = @otherCompetitorOfMatch(match, match['winner_competitor'])
+          @updateDefeatedAndOutmatchedCompetitorsByCompetitor(match['winner_competitor'], loserId)
   
-  @removeItemFromArray: (array, item) ->
+  removeItemFromArray: (array, item) ->
     list = []
     
-    $.each array, (index, workingItem) ->
+    $.each array, (index, workingItem) =>
       unless JSON.stringify(workingItem) == JSON.stringify(item)
         list.push workingItem
         
     return list
           
-  @generateMatches: () ->
-    $.each window.competitors, (index, competitor_id) ->
-      window.competitorsOfCompetitor[competitor_id] ||= []
+  generateMatches: () ->
+    $.each @competitors, (index, competitor_id) =>
+      @competitorsOfCompetitor[competitor_id] ||= []
         
-      $.each window.competitors, (index, otherCompetitorId) ->
-        window.competitorsOfCompetitor[otherCompetitorId] ||= []
+      $.each @competitors, (index, otherCompetitorId) =>
+        @competitorsOfCompetitor[otherCompetitorId] ||= []
         
-        if competitor_id != otherCompetitorId && $.inArray(otherCompetitorId, window.competitorsOfCompetitor[competitor_id]) == -1
+        if competitor_id != otherCompetitorId && $.inArray(otherCompetitorId, @competitorsOfCompetitor[competitor_id]) == -1
           window.matches.push { competitors: [competitor_id, otherCompetitorId] }
-          window.competitorsOfCompetitor[competitor_id].push otherCompetitorId
-          window.competitorsOfCompetitor[otherCompetitorId].push competitor_id
+          @competitorsOfCompetitor[competitor_id].push otherCompetitorId
+          @competitorsOfCompetitor[otherCompetitorId].push competitor_id
           
-  @nextMatch: () ->
-    window.currentMatch = null
+  nextMatch: () ->
+    @currentMatch = null
     
-    $.each window.matches, (index, match) ->
+    $.each window.matches, (index, match) =>
       if match['winner_competitor'] == undefined
-        window.currentMatch = match
-        window.currentMatchIndex = index
+        @currentMatch = match
+        @currentMatchIndex = index
         
         return
     
-    if window.currentMatch == null
+    if @currentMatch == null
       alert 'No matches to rate left.'
       
       return false
@@ -109,16 +115,16 @@ window.Voluntary.DomManipulation.CompetitiveList = class CompetitiveList
       competitorStrings = []
       i = 0
       
-      $.each window.currentMatch['competitors'], (index, competitorId) ->
+      $.each @currentMatch['competitors'], (index, competitorId) =>
         competitorDomElement = $('#competitor_' + competitorId)
         checked = ' checked="checked"'
         checked = '' if i == 1
         radioButtons.push ('<input type="radio" ' + checked + ' name="winner" value="' + competitorId + '" style="position:relative; top:-5px "/>')
         
-        if window.competitiveListOptions['competitor_name_proc'] == undefined || $(competitorDomElement).find('.competitor_name').data('proc-argument') == undefined
+        if @competitiveListOptions['competitor_name_proc'] == undefined || $(competitorDomElement).find('.competitor_name').data('proc-argument') == undefined
           competitorStrings.push $(competitorDomElement).find('.competitor_name').html()  
         else
-          competitorStrings.push window.competitiveListOptions['competitor_name_proc']($(competitorDomElement).find('.competitor_name').data('proc-argument'))
+          competitorStrings.push @competitiveListOptions['competitor_name_proc']($(competitorDomElement).find('.competitor_name').data('proc-argument'))
           
         i += 1
         
@@ -126,7 +132,7 @@ window.Voluntary.DomManipulation.CompetitiveList = class CompetitiveList
 <form class="form-inline" style="margin:0px;">
   <div class="modal-header">
     <button type="button" id="close_bootstrap_modal_button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Appoint Winner (#{window.matchesLeft} matches left)</h3>
+    <h3>Appoint Winner (#{@matchesLeft} matches left)</h3>
   </div>
   <div class="modal-body" style="overflow-y:none;">
     <div class="controls" style="margin-left:50px">
@@ -159,106 +165,101 @@ window.Voluntary.DomManipulation.CompetitiveList = class CompetitiveList
 
       return true
     
-  @letWinnerWinMatchesAgainstCompetitorsWhichLoseAgainstLoser: (winnerId, loserId) ->
-    $.each window.matches, (index, match) ->  
-      matchOfWinner = $.inArray(winnerId, match['competitors'])
-      return true if matchOfWinner == -1
+  letWinnerWinMatchesAgainstCompetitorsWhichLoseAgainstLoser: (winnerId, loserId) ->
+    @defeatedCompetitorsByCompetitor[loserId] ||= []
+    
+    $.each window.matches, (index, match) =>  
+      return true if match['winner_competitor'] == winnerId || $.inArray(winnerId, match['competitors']) == -1
       
-      matchCompetitorsWhichIncludeLoser = jQuery.map(match['competitors'], (c) ->
-        if $.inArray(c, window.Voluntary.DomManipulation.CompetitiveList.defeatedCompetitorsByCompetitor(loserId)) > -1
+      matchCompetitorsWhichIncludeLoser = jQuery.map(match['competitors'], (c) =>
+        if $.inArray(c, @defeatedCompetitorsByCompetitor[loserId]) > -1
           return c
       )
         
-      return true if match['winner_competitor'] == winnerId || matchCompetitorsWhichIncludeLoser.length == 0
+      return true if matchCompetitorsWhichIncludeLoser.length == 0
         
-      otherLoserId = window.Voluntary.DomManipulation.CompetitiveList.otherCompetitorOfMatch(match, winnerId)
+      otherLoserId = @otherCompetitorOfMatch(match, winnerId)
       
-      window.matchesWon[winnerId] ||= 0
-      window.matchesWon[winnerId] = window.matchesWon[winnerId] + 1
-      
-      unless match['winner_competitor'] == undefined
-        window.Voluntary.DomManipulation.CompetitiveList.changeCompetitorsComparisonResult(winnerId, otherLoserId)
+      @changeCompetitorsComparisonResult(winnerId, otherLoserId) unless match['winner_competitor'] == undefined
         
-      window.Voluntary.DomManipulation.CompetitiveList.appointWinnerOfMatch(index, winnerId, loserId, match['winner_competitor'] == undefined)
+      @appointWinnerOfMatch(index, winnerId, otherLoserId, match['winner_competitor'] == undefined)
       window.matches[index]['winner_competitor'] = winnerId
-      console.log 'auto_winner through @letWinnerWinMatchesAgainstCompetitorsWhichLoseAgainstLoser: ' + JSON.stringify([winnerId, loserId])
       window.matches[index]['auto_winner'] = true
       
-  @changeCompetitorsComparisonResult: (winnerId, loserId) ->
-    window.matchesWon[loserId] = window.matchesWon[loserId] - 1
-    window.outmatchedCompetitorsByCompetitor[winnerId] ||= []
-    window.outmatchedCompetitorsByCompetitor[winnerId] = window.Voluntary.DomManipulation.CompetitiveList.removeItemFromArray(window.outmatchedCompetitorsByCompetitor[winnerId], loserId)
-    window.defeatedCompetitorsByCompetitor[loserId] = window.Voluntary.DomManipulation.CompetitiveList.removeItemFromArray(window.outmatchedCompetitorsByCompetitor[loserId], winnerId)
+  changeCompetitorsComparisonResult: (winnerId, loserId) ->
+    @outmatchedCompetitorsByCompetitor[winnerId] ||= []
+    @outmatchedCompetitorsByCompetitor[winnerId] = @removeItemFromArray(@outmatchedCompetitorsByCompetitor[winnerId], loserId)
+    @defeatedCompetitorsByCompetitor[loserId] = @removeItemFromArray(@outmatchedCompetitorsByCompetitor[loserId], winnerId)
     
-  @defeatedCompetitorsByCompetitor: (competitorId) ->
-    window.defeatedCompetitorsByCompetitor[competitorId] ||= []
+  getDefeatedCompetitorsByCompetitor: (competitorId) ->
+    @defeatedCompetitorsByCompetitor[competitorId] ||= []
       
-    return window.defeatedCompetitorsByCompetitor[competitorId]
+    return @defeatedCompetitorsByCompetitor[competitorId]
 
-  @otherCompetitorOfMatch: (match, competitorId) ->
+  otherCompetitorOfMatch: (match, competitorId) ->
     otherCompetitors = jQuery.map(match['competitors'], (c) ->
       if c != competitorId
         return c
     )
     return otherCompetitors[0]
 
-  @appointWinnerOfMatchByInput: () ->
+  appointWinnerOfMatchByInput: () ->
     winnerId = parseInt($("input[name='winner']:checked").val())
-    loserId = window.Voluntary.DomManipulation.CompetitiveList.otherCompetitorOfMatch(window.currentMatch, winnerId)
+    loserId = @otherCompetitorOfMatch(@currentMatch, winnerId)
     
-    window.Voluntary.DomManipulation.CompetitiveList.appointWinnerOfMatch(window.currentMatchIndex, winnerId, loserId, true)
+    @appointWinnerOfMatch(@currentMatchIndex, winnerId, loserId, true)
     
-    unless window.Voluntary.DomManipulation.CompetitiveList.nextMatch()
-      window.Voluntary.DomManipulation.CompetitiveList.sortByMostMatchesWon()
+    unless @nextMatch()
+      @sortByMostWins()
       $('#bootstrap_modal').modal('hide')
       
-  @appointWinnerOfMatch: (matchIndex, winnerId, loserId, decrementMatchesLeft) ->
+  appointWinnerOfMatch: (matchIndex, winnerId, loserId, decrementMatchesLeft) ->
     window.matches[matchIndex]['winner_competitor'] = winnerId
-    window.matchesLeft = window.matchesLeft - 1 if decrementMatchesLeft
+    @matchesLeft = @matchesLeft - 1 if decrementMatchesLeft
     
-    window.Voluntary.DomManipulation.CompetitiveList.incrementMatchesWon(winnerId, loserId)
-    window.Voluntary.DomManipulation.CompetitiveList.letWinnerWinMatchesAgainstCompetitorsWhichLoseAgainstLoser(winnerId, loserId)
-    window.Voluntary.DomManipulation.CompetitiveList.letOutMatchedCompetitorsOfWinnerWinAgainstLoser(winnerId, loserId)
+    @updateDefeatedAndOutmatchedCompetitorsByCompetitor(winnerId, loserId)
+    @letWinnerWinMatchesAgainstCompetitorsWhichLoseAgainstLoser(winnerId, loserId)
+    @letOutMatchedCompetitorsOfWinnerWinAgainstLoser(winnerId, loserId)
     
-  @letOutMatchedCompetitorsOfWinnerWinAgainstLoser: (winnerId, loserId) ->
-    $.each window.Voluntary.DomManipulation.CompetitiveList.outmatchedCompetitorsByCompetitor(winnerId), (index, competitorId) ->
-      window.Voluntary.DomManipulation.CompetitiveList.letCompetitorWinMatchAgainstOtherCompetitor(competitorId, loserId)
-
-  @outmatchedCompetitorsByCompetitor: (competitorId) ->
-    window.outmatchedCompetitorsByCompetitor[competitorId] ||= []
+  letOutMatchedCompetitorsOfWinnerWinAgainstLoser: (winnerId, loserId) ->
+    @outmatchedCompetitorsByCompetitor[winnerId] ||= []
+    
+    $.each @outmatchedCompetitorsByCompetitor[winnerId], (index, competitorId) =>
+      @letCompetitorWinMatchAgainstOtherCompetitor(competitorId, loserId)
       
-    return window.outmatchedCompetitorsByCompetitor[competitorId]
+    return @outmatchedCompetitorsByCompetitor[competitorId]
 
-  @letCompetitorWinMatchAgainstOtherCompetitor: (winnerId, loserId) ->
-    $.each window.matches, (index, match) ->
+  letCompetitorWinMatchAgainstOtherCompetitor: (winnerId, loserId) ->
+    $.each window.matches, (index, match) =>
       if $.inArray(winnerId, match['competitors']) > -1 && $.inArray(loserId, match['competitors']) > -1 && match['winner_competitor'] != winnerId
-        console.log 'auto_winner through @letCompetitorWinMatchAgainstOtherCompetitor: ' + JSON.stringify([winnerId, loserId])
         window.matches[index]['auto_winner'] = true
-        window.Voluntary.DomManipulation.CompetitiveList.changeCompetitorsComparisonResult(winnerId, loserId) unless match['winner_competitor']  == undefined
-        window.Voluntary.DomManipulation.CompetitiveList.appointWinnerOfMatch(index, winnerId, loserId, match['winner_competitor']  == undefined)
+        @changeCompetitorsComparisonResult(winnerId, loserId) unless match['winner_competitor']  == undefined
+        @appointWinnerOfMatch(index, winnerId, loserId, match['winner_competitor']  == undefined)
         
         return false
 
-  @incrementMatchesWon: (winnerId, loserId) ->
-    window.matchesWon[winnerId] ||= 0
-    window.matchesWon[winnerId] = window.matchesWon[winnerId] + 1
-    
-    window.Voluntary.DomManipulation.CompetitiveList.defeatedCompetitorsByCompetitor(winnerId)  
-    window.defeatedCompetitorsByCompetitor[winnerId] ||= []
-    window.defeatedCompetitorsByCompetitor[winnerId].push loserId  
-    
-    window.Voluntary.DomManipulation.CompetitiveList.outmatchedCompetitorsByCompetitor(loserId)  
-    window.outmatchedCompetitorsByCompetitor[loserId] ||= []
-    window.outmatchedCompetitorsByCompetitor[loserId].push winnerId
+  updateDefeatedAndOutmatchedCompetitorsByCompetitor: (winnerId, loserId) ->
+    @defeatedCompetitorsByCompetitor[winnerId] ||= []
+    @defeatedCompetitorsByCompetitor[winnerId].push loserId  
      
-  @cancelTournament: ->
-    window.Voluntary.DomManipulation.CompetitiveList.sortByMostMatchesWon()
+    @outmatchedCompetitorsByCompetitor[loserId] ||= []
+    @outmatchedCompetitorsByCompetitor[loserId].push winnerId
+     
+  cancelTournament: ->
+    @sortByMostWins()
     $('#bootstrap_modal').modal('hide')
       
-  @sortByMostMatchesWon: ->
-    $.each window.competitors, (index, competitorId) ->
-      window.matchesWon[competitorId] ||= 0
-      $('#competitor_' + competitorId).data('wins', window.matchesWon[competitorId])
+  sortByMostWins: ->
+    winsByCompetitor = {}
+    
+    $.each @competitors, (index, competitorId) =>
+      winsByCompetitor[competitorId] = 0
+
+    $.each window.matches, (index, match) ->
+      winsByCompetitor[match['winner_competitor']] += 1
+    
+    $.each Object.keys(winsByCompetitor), (index, competitorId) ->
+      $('#competitor_' + competitorId).data 'wins', winsByCompetitor[competitorId]
       
     $wrapper = $('.competitive_list')
     
@@ -272,8 +273,8 @@ window.Voluntary.DomManipulation.CompetitiveList = class CompetitiveList
     $.each $('.competitive_list li'), (index, element) ->
       positions[currentPosition] = $(element).data('id')
       $(element).data('position', currentPosition)  
-      $(element).find('.competitorPosition').html(currentPosition)
+      $(element).find('.competitor_position').html(currentPosition)
       currentPosition += 1  
       
     data = { _method: 'put', positions: positions, matches: JSON.stringify(window.matches) }  
-    $.post $('.competitive_list').data('update-all-positions-path'), data    
+    $.post $('.competitive_list').data('update-all-positions-path'), data   
