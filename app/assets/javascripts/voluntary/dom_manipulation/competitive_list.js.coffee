@@ -7,6 +7,7 @@ class @CompetitiveList
   matchesLeft: 0
   currentMatch: null
   currentMatchIndex: 0
+  currentAutoWinnerMatches: []
   
   constructor: (options) ->
     @competitiveListOptions = options
@@ -23,6 +24,13 @@ class @CompetitiveList
     $(document.body).on "click", ".select_winner_button", (event) =>
       event.preventDefault()
       @appointWinnerOfMatchByInput()
+    
+    $(document.body).on "click", ".read_current_auto_winner_matches_button", (event) =>
+      event.preventDefault()
+      
+      unless @nextMatch()
+        @sortByMostWins()
+        $('#bootstrap_modal').modal('hide')
     
   start: () ->     
     matchesAlreadyExist = false
@@ -85,18 +93,23 @@ class @CompetitiveList
     return list
           
   generateMatches: () ->
-    $.each @competitors, (index, competitor_id) =>
-      @competitorsOfCompetitor[competitor_id] ||= []
+    $.each @competitors, (index, competitorId) =>
+      @competitorsOfCompetitor[competitorId] ||= []
         
       $.each @competitors, (index, otherCompetitorId) =>
         @competitorsOfCompetitor[otherCompetitorId] ||= []
         
-        if competitor_id != otherCompetitorId && $.inArray(otherCompetitorId, @competitorsOfCompetitor[competitor_id]) == -1
-          window.matches.push { competitors: [competitor_id, otherCompetitorId] }
-          @competitorsOfCompetitor[competitor_id].push otherCompetitorId
-          @competitorsOfCompetitor[otherCompetitorId].push competitor_id
+        if competitorId != otherCompetitorId && $.inArray(otherCompetitorId, @competitorsOfCompetitor[competitorId]) == -1
+          window.matches.push { competitors: [competitorId, otherCompetitorId] }
+          @competitorsOfCompetitor[competitorId].push otherCompetitorId
+          @competitorsOfCompetitor[otherCompetitorId].push competitorId
           
   nextMatch: () ->
+    if @currentAutoWinnerMatches.length > 0
+      @showCurrentAutoWinnerMatches()
+      
+      return true
+      
     @currentMatch = null
     
     $.each window.matches, (index, match) =>
@@ -104,7 +117,7 @@ class @CompetitiveList
         @currentMatch = match
         @currentMatchIndex = index
         
-        return
+        return false
     
     if @currentMatch == null
       alert 'No matches to rate left.'
@@ -116,15 +129,10 @@ class @CompetitiveList
       i = 0
       
       $.each @currentMatch['competitors'], (index, competitorId) =>
-        competitorDomElement = $('#competitor_' + competitorId)
         checked = ' checked="checked"'
         checked = '' if i == 1
         radioButtons.push ('<input type="radio" ' + checked + ' name="winner" value="' + competitorId + '" style="position:relative; top:-5px "/>')
-        
-        if @competitiveListOptions['competitor_name_proc'] == undefined || $(competitorDomElement).find('.competitor_name').data('proc-argument') == undefined
-          competitorStrings.push $(competitorDomElement).find('.competitor_name').html()  
-        else
-          competitorStrings.push @competitiveListOptions['competitor_name_proc']($(competitorDomElement).find('.competitor_name').data('proc-argument'))
+        competitorStrings.push @nameOfCompetitor(competitorId, true)  
           
         i += 1
         
@@ -158,12 +166,88 @@ class @CompetitiveList
       <button type="button" class="cancel_tournament_button" class="btn">Cancel</button> &nbsp;&nbsp;&nbsp;&nbsp;
       <button type="button" class="select_winner_button" class="btn btn-primary">Submit</button>
     </p>
-  </form>
+  </div>
+</form>
 """
+
       $('#bootstrap_modal').html(html)
       
-
       return true
+    
+  showCurrentAutoWinnerMatches: () ->
+    @currentMatch = window.matches[@currentMatchIndex]
+    rows = ""
+    
+    $.each @currentAutoWinnerMatches, (index, match) =>
+      even_or_odd = ''
+      
+      if index % 2 == 0
+        even_or_odd = 'even'
+      else
+        even_or_odd = 'odd'
+        
+      rows +=     html = """
+<tr class="#{even_or_odd}">
+  <td style="width:200px">#{@nameOfCompetitor(match['winner_competitor'], false)}</td>
+  <td><input type="radio" checked="checked" disabled="disabled"/></td>
+  <td>&nbsp;&nbsp;VS.&nbsp;&nbsp;&nbsp;</td>
+  <td><input type="radio" disabled="disabled"/></td>
+  <td>&nbsp;&nbsp;&nbsp;</td>
+  <td style="width:200px">#{@nameOfCompetitor(@otherCompetitorOfMatch(match, match['winner_competitor']), false)}</td>
+  <td style="text-align:center">
+    <a class="bootstrap_tooltip" href="#" data-toggle="tooltip" data-html="true" title="#{match['auto_winner_reason']}">
+      <i class="icon-question-sign"/>
+    </a>
+  </td>
+  <td style="width:200px">#{@nameOfCompetitor(match['foot_note_competitor'], false)}</td>
+</tr>        
+"""     
+        
+    html = """  
+<div class="modal-header">
+  <button type="button" id="close_bootstrap_modal_button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h3>Auto Winners due to Result of last Match</h3>
+</div>
+<div class="modal-body" style="overflow-y:none;">
+  <table>
+    <tr>
+      <td><strong>Last Match was:&nbsp;&nbsp;</strong></td>
+      <td>#{@nameOfCompetitor(@currentMatch['winner_competitor'], false)}</td>
+      <td>&nbsp;&nbsp;<input type="radio" checked="checked" disabled="disabled"/></td>
+      <td>&nbsp;&nbsp;VS.&nbsp;&nbsp;&nbsp;</td>
+      <td><input type="radio" disabled="disabled"/></td>
+      <td>&nbsp;&nbsp;&nbsp;</td>
+      <td>#{@nameOfCompetitor(@otherCompetitorOfMatch(@currentMatch, @currentMatch['winner_competitor']), false)}</td>
+    </tr>
+  </table>
+  <table class="table table-striped">
+    <thead>
+      <tr class="odd">
+        <th>Winner</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Loser</th>
+        <th>Reason</th>
+        <th>[1]</th>
+      </tr>
+    </thead>
+    <tbody>
+      #{rows}
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer" style="text-align:left;">
+  <p>
+    <button type="button" class="read_current_auto_winner_matches_button" class="btn btn-primary">OK</button>
+  </p>
+</div>     
+"""    
+
+    $('#bootstrap_modal').html(html)
+    $('.bootstrap_tooltip').tooltip()
+    @currentAutoWinnerMatches = []
     
   letWinnerWinMatchesAgainstCompetitorsWhichLoseAgainstLoser: (winnerId, loserId) ->
     @defeatedCompetitorsByCompetitor[loserId] ||= []
@@ -183,8 +267,22 @@ class @CompetitiveList
       @changeCompetitorsComparisonResult(winnerId, otherLoserId) unless match['winner_competitor'] == undefined
         
       @appointWinnerOfMatch(index, winnerId, otherLoserId, match['winner_competitor'] == undefined)
-      window.matches[index]['winner_competitor'] = winnerId
       window.matches[index]['auto_winner'] = true
+      match = window.matches[index]
+      
+      competitorsWhichAreLoserOfLastMatch = jQuery.map(match['competitors'], (c) =>
+        if c == @otherCompetitorOfMatch(@currentMatch, @currentMatch['winner_competitor'])
+          return c
+      )
+      
+      match['foot_note_competitor'] = loserId
+      
+      if competitorsWhichAreLoserOfLastMatch.length == 1
+        match['auto_winner_reason'] = 'loser has been defeated because he loses against the loser <sup>[1]</sup> of last match'
+      else
+        match['auto_winner_reason'] = 'loser has been defeated because he loses against the loser <sup>[1]</sup> of last auto winner match'
+        
+      @currentAutoWinnerMatches.push match
       
   changeCompetitorsComparisonResult: (winnerId, loserId) ->
     @outmatchedCompetitorsByCompetitor[winnerId] ||= []
@@ -203,6 +301,14 @@ class @CompetitiveList
     )
     return otherCompetitors[0]
 
+  nameOfCompetitor: (competitorId, considerProc) ->
+    competitorDomElement = $('#competitor_' + competitorId)
+    
+    if considerProc == false || @competitiveListOptions['competitor_name_proc'] == undefined || $(competitorDomElement).find('.competitor_name').data('proc-argument') == undefined
+      return $(competitorDomElement).find('.competitor_name').html()  
+    else
+      return @competitiveListOptions['competitor_name_proc']($(competitorDomElement).find('.competitor_name').data('proc-argument'))
+     
   appointWinnerOfMatchByInput: () ->
     winnerId = parseInt($("input[name='winner']:checked").val())
     loserId = @otherCompetitorOfMatch(@currentMatch, winnerId)
@@ -225,18 +331,34 @@ class @CompetitiveList
     @outmatchedCompetitorsByCompetitor[winnerId] ||= []
     
     $.each @outmatchedCompetitorsByCompetitor[winnerId], (index, competitorId) =>
-      @letCompetitorWinMatchAgainstOtherCompetitor(competitorId, loserId)
-      
-    return @outmatchedCompetitorsByCompetitor[competitorId]
-
-  letCompetitorWinMatchAgainstOtherCompetitor: (winnerId, loserId) ->
-    $.each window.matches, (index, match) =>
-      if $.inArray(winnerId, match['competitors']) > -1 && $.inArray(loserId, match['competitors']) > -1 && match['winner_competitor'] != winnerId
-        window.matches[index]['auto_winner'] = true
-        @changeCompetitorsComparisonResult(winnerId, loserId) unless match['winner_competitor']  == undefined
-        @appointWinnerOfMatch(index, winnerId, loserId, match['winner_competitor']  == undefined)
-        
-        return false
+      $.each window.matches, (index, match) =>
+        if $.inArray(competitorId, match['competitors']) > -1 && $.inArray(loserId, match['competitors']) > -1 && match['winner_competitor'] != competitorId
+          window.matches[index]['auto_winner'] = true
+          winner_changed = false
+          
+          unless match['winner_competitor']  == undefined
+            @changeCompetitorsComparisonResult(competitorId, loserId)
+            winner_changed = true
+            
+          @appointWinnerOfMatch(index, competitorId, loserId, match['winner_competitor']  == undefined)
+          match = window.matches[index]
+          match['winner_changed'] = winner_changed
+          
+          competitorsWhichAreLoserOfLastMatch = jQuery.map(match['competitors'], (c) =>
+            if c == @otherCompetitorOfMatch(@currentMatch, @currentMatch['winner_competitor'])
+              return c
+          )
+          
+          match['foot_note_competitor'] = winnerId
+          
+          if competitorsWhichAreLoserOfLastMatch.length == 1
+            match['auto_winner_reason'] = "loser of last match has been defeated by outmatched competitor of<br/>winner <sup>[1]</sup>"
+          else
+            match['auto_winner_reason'] = "loser of last auto winner match has been defeated by outmatched competitor of winner <sup>[1]</sup>"
+            
+          @currentAutoWinnerMatches.push match
+          
+          return false
 
   updateDefeatedAndOutmatchedCompetitorsByCompetitor: (winnerId, loserId) ->
     @defeatedCompetitorsByCompetitor[winnerId] ||= []
