@@ -110,3 +110,5 @@ $(document).ready ->
       $('.toggleable_checkbox').prop('checked', true)
     else
       $('.toggleable_checkbox').prop('checked', false)
+      
+  $('.bootstrap_tooltip').tooltip()
