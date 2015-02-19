@@ -13,15 +13,15 @@ class @CompetitiveList
     @competitiveListOptions = options
     @competitiveListOptions ||= {}
     
-    $(document.body).on "click", ".competitive_list_start_link", (event) =>
+    $(document.body).on "click", "#{@competitiveListOptions['id']} > .competitive_list_start_link", (event) =>
       event.preventDefault()
       @start()
       
-    $(document.body).on "click", ".cancel_tournament_button", (event) =>
+    $(document.body).on "click", "#{@competitiveListOptions['id']}_buttons > .cancel_tournament_button", (event) =>
       event.preventDefault()
       @cancelTournament()   
       
-    $(document.body).on "click", ".select_winner_button", (event) =>
+    $(document.body).on "click", "#{@competitiveListOptions['id']}_buttons > .select_winner_button", (event) =>
       event.preventDefault()
       @appointWinnerOfMatchByInput()
     
@@ -195,7 +195,7 @@ class @CompetitiveList
     if @currentMatch == null 
       modalTitle = 'No matches to rate left.' 
       modalFooterHtml = """
-<p>
+<p id="#{@competitiveListOptions['id'].replace('#', '')}_buttons">
   <button type="button" class="cancel_tournament_button" class="btn">Save match results and close window</button>
 </p>      
 """      
@@ -233,7 +233,7 @@ class @CompetitiveList
 </div>     
 """
       modalFooterHtml = """
-<p>
+<p id="#{@competitiveListOptions['id'].replace('#', '')}_buttons">
   <button type="button" class="cancel_tournament_button" class="btn">Save match results and close window</button> &nbsp;&nbsp;&nbsp;&nbsp;
   <button type="button" class="select_winner_button" class="btn btn-primary">Submit</button>
 </p>
