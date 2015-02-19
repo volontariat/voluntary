@@ -25,13 +25,6 @@ class @CompetitiveList
       event.preventDefault()
       @appointWinnerOfMatchByInput()
     
-    $(document.body).on "click", ".read_current_auto_winner_matches_button", (event) =>
-      event.preventDefault()
-      
-      unless @nextMatch()
-        @sortByMostWins()
-        $('#bootstrap_modal').modal('hide')
-    
   start: () ->     
     matchesAlreadyExist = false
     window.matches ||= []
@@ -61,7 +54,7 @@ class @CompetitiveList
     
     @matchesLeft = matchesWithoutWinner.length
     
-    if @nextMatch()
+    if @nextMatch(true)
       $('#bootstrap_modal').modal('show')
       
   removeMatchesOfNonExistingCompetitors: () ->
@@ -104,102 +97,34 @@ class @CompetitiveList
           @competitorsOfCompetitor[competitorId].push otherCompetitorId
           @competitorsOfCompetitor[otherCompetitorId].push competitorId
           
-  nextMatch: () ->
-    if @currentAutoWinnerMatches.length > 0
-      @showCurrentAutoWinnerMatches()
-      
-      return true
-      
-    @currentMatch = null
-    
-    $.each window.matches, (index, match) =>
-      if match['winner_competitor'] == undefined
-        @currentMatch = match
-        @currentMatchIndex = index
-        
-        return false
-    
-    if @currentMatch == null
-      alert 'No matches to rate left.'
-      
-      return false
-    else  
-      radioButtons = []
-      competitorStrings = []
-      i = 0
-      
-      $.each @currentMatch['competitors'], (index, competitorId) =>
-        checked = ' checked="checked"'
-        checked = '' if i == 1
-        radioButtons.push ('<input type="radio" ' + checked + ' name="winner" value="' + competitorId + '" style="position:relative; top:-5px "/>')
-        competitorStrings.push @nameOfCompetitor(competitorId, true)  
-          
-        i += 1
-        
-      html = """
-<form class="form-inline" style="margin:0px;">
-  <div class="modal-header">
-    <button type="button" id="close_bootstrap_modal_button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Appoint Winner (#{@matchesLeft} matches left)</h3>
-  </div>
-  <div class="modal-body" style="overflow-y:none;">
-    <div class="controls" style="margin-left:50px">
-      <table><tr>      
-          <td style="width:325px">
-            #{competitorStrings[0]}
-          </td>
-          <td>#{radioButtons[0]}</td>
-          <td>&nbsp;&nbsp;VS.&nbsp;&nbsp;&nbsp;</td>
-          <td>#{radioButtons[1]}</td>
-          <td>
-            &nbsp;&nbsp;&nbsp;
-          </td>
-          <td style="width:325px">
-            #{competitorStrings[1]}
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-  <div class="modal-footer" style="text-align:left;">
-    <p>
-      <button type="button" class="cancel_tournament_button" class="btn">Cancel</button> &nbsp;&nbsp;&nbsp;&nbsp;
-      <button type="button" class="select_winner_button" class="btn btn-primary">Submit</button>
-    </p>
-  </div>
-</form>
-"""
+  nextMatch: (from_start) ->
+    autoWinnerMatchesHtml = ''
 
-      $('#bootstrap_modal').html(html)
+    if @currentAutoWinnerMatches.length > 0
+      @currentMatch = window.matches[@currentMatchIndex]
+      rows = ""
       
-      return true
-    
-  showCurrentAutoWinnerMatches: () ->
-    @currentMatch = window.matches[@currentMatchIndex]
-    rows = ""
-    
-    $.each @currentAutoWinnerMatches, (index, match) =>
-      console.log match
-      even_or_odd = ''
-      
-      if index % 2 == 0
-        even_or_odd = 'even'
-      else
-        even_or_odd = 'odd'
-      
-      manual_winner_changed_html = ''
-      
-      if match['manual_winner_changed'] == true
-        manual_winner_changed_html = """
+      $.each @currentAutoWinnerMatches, (index, match) =>
+        even_or_odd = ''
+        
+        if index % 2 == 0
+          even_or_odd = 'even'
+        else
+          even_or_odd = 'odd'
+        
+        manualWinnerChangedHtml = ''
+        
+        if match['manual_winner_changed'] == true
+          manualWinnerChangedHtml = """
 <a class="bootstrap_tooltip" href="#" data-toggle="tooltip" title="The winner you once have set has been changed automatically!">
   <i class='icon-warning-sign'/>
 </a>
 """ 
         
-      rows +=     html = """
+        rows +=     html = """
 <tr class="#{even_or_odd}">
   <td>
-    #{manual_winner_changed_html}
+    #{manualWinnerChangedHtml}
   </td>
   <td style="width:200px">#{@nameOfCompetitor(match['winner_competitor'], false)}</td>
   <td><input type="radio" checked="checked" disabled="disabled"/></td>
@@ -216,52 +141,126 @@ class @CompetitiveList
 </tr>        
 """     
         
-    html = """  
-<div class="modal-header">
-  <button type="button" id="close_bootstrap_modal_button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  <h3>Auto Winners due to Result of last Match</h3>
-</div>
-<div class="modal-body" style="overflow-y:none;">
+      autoWinnerMatchesHtml = """  
+<h4>Auto Winners due to Result of last Match</h4>
+<table>
+  <tr>
+    <td><strong>Last Match was:&nbsp;&nbsp;</strong></td>
+    <td>#{@nameOfCompetitor(@currentMatch['winner_competitor'], false)}</td>
+    <td>&nbsp;&nbsp;<input type="radio" checked="checked" disabled="disabled"/></td>
+    <td>&nbsp;&nbsp;VS.&nbsp;&nbsp;&nbsp;</td>
+    <td><input type="radio" disabled="disabled"/></td>
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td>#{@nameOfCompetitor(@otherCompetitorOfMatch(@currentMatch, @currentMatch['winner_competitor']), false)}</td>
+  </tr>
+</table>
+<table class="table table-striped">
+  <thead>
+    <tr class="odd">
+      <th></th>
+      <th>Winner</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>Loser</th>
+      <th>Reason</th>
+      <th>[1]</th>
+    </tr>
+  </thead>
+  <tbody>
+    #{rows}
+  </tbody>
+</table>   
+"""
+      
+    @currentMatch = null
+    
+    $.each window.matches, (index, match) =>
+      if match['winner_competitor'] == undefined
+        @currentMatch = match
+        @currentMatchIndex = index
+        
+        return false
+    
+    if from_start == true && @currentMatch == null 
+      alert 'No matches to rate left.'
+      
+      return false
+    
+    modalBodyHtml = ''
+    modalTitle = ''
+    modalFooterHtml = ''
+    
+    if @currentMatch == null 
+      modalTitle = 'No matches to rate left.' 
+      modalFooterHtml = """
+<p>
+  <button type="button" class="cancel_tournament_button" class="btn">Save match results and close window</button>
+</p>      
+"""      
+    else
+      modalTitle = "Appoint Winner (#{@matchesLeft} matches left)"
+      radioButtons = []
+      competitorStrings = []
+      i = 0
+      
+      $.each @currentMatch['competitors'], (index, competitorId) =>
+        checked = ' checked="checked"'
+        checked = '' if i == 1
+        radioButtons.push ('<input type="radio" ' + checked + ' name="winner" value="' + competitorId + '" style="position:relative; top:-5px "/>')
+        competitorStrings.push @nameOfCompetitor(competitorId, true)  
+          
+        i += 1
+      modalBodyHtml += """  
+<div class="controls" style="margin-left:50px">
   <table>
-    <tr>
-      <td><strong>Last Match was:&nbsp;&nbsp;</strong></td>
-      <td>#{@nameOfCompetitor(@currentMatch['winner_competitor'], false)}</td>
-      <td>&nbsp;&nbsp;<input type="radio" checked="checked" disabled="disabled"/></td>
+    <tr>      
+      <td style="width:325px">
+        #{competitorStrings[0]}
+      </td>
+      <td>#{radioButtons[0]}</td>
       <td>&nbsp;&nbsp;VS.&nbsp;&nbsp;&nbsp;</td>
-      <td><input type="radio" disabled="disabled"/></td>
-      <td>&nbsp;&nbsp;&nbsp;</td>
-      <td>#{@nameOfCompetitor(@otherCompetitorOfMatch(@currentMatch, @currentMatch['winner_competitor']), false)}</td>
+      <td>#{radioButtons[1]}</td>
+      <td>
+        &nbsp;&nbsp;&nbsp;
+      </td>
+      <td style="width:325px">
+        #{competitorStrings[1]}
+      </td>
     </tr>
   </table>
-  <table class="table table-striped">
-    <thead>
-      <tr class="odd">
-        <th></th>
-        <th>Winner</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>Loser</th>
-        <th>Reason</th>
-        <th>[1]</th>
-      </tr>
-    </thead>
-    <tbody>
-      #{rows}
-    </tbody>
-  </table>
-</div>
-<div class="modal-footer" style="text-align:left;">
-  <p>
-    <button type="button" class="read_current_auto_winner_matches_button" class="btn btn-primary">OK</button>
-  </p>
 </div>     
-"""    
+"""
+      modalFooterHtml = """
+<p>
+  <button type="button" class="cancel_tournament_button" class="btn">Save match results and close window</button> &nbsp;&nbsp;&nbsp;&nbsp;
+  <button type="button" class="select_winner_button" class="btn btn-primary">Submit</button>
+</p>
+"""
+      
+    modalBodyHtml += autoWinnerMatchesHtml
+       
+    html = """
+<form class="form-inline" style="margin:0px;">
+  <div class="modal-header">
+    <button type="button" id="close_bootstrap_modal_button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>#{modalTitle}</h3>
+  </div>
+  <div class="modal-body" style="overflow-y:none;">
+    #{modalBodyHtml}
+  </div>
+  <div class="modal-footer" style="text-align:left;">
+    #{modalFooterHtml}
+  </div>
+</form>
+"""
 
     $('#bootstrap_modal').html(html)
     $('.bootstrap_tooltip').tooltip()
     @currentAutoWinnerMatches = []
+    
+    return true
     
   letWinnerWinMatchesAgainstCompetitorsWhichLoseAgainstLoser: (winnerId, loserId) ->
     @defeatedCompetitorsByCompetitor[loserId] ||= []
@@ -336,9 +335,7 @@ class @CompetitiveList
     
     @appointWinnerOfMatch(@currentMatchIndex, winnerId, loserId, true)
     
-    unless @nextMatch()
-      @sortByMostWins()
-      $('#bootstrap_modal').modal('hide')
+    @nextMatch(false)
       
   appointWinnerOfMatch: (matchIndex, winnerId, loserId, decrementMatchesLeft) ->
     window.matches[matchIndex]['winner_competitor'] = winnerId
