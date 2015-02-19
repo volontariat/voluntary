@@ -247,7 +247,7 @@ class @CompetitiveList
     <button type="button" id="close_bootstrap_modal_button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3>#{modalTitle}</h3>
   </div>
-  <div class="modal-body" style="overflow-y:none;">
+  <div class="modal-body scrollable-modal-body">
     #{modalBodyHtml}
   </div>
   <div class="modal-footer" style="text-align:left;">
