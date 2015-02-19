@@ -179,15 +179,28 @@ class @CompetitiveList
     rows = ""
     
     $.each @currentAutoWinnerMatches, (index, match) =>
+      console.log match
       even_or_odd = ''
       
       if index % 2 == 0
         even_or_odd = 'even'
       else
         even_or_odd = 'odd'
+      
+      manual_winner_changed_html = ''
+      
+      if match['manual_winner_changed'] == true
+        manual_winner_changed_html = """
+<a class="bootstrap_tooltip" href="#" data-toggle="tooltip" title="The winner you once have set has been changed automatically!">
+  <i class='icon-warning-sign'/>
+</a>
+""" 
         
       rows +=     html = """
 <tr class="#{even_or_odd}">
+  <td>
+    #{manual_winner_changed_html}
+  </td>
   <td style="width:200px">#{@nameOfCompetitor(match['winner_competitor'], false)}</td>
   <td><input type="radio" checked="checked" disabled="disabled"/></td>
   <td>&nbsp;&nbsp;VS.&nbsp;&nbsp;&nbsp;</td>
@@ -223,6 +236,7 @@ class @CompetitiveList
   <table class="table table-striped">
     <thead>
       <tr class="odd">
+        <th></th>
         <th>Winner</th>
         <th></th>
         <th></th>
@@ -263,23 +277,30 @@ class @CompetitiveList
       return true if matchCompetitorsWhichIncludeLoser.length == 0
         
       otherLoserId = @otherCompetitorOfMatch(match, winnerId)
+      manual_winner_changed = false
       
-      @changeCompetitorsComparisonResult(winnerId, otherLoserId) unless match['winner_competitor'] == undefined
-        
+      unless match['winner_competitor'] == undefined
+        @changeCompetitorsComparisonResult(winnerId, otherLoserId) 
+        manual_winner_changed = true unless match['auto_winner'] == true
+       
+      window.matches[index]['manual_winner_changed'] = manual_winner_changed  
       @appointWinnerOfMatch(index, winnerId, otherLoserId, match['winner_competitor'] == undefined)
       window.matches[index]['auto_winner'] = true
-      match = window.matches[index]
+      window.matches[index]['foot_note_competitor'] = loserId
+      window.matches[index]['auto_winner_type'] = 0
       
-      competitorsWhichAreLoserOfLastMatch = jQuery.map(match['competitors'], (c) =>
+      competitorsWhichAreLoserOfLastMatch = jQuery.map(window.matches[index]['competitors'], (c) =>
         if c == @otherCompetitorOfMatch(@currentMatch, @currentMatch['winner_competitor'])
           return c
       )
       
-      match['foot_note_competitor'] = loserId
+      match = window.matches[index]
       
       if competitorsWhichAreLoserOfLastMatch.length == 1
+        window.matches[index]['auto_winner_recursion'] = false
         match['auto_winner_reason'] = 'loser has been defeated because he loses against the loser <sup>[1]</sup> of last match'
       else
+        window.matches[index]['auto_winner_recursion'] = true
         match['auto_winner_reason'] = 'loser has been defeated because he loses against the loser <sup>[1]</sup> of last auto winner match'
         
       @currentAutoWinnerMatches.push match
@@ -333,27 +354,29 @@ class @CompetitiveList
     $.each @outmatchedCompetitorsByCompetitor[winnerId], (index, competitorId) =>
       $.each window.matches, (index, match) =>
         if $.inArray(competitorId, match['competitors']) > -1 && $.inArray(loserId, match['competitors']) > -1 && match['winner_competitor'] != competitorId
-          window.matches[index]['auto_winner'] = true
-          winner_changed = false
+          manual_winner_changed = false
           
           unless match['winner_competitor']  == undefined
             @changeCompetitorsComparisonResult(competitorId, loserId)
-            winner_changed = true
-            
+            manual_winner_changed = true unless match['auto_winner'] == true
+          
+          window.matches[index]['auto_winner'] = true
+          window.matches[index]['auto_winner_type'] = 1
+          window.matches[index]['foot_note_competitor'] = winnerId
+          window.matches[index]['manual_winner_changed'] = manual_winner_changed  
           @appointWinnerOfMatch(index, competitorId, loserId, match['winner_competitor']  == undefined)
           match = window.matches[index]
-          match['winner_changed'] = winner_changed
           
           competitorsWhichAreLoserOfLastMatch = jQuery.map(match['competitors'], (c) =>
             if c == @otherCompetitorOfMatch(@currentMatch, @currentMatch['winner_competitor'])
               return c
           )
           
-          match['foot_note_competitor'] = winnerId
-          
           if competitorsWhichAreLoserOfLastMatch.length == 1
+            window.matches[index]['auto_winner_recursion'] = false
             match['auto_winner_reason'] = "loser of last match has been defeated by outmatched competitor of<br/>winner <sup>[1]</sup>"
           else
+            window.matches[index]['auto_winner_recursion'] = true
             match['auto_winner_reason'] = "loser of last auto winner match has been defeated by outmatched competitor of winner <sup>[1]</sup>"
             
           @currentAutoWinnerMatches.push match
