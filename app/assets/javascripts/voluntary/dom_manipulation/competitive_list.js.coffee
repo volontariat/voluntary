@@ -13,15 +13,19 @@ class @CompetitiveList
     @competitiveListOptions = options
     @competitiveListOptions ||= {}
     
-    $(document.body).on "click", "#{@competitiveListOptions['id']} > .competitive_list_start_link", (event) =>
+    $(document.body).on "click", "#{@competitiveListOptions['id']} .competitive_list_start_link", (event) =>
       event.preventDefault()
       @start()
       
-    $(document.body).on "click", "#{@competitiveListOptions['id']}_buttons > .cancel_tournament_button", (event) =>
+    $(document.body).on "click", "#{@competitiveListOptions['id']} .save_match_results_link", (event) =>
+      event.preventDefault()
+      @sortByMostWins()
+      
+    $(document.body).on "click", "#{@competitiveListOptions['id']}_buttons .cancel_tournament_button", (event) =>
       event.preventDefault()
       @cancelTournament()   
       
-    $(document.body).on "click", "#{@competitiveListOptions['id']}_buttons > .select_winner_button", (event) =>
+    $(document.body).on "click", "#{@competitiveListOptions['id']}_buttons .select_winner_button", (event) =>
       event.preventDefault()
       @appointWinnerOfMatchByInput()
     
@@ -187,7 +191,9 @@ class @CompetitiveList
       alert 'No matches to rate left.'
       
       return false
-    
+    else
+      $("#{@competitiveListOptions['id']} .save_match_results_link").show()
+      
     modalBodyHtml = ''
     modalTitle = ''
     modalFooterHtml = ''
@@ -389,6 +395,7 @@ class @CompetitiveList
      
   cancelTournament: ->
     @sortByMostWins()
+    $("#{@competitiveListOptions['id']} .save_match_results_link").hide()
     $('#bootstrap_modal').modal('hide')
       
   sortByMostWins: ->
