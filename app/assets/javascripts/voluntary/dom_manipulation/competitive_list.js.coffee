@@ -20,6 +20,7 @@ class @CompetitiveList
     $(document.body).on "click", "#{@competitiveListOptions['id']} .save_match_results_link", (event) =>
       event.preventDefault()
       @sortByMostWins()
+      $("#{@competitiveListOptions['id']} .save_match_results_link").hide()
       
     $(document.body).on "click", "#{@competitiveListOptions['id']}_buttons .cancel_tournament_button", (event) =>
       event.preventDefault()
