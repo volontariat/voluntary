@@ -95,7 +95,9 @@ $(document).ready ->
   $(document.body).on "click", ".remote_modal_link", (event) ->
     $this = $(this)
     
-    $.ajax(url: $this.attr('href'), type: "GET", dataType: "html").success (data) ->
+    url = if $this.data('url') then $this.data('url') else $this.attr('href')
+    
+    $.ajax(url: url, type: "GET", dataType: "html").success (data) ->
       $('#bootstrap_modal').html(data)
       $('#bootstrap_modal').modal(show: true, keyboard: false)
       
