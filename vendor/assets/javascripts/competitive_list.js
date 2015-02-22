@@ -209,7 +209,7 @@
             return i += 1;
           };
         })(this));
-        modalBodyHtml += "<div class=\"controls\" style=\"margin-left:50px\">\n  <table>\n    <tr>      \n      <td style=\"width:325px\">\n        " + competitorStrings[0] + "\n      </td>\n      <td>" + radioButtons[0] + "</td>\n      <td>&nbsp;&nbsp;VS.&nbsp;&nbsp;&nbsp;</td>\n      <td>" + radioButtons[1] + "</td>\n      <td>\n        &nbsp;&nbsp;&nbsp;\n      </td>\n      <td style=\"width:325px\">\n        " + competitorStrings[1] + "\n      </td>\n    </tr>\n  </table>\n</div>     ";
+        modalBodyHtml += "<div class=\"controls\" style=\"margin-left:50px\">\n  <table>\n    <tr>      \n      <td style=\"width:325px; text-align:right;\">\n        " + competitorStrings[0] + "\n      </td>\n      <td>&nbsp;&nbsp;&nbsp;</td>\n      <td>" + radioButtons[0] + "</td>\n      <td>&nbsp;&nbsp;VS.&nbsp;&nbsp;&nbsp;</td>\n      <td>" + radioButtons[1] + "</td>\n      <td>\n        &nbsp;&nbsp;&nbsp;\n      </td>\n      <td style=\"width:325px\">\n        " + competitorStrings[1] + "\n      </td>\n    </tr>\n  </table>\n</div>     ";
         modalFooterHtml = "<p id=\"" + (this.competitiveListOptions['id'].replace('#', '')) + "_buttons\">\n  <button type=\"button\" class=\"cancel_tournament_button\" class=\"btn\">Save match results and close window</button> &nbsp;&nbsp;&nbsp;&nbsp;\n  <button type=\"button\" class=\"select_winner_button\" class=\"btn btn-primary\">Submit</button>\n</p>";
       }
       modalBodyHtml += autoWinnerMatchesHtml;
@@ -448,18 +448,20 @@
       $wrapper.find('li').sort(function(a, b) {
         return +parseInt($(b).data('wins')) - +parseInt($(a).data('wins'));
       }).appendTo($wrapper);
-      data = {
-        _method: 'put',
-        positions: this.getPositions(),
-        matches: JSON.stringify(window.matches)
-      };
-      return $.post($('.competitive_list').data('update-all-positions-path'), data).always((function(_this) {
-        return function() {
-          if (after_update_request_proc !== null) {
-            return after_update_request_proc();
-          }
+      if ($('.competitive_list').data('update-all-positions-path') !== void 0) {
+        data = {
+          _method: 'put',
+          positions: this.getPositions(),
+          matches: JSON.stringify(window.matches)
         };
-      })(this));
+        return $.post($('.competitive_list').data('update-all-positions-path'), data).always((function(_this) {
+          return function() {
+            if (after_update_request_proc !== null) {
+              return after_update_request_proc();
+            }
+          };
+        })(this));
+      }
     };
 
     CompetitiveList.prototype.getPositions = function() {
