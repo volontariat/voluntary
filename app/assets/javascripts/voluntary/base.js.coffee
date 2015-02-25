@@ -114,3 +114,7 @@ $(document).ready ->
       $('.toggleable_checkbox').prop('checked', false)
       
   $('.bootstrap_tooltip').tooltip()
+
+  $('.selectize_select').selectize
+    create: true,
+    sortField: 'text'

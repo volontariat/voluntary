@@ -65,6 +65,7 @@ require 'uglifier'
 require 'coffee-script'
 require 'font-awesome-rails'
 require 'thor'
+require 'selectize-rails'
 
 require 'voluntary/navigation'
 

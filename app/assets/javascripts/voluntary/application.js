@@ -4,5 +4,6 @@
 //= require twitter/bootstrap
 //= require bootstrap-datetimepicker
 //= require jquery.tokeninput
+//= require selectize
 //= require competitive_list
 //= require_tree .

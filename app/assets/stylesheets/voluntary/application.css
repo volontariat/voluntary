@@ -13,6 +13,8 @@
  *= require token-input-facebook
  *= require twitter/bootstrap
  *= require jquery-ui-bootstrap
+ *= require selectize
+ *= require selectize.bootstrap2
  *= require 'voluntary/bootstrap_and_overrides'
  *= require 'voluntary/base'
  */

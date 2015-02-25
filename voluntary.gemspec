@@ -76,6 +76,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'country_select', '~> 1.3.1'
   s.add_dependency 'diffy', '~> 3.0.1'
   s.add_dependency 'font-awesome-rails', '~> 4.0.3.1'
+  s.add_dependency 'bootstrap-sass-rails', '~> 2'
+  s.add_dependency 'auto_html', '~> 1.6.4'
   
   # Could not find a valid   s.add_dependency 'mobile_fu' (>= 0) in any repository
   #  s.add_dependency 'mobile-fu'
@@ -83,7 +85,13 @@ Gem::Specification.new do |s|
   # 3.0.5 from 3-0-stable branch currently drops mongoid support that's why 3.0.4
   s.add_dependency 'will_paginate', '~> 3.0.4'
   s.add_dependency 'gon', '~> 5.0.1'
-
+  
+  # javascript
+  s.add_dependency 'selectize-rails', '~> 0.12.0'
+  s.add_dependency 'jquery-rails'
+  s.add_dependency 'jquery-ui-bootstrap-rails-asset'
+  s.add_dependency 'bootstrap-datetimepicker-rails', '~> 0.0.11'
+  
   # file uploading
 
   s.add_dependency 'carrierwave', '~> 0.6.2'
@@ -113,15 +121,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'typhoeus', '~> 0.5.3'
   s.add_dependency 'capistrano', '~> 2.15.5'
 
-  # view
-  s.add_dependency 'jquery-rails'
-  s.add_dependency 'jquery-ui-bootstrap-rails-asset'
-  s.add_dependency 'jquery-rails'
-  s.add_dependency 'jquery-ui-bootstrap-rails-asset'
-  s.add_dependency 'bootstrap-sass-rails', '~> 2'
-  s.add_dependency 'bootstrap-datetimepicker-rails', '~> 0.0.11'
-  s.add_dependency 'auto_html', '~> 1.6.4'
-  
   # includes jquery 1.11.0 which is not supported by ember.js
   #s.add_dependency 'jquery-rails', '~> 3.1.0'
   s.add_dependency 'jquery-rails', '2.2.2'
