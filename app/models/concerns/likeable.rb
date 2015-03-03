@@ -13,4 +13,10 @@ module Likeable
   def update_likes_counter
     self.class.where(id: self.id).update_all likes_count: self.likes.count, dislikes_count: self.dislikes.count
   end
+  
+  module ClassMethods
+    def likes_or_dislikes_for(user, ids)
+       user.likes_or_dislikes.for_targets(name, ids).index_by(&:target_id)
+    end
+  end
 end
