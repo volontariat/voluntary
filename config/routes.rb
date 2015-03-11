@@ -159,4 +159,6 @@ Rails.application.routes.draw do
   post 'like/:target_type/:target_id' => 'likes#create'
   post 'dislike/:target_type/:target_id' => 'likes#create'
   post 'unlike/:target_type/:target_id' => 'likes#destroy'
+  
+  draw :api
 end
