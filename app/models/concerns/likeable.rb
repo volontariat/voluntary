@@ -8,6 +8,11 @@ module Likeable
     has_many :likers, class_name: 'User', through: :likes, source: :user
     has_many :dislikes, -> { where(positive: false) }, class_name: 'Like', dependent: :delete_all, as: :target
     has_many :dislikers, class_name: 'User', through: :dislikes, source: :user
+    
+    scope :liked_by, ->(user_id) do
+      select('music_videos.*, likes.created_at AS liked_at').joins('RIGHT JOIN likes ON likes.positive = 1 AND likes.target_type = "MusicVideo" AND likes.target_id = music_videos.id').
+      where('likes.user_id = ? AND music_videos.id IS NOT NULL', user_id)
+    end
   end
   
   def update_likes_counter
