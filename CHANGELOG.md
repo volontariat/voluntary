@@ -1,5 +1,27 @@
 ## unreleased ##
 
+## 0.2.3 (March 15, 2015) ##
+
+*   #16 Implements scope liked_by for likeables.
+*   #45 Rewrite of API base controller and initialization of API V1 routes.
+*   Introduces Likeable.likes_or_dislikes_for.
+*   Introduces new window function jquery_ui_tabs_initialization.
+*   #37 Integrates selectize plugin. Used at new tournament form of competition product.
+*   Make .remote_modal_link click handler work with other elements than links through data attribute url.
+*   Disables closing of modal on pressing escape key.
+*   Introduces modal JavaScript response partial. See protip https://coderwall.com/p/eu9sqa/multi-step-form-wizard-responses-for-ajax-modals-and-html-requests
+*   Option to yield sidebar in application layout.
+*   Introduces User#best_available_name.
+*   #26 Add event handler for toggleable checkboxes.
+*   Sets GitHub ribbon to voluntary repository in application layout which can be overridden in each product through controller method voluntary_application_repository_path.
+*   #20 #23 #32 #33 #34 Adds JavaScript Plugin CompetitiveList used at music metadata enrichment music year in review top albums and songs.
+*   Adds jquery.multisortable.js used at music metadata enrichment music year in review top albums and songs.
+*   #19 Adds Twitter Bootstrap datetime picker. 
+*   Implements shared twitter bootstrap layout 'boolean control group'.
+*   Sets width of #bootstrap_modal to 800px.
+*   Implements shared twitter bootstrap layout partials 'control_group' ...
+*   Implements new option :namespace for Voluntary::ShowHelper#show_actions.
+
 ## 0.2.2 (February 5, 2015) ##
 
 *   #17 Show progress spinner gif for Ajax tabs.
