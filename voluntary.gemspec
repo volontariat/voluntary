@@ -1,19 +1,19 @@
-$:.push File.expand_path("../lib", __FILE__)
+$:.push File.expand_path('../lib', __FILE__)
 
 # Maintain your gem's version:
-require "voluntary/version"
+require 'voluntary/version'
 
 # Describe your   s.add_dependency and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "voluntary"
+  s.name        = 'voluntary'
   s.version     = Voluntary::VERSION
-  s.authors     = ["Mathias Gawlista"]
-  s.email       = ["gawlista@gmail.com"]
-  s.homepage    = "http://github.com/Applicat/voluntary"
-  s.summary     = "This is a gem which turns your rails application into a crowdsourcing platform to run on your intranet or on the internet."
-  s.description = "This is a gem which turns your rails application into a crowdsourcing platform to run on your intranet or on the internet."
+  s.authors     = ['Mathias Gawlista']
+  s.email       = ['gawlista@gmail.com']
+  s.homepage    = 'http://Volontari.at'
+  s.summary     = 'Crowdsourcing management system for Rails'
+  s.description = '#Crowdsourcing management system for #Ruby on #Rails changes: http://bit.ly/voluntary-0-2-3 #Volontariat #CMS'
 
-  s.files = Dir["{app,config,db,lib,vendor_extensions}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir['{app,config,db,lib,vendor_extensions}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'CHANGELOG.md', 'README.rdoc']
 
   s.add_dependency 'rails', '~> 4.0.0'
  
