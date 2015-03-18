@@ -59,9 +59,9 @@ Run this in your console:
   
   git clone https://github.com/user/voluntary_product_name.git
   cd voluntary_product_name
-  rvm --create use --rvmrc 1.9.3@voluntary_product_name
+  rvm --create use --rvmrc 1.9.3@voluntary_product_name # if you use RVM
   gem update bundler
-  gem install rails --no-ri --no-rdoc -v=3.2.14
+  gem install rails -v 4.0.13 --no-ri --no-rdoc
   cd ..
   rails plugin new voluntary_product_name --database=postgresql --skip-javascript --skip-test-unit --dummy-path=dummy --full
   cd voluntary_product_name
