@@ -76,7 +76,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'country_select', '~> 1.3.1'
   s.add_dependency 'diffy', '~> 3.0.1'
   s.add_dependency 'font-awesome-rails', '~> 4.0.3.1'
-  s.add_dependency 'bootstrap-sass-rails', '~> 2'
+  s.add_dependency 'bootstrap-sass-rails', '~> 2.3.2.1'
   s.add_dependency 'auto_html', '~> 1.6.4'
   
   # Could not find a valid   s.add_dependency 'mobile_fu' (>= 0) in any repository
@@ -88,9 +88,11 @@ Gem::Specification.new do |s|
   
   # javascript
   s.add_dependency 'selectize-rails', '~> 0.12.0'
-  s.add_dependency 'jquery-rails'
-  s.add_dependency 'jquery-ui-bootstrap-rails-asset'
   s.add_dependency 'bootstrap-datetimepicker-rails', '~> 0.0.11'
+  # includes jquery 1.11.0 which is not supported by ember.js
+  #s.add_dependency 'jquery-rails', '~> 3.1.0'
+  s.add_dependency 'jquery-rails', '2.2.2'
+  s.add_dependency 'jquery-ui-bootstrap-rails-asset', '~> 0.0.3'
   
   # file uploading
 
@@ -120,12 +122,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'http_accept_language', '~> 1.0.2'
   s.add_dependency 'typhoeus', '~> 0.5.3'
   s.add_dependency 'capistrano', '~> 2.15.5'
-
-  # includes jquery 1.11.0 which is not supported by ember.js
-  #s.add_dependency 'jquery-rails', '~> 3.1.0'
-  s.add_dependency 'jquery-rails', '2.2.2'
-  s.add_dependency 'jquery-ui-bootstrap-rails-asset', '~> 0.0.3'
-  s.add_dependency 'bootstrap-sass-rails', '~> 2.3.2.1'
   
   # TODO: get rid of exception wrong number of arguments (3 for 2) for form_for
   #s.add_dependency 'client_side_validations', '~> 3.2.6'
