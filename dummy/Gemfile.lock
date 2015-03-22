@@ -41,7 +41,6 @@ PATH
       ancestry (~> 2.0.0)
       auto_html (~> 1.6.4)
       bootstrap-datetimepicker-rails (~> 0.0.11)
-      bootstrap-sass-rails (~> 2)
       bootstrap-sass-rails (~> 2.3.2.1)
       cancan (~> 1.6.10)
       capistrano (~> 2.15.5)
@@ -67,8 +66,6 @@ PATH
       http_accept_language (~> 1.0.2)
       i18n-inflector-rails (~> 1.0)
       jquery-rails (= 2.2.2)
-      jquery-rails
-      jquery-ui-bootstrap-rails-asset
       jquery-ui-bootstrap-rails-asset (~> 0.0.3)
       json (~> 1.8.1)
       koala (~> 1.8.0)
