@@ -12,6 +12,7 @@
  *= require font-awesome
  *= require token-input-facebook
  *= require twitter/bootstrap
+ *= require voluntary/sticky_footer
  *= require jquery-ui-bootstrap
  *= require selectize
  *= require selectize.bootstrap2

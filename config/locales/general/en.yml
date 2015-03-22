@@ -42,7 +42,13 @@ en:
       competitive_list:
         sort: Sort through round robin tournament
         save_match_results: Save match results
-    
+    footer:
+      credits:
+        voluntary: Powered by %{link}
+        twitter_bootstrap: Frontend framework Twitter Bootstrap by %{mdo} and %{fat}.
+        sticky_footer: Sticky footer style from
+      license: Code licensed under %{link}
+      
   attributes:  
     name: Name 
     text: Text
