@@ -1,5 +1,10 @@
 ## unreleased ##
 
+## 0.2.4 (March 23, 2015) ##
+
+*  #73 Sticky Footer for Application Layout (Twitter Bootstrap).
+*  #72 CORS: Access-Control-(Allow-Origin|Request-Method)=* (API)
+
 ## 0.2.3 (March 15, 2015) ##
 
 *   #16 Implements scope liked_by for likeables.
