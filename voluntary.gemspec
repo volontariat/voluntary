@@ -66,7 +66,6 @@ Gem::Specification.new do |s|
   
   s.add_dependency 'friendly_id', '~> 5.0.0' # use 4.x for Rails 3 and later 5.x for Rails 4
   s.add_dependency 'wicked', '~> 1.0.2'
-  s.add_dependency 'rails-api', '~> 0.2.0'
   s.add_dependency 'versionist', '~> 1.2.1'
 
   # view
