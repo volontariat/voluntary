@@ -1,4 +1,21 @@
-<h3><%= params[:product_id] == 'no-name' ? 'No Name' : @product.name %></h3>
+<% content_for :breadcrumbs do %>
+  <% product_key = nil %>
+  <% Voluntary::Navigation::Base.products.each{|s,k| product_key = k if s == params[:product_id] } %>
+  <%= raw(
+    (
+      [
+        link_to(t('workflow.index.title'), workflow_path),
+        link_to(t('workflow.user.index.title'), workflow_user_index_path),
+        link_to(t(product_key), product_workflow_user_index_path(params[:product_id]))
+      ] + 
+      (@area.ancestors + [@area]).map do |a| 
+        link_to(a.name, product_area_workflow_user_index_path(params[:product_id], a))
+      end
+    ).join(' > ')
+  ) %> 
+<% end %>
+
+<h3><%= @area.name %></h3>
 
 <%= render 'shared/collection/table',
   type: 'areas', collection: @areas, columns: {
