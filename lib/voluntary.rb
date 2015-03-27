@@ -1,7 +1,5 @@
-# controller
-require 'rails-api'
-
 # misc
+require 'rack/cors'
 require 'pg'
 require 'mongoid'
 require 'foreman'

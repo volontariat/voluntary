@@ -14,6 +14,13 @@ module Voluntary
     end
     
     initializer "voluntary.add_middleware" do |config|
+      config.middleware.insert_before 0, 'Rack::Cors' do
+        allow do
+          origins '*'
+          resource '*', headers: :any, methods: [:get, :post, :options]
+        end
+      end
+      
       config.middleware.insert_after Rack::Runtime, Rack::MethodOverride
       config.middleware.insert_after ActiveRecord::QueryCache, ActionDispatch::Cookies
       config.middleware.insert_after ActionDispatch::Cookies, ActionDispatch::Session::CookieStore
