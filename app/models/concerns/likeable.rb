@@ -10,7 +10,10 @@ module Likeable
     has_many :dislikers, class_name: 'User', through: :dislikes, source: :user
     
     scope :liked_by, ->(user_id) do
-      positive_likes_string = if ActiveRecord::Base.connection.instance_of?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) 
+      positive_likes_string = if (
+        defined?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) &&
+        ActiveRecord::Base.connection.instance_of?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) 
+      )
         "likes.positive = 't'"
       else
         'likes.positive = 1'
