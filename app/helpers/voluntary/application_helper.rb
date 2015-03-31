@@ -79,5 +79,22 @@ module Voluntary
     def name_with_apostrophe(value)
       value =~ /s$/i ? "#{value}'" : "#{value}'s"
     end
+    
+    def event_links_for_resource(current_resource, type)
+      return [] unless current_resource.respond_to? :state_events
+      
+      links = []
+      
+      current_resource.state_events.select{|event| can? event, current_resource }.each do |event|
+        path = "#{event}_#{type.singularize}_path(current_resource)"
+        
+        next unless respond_to? path
+        
+        path = eval(path)
+        links << link_to(t("#{type}.show.events.#{event}"), path, method: :put)
+      end
+      
+      links
+    end
   end
 end

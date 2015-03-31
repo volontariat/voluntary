@@ -37,10 +37,11 @@
 				  <% if can? :edit, product %>    
 				    <li><%= link_to t('general.edit'), eval("edit_product_path(product)") %></li>
 				  <% end %>
-				  <% if product.respond_to? :state_events %>
-				  <li class="divider"></li>
-				  <% end %>
-				  <%= render 'shared/resource/event_elements', resource: product, type: 'products' %>
+				  <% links = event_links_for_resource(product, 'products') %>
+          <% if links.any? %>
+            <li class="divider"></li>
+            <%= render 'shared/resource/event_elements', links: links %>
+          <% end %>
 				  </ul>
 				</div>
 				<% end %>

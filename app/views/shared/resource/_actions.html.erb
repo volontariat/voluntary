@@ -21,10 +21,11 @@
   <% if can? :edit, resource %>    
     <li><%= link_to t('general.edit'), eval("edit_#{(namespace.present? ? namespace.to_s + '_' : '')}#{type.gsub('/', '_').singularize}_path(resource)") %></li>
   <% end %>
-  <% if resource.respond_to? :state_events %>
-  <li class="divider"></li>
+  <% links = event_links_for_resource(resource, type) %>
+  <% if links.any? %>
+    <li class="divider"></li>
+    <%= render 'shared/resource/event_elements', links: links %>
   <% end %>
-  <%= render 'shared/resource/event_elements', resource: resource, type: type %>
   </ul>
 </div>
 <% end %>
