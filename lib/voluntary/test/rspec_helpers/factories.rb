@@ -21,7 +21,7 @@ module Voluntary
               
               factory :master_user do
                 after_create do |user|
-                  role = Role.find_or_create_by_name('Master')
+                  role = Role.find_or_create_by(name: 'Master')
                   user.roles << role
                 end
               end

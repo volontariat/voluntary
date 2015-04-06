@@ -6,7 +6,7 @@ describe User do
       it 'returns true' do
         user = FactoryGirl.create(:master_user)
         
-        user.is_master?.should be_true
+        user.is_master?.should be_truthy
       end
     end
     
@@ -14,7 +14,7 @@ describe User do
       it 'returns false' do
         user = FactoryGirl.create(:user)
         
-        user.is_master?.should be_false
+        user.is_master?.should be_falsey
       end
     end
   end
