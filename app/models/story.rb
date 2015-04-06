@@ -15,6 +15,8 @@ class Story
   
   accepts_nested_attributes_for :tasks, allow_destroy: true, reject_if: ->(t) { t['name'].blank? && t['text'].blank? }
   
+  # see https://github.com/mongoid/mongoid/issues/2222
+  field(:_type, default: ->{ self.class.name }, type: String)
   field :project_id, type: Integer
   field :offeror_id, type: Integer
   field :name, type: String

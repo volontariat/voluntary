@@ -8,7 +8,7 @@ module Product::ProjectManagement
   module ClassMethods
     def stories(id, user)
       collection = if id == 'no-name'
-        Story.exists(_type: false)
+        Story.where(_type: 'Story')
       else
         product = Product.find(id)
         
