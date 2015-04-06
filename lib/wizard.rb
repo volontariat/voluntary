@@ -2,8 +2,8 @@ module Wizard
   module Controller
     extend ActiveSupport::Concern 
     
-    include Concerns::Steps
-    include Concerns::Paths
+    include ::Wizard::Controller::Concerns::Steps
+    include ::Wizard::Controller::Concerns::Paths
     
     included do
       # Set step variables
