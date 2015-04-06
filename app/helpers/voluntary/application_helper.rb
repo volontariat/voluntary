@@ -86,11 +86,11 @@ module Voluntary
       links = []
       
       current_resource.state_events.select{|event| can? event, current_resource }.each do |event|
-        path = "#{event}_#{type.singularize}_path(current_resource)"
+        path = "#{event}_#{type.singularize}_path"
         
         next unless respond_to? path
         
-        path = eval(path)
+        path = eval("#{path}(current_resource)")
         links << link_to(t("#{type}.show.events.#{event}"), path, method: :put)
       end
       
