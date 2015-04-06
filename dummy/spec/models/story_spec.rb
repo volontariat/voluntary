@@ -1,11 +1,15 @@
 require 'spec_helper'
 
+class ChildStory < Story
+end
+
 describe Product do
   describe 'member methods' do
     describe 'next_task_for_user' do
       it 'principally works' do
         subject = FactoryGirl.create(:story)
         subject.activate!
+        ChildStory.create!(name: 'Dummy', project_id: subject.project_id, offeror_id: subject.offeror_id, text: 'Dummy')
         user = FactoryGirl.create(:user)
         
         next_task = subject.next_task_for_user(user)
