@@ -99,6 +99,6 @@ class Product
   end
   
   def set_klass_name
-    update_attribute(:_type, get_klass_name)
+    self._type = get_klass_name
   end
 end
