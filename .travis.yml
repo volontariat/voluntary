@@ -6,6 +6,9 @@ rvm:
   - "2.2.0"
 services:
   - mongodb
+addons:
+  code_climate:
+    repo_token: 55240f7369568016f5002ec6
 script:
   - cd dummy
   - cp config/database.travis.yml config/database.yml
