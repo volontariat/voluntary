@@ -5,8 +5,9 @@ language: ruby
 rvm:
   - "2.2.0"
 script:
-  - cp dummy/config/database.travis.yml dummy/config/database.yml
+  - cd dummy
+  - cp config/database.travis.yml config/database.yml
   - RAILS_ENV=test bundle exec rake db:create
   - bundle exec rake db:test:prepare
-  - bundle exec rspec dummy/spec
-  - bundle exec cucumber dummy/features/
+  - bundle exec rspec
+  - bundle exec cucumber
