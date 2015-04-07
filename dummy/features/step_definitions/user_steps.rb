@@ -4,5 +4,5 @@ Given /^a user named "([^\"]*)"$/ do |name|
 end
 
 Given /^current user has role "([^\"]*)"$/ do |name|
-  @me.roles << Role.find_or_create_by_name(name)
+  @me.roles << Role.find_or_create_by(name: name)
 end
