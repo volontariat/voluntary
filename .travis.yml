@@ -4,6 +4,9 @@ before_install:
 language: ruby  
 rvm:
   - "2.2.0"
+services:
+  - mysql
+  - mongodb
 script:
   - cd dummy
   - cp config/database.travis.yml config/database.yml
