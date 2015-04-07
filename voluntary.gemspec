@@ -163,6 +163,7 @@ Gem::Specification.new do |s|
 
   # group :cucumber, :test
   s.add_development_dependency 'database_cleaner', '~> 0.7.1'
+  s.add_development_dependency 'test-unit', '~> 3.0.9'
 
   # Gems used only for assets and not required  
   # in production environments by default.
