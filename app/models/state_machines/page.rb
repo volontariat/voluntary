@@ -8,7 +8,15 @@ module StateMachines::Page
       const_set 'STATES', [:active]
       const_set 'EVENTS', []
       
+      after_initialize :set_initial_state
+      
       state_machine :state, initial: :active do
+      end
+      
+      private
+      
+      def set_initial_state
+        self.state ||= :active
       end
     end
   end

@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib,vendor_extensions}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'CHANGELOG.md', 'README.md']
 
-  s.add_dependency 'rails', '~> 4.0.13'
+  s.add_dependency 'rails', '~> 4.1.10'
  
   # rails 3
   s.add_dependency 'protected_attributes', '~> 1.0.5 '
@@ -52,7 +52,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'acts_as_list', '~> 0.4.0'
   s.add_dependency 'activerecord-import', '~> 0.4.1'
   s.add_dependency 'koala', '~> 1.8.0'
-  s.add_dependency 'ransack', '~> 1.1.0'
   s.add_dependency 'faker', '~> 1.2.0'# needed not just for testing but for rake db:seed, too
   s.add_dependency 'paper_trail', '~> 3.0.0'
   s.add_dependency 'mongoid-history', '~> 0.4.1'
@@ -137,6 +136,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'faraday_middleware', '~> 0.9.0'
   
   # group :development
+  
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  s.add_development_dependency 'spring'
   s.add_development_dependency 'letter_opener', '~> 1.0.0'
 
   # for tracing AR object instantiation and memory usage per request
@@ -149,7 +151,6 @@ Gem::Specification.new do |s|
   # group :test
   s.add_development_dependency 'capybara', '~> 1.1.2'
   s.add_development_dependency 'capybara-webkit', '~> 0.13.0'
-  s.add_development_dependency 'cucumber', '~> 1.2.5'
   s.add_development_dependency 'cucumber-rails-training-wheels', '~> 1.0.0'
   s.add_development_dependency 'timecop', '~> 0.6.1'
   s.add_development_dependency 'factory_girl_rails', '~> 1.7.0'

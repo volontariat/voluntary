@@ -8,6 +8,8 @@ module StateMachines::Vacancy
       const_set 'STATES', [:open, :recommended, :denied, :closed]
       const_set 'EVENTS', [:accept_recommendation, :deny_recommendation, :close, :reopen]
       
+      after_initialize :set_initial_state
+      
       state_machine :state, initial: :new do
         event :recommend do
           transition :new => :recommended 
@@ -32,6 +34,12 @@ module StateMachines::Vacancy
         event :reopen do
           transition [:denied, :closed] => :open
         end
+      end
+      
+      private
+      
+      def set_initial_state
+        self.state ||= :new
       end
     end
   end
