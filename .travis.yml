@@ -8,11 +8,12 @@ services:
   - mongodb
 addons:
   code_climate:
-    repo_token: 55240f7369568016f5002ec6
+    repo_token: dcb67cb13d22ab3f778829f7a7b15c2e04ecbd2b6d0d2a1ebcd9d6b25d402d7a
 script:
   - cd dummy
+  - ln -s ../.git .git
   - cp config/database.travis.yml config/database.yml
   - RAILS_ENV=test bundle exec rake db:create
   - bundle exec rake db:test:prepare
-  - bundle exec rspec
-  - bundle exec cucumber
+  - CODECLIMATE_REPO_TOKEN=dcb67cb13d22ab3f778829f7a7b15c2e04ecbd2b6d0d2a1ebcd9d6b25d402d7a bundle exec rspec
+  - CODECLIMATE_REPO_TOKEN=dcb67cb13d22ab3f778829f7a7b15c2e04ecbd2b6d0d2a1ebcd9d6b25d402d7a bundle exec cucumber
