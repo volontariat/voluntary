@@ -11,11 +11,11 @@ Gem::Specification.new do |s|
   s.email       = ['gawlista@gmail.com']
   s.homepage    = 'http://Volontari.at'
   s.summary     = 'Crowdsourcing management system for Rails'
-  s.description = '#Crowdsourcing management system for #Ruby on #Rails changes: http://bit.ly/voluntary-0-2-4'
+  s.description = '#Crowdsourcing management system for #Ruby on #Rails changes: http://bit.ly/voluntary-0-3-0'
 
   s.files = Dir['{app,config,db,lib,vendor_extensions}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'CHANGELOG.md', 'README.md']
 
-  s.add_dependency 'rails', '~> 4.1.10'
+  s.add_dependency 'rails', '~> 4.2.1'
  
   # rails 3
   s.add_dependency 'protected_attributes', '~> 1.0.5 '
@@ -34,8 +34,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'messagebus_ruby_api', '~> 1.0.3'
   
   # authentication / authorization
-  s.add_dependency 'devise', '~> 3.2.2'
-  s.add_dependency 'devise-encryptable', '~> 0.1.2'
+  s.add_dependency 'devise', '~> 3.4.1'
+  s.add_dependency 'devise-encryptable', '~> 0.2.0'
   s.add_dependency 'cancan', '~> 1.6.10'
   s.add_dependency 'omniauth', '~> 1.2.2'
   s.add_dependency 'omniauth-facebook', '~> 2.0.0'
@@ -76,6 +76,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'font-awesome-rails', '~> 4.0.3.1'
   s.add_dependency 'bootstrap-sass-rails', '~> 2.3.2.1'
   s.add_dependency 'auto_html', '~> 1.6.4'
+  s.add_dependency 'slim', '~> 2.0.2'
   
   # Could not find a valid   s.add_dependency 'mobile_fu' (>= 0) in any repository
   #  s.add_dependency 'mobile-fu'
@@ -91,12 +92,6 @@ Gem::Specification.new do |s|
   #s.add_dependency 'jquery-rails', '~> 3.1.0'
   s.add_dependency 'jquery-rails', '2.2.2'
   s.add_dependency 'jquery-ui-bootstrap-rails-asset', '~> 0.0.3'
-  
-  # file uploading
-
-  s.add_dependency 'carrierwave', '~> 0.6.2'
-  s.add_dependency 'fog', '~> 1.19.0'
-  s.add_dependency 'mini_magick', '~> 3.4'
 
   # JSON and API
 
@@ -107,13 +102,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'i18n-inflector-rails', '~> 1.0'
   s.add_dependency 'rails-i18n', '~> 4.0.1'
-
-  # queue
-
-  #  s.add_dependency 'resque', '1.20.0'
-  #  s.add_dependency 'resque-timeout', '1.0.0'
-  s.add_dependency 'sidekiq', '~> 2.17.3'
-  s.add_dependency 'slim', '~> 2.0.2'
 
   # URIs and HTTP
 
@@ -137,8 +125,6 @@ Gem::Specification.new do |s|
   
   # group :development
   
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  s.add_development_dependency 'spring'
   s.add_development_dependency 'letter_opener', '~> 1.0.0'
 
   # for tracing AR object instantiation and memory usage per request
@@ -169,8 +155,8 @@ Gem::Specification.new do |s|
   # Gems used only for assets and not required  
   # in production environments by default.
   # group :assets
-  s.add_dependency 'sass-rails',     '~> 4.0.5'
-  s.add_dependency 'coffee-rails',   '~> 4.0.0'
+  s.add_dependency 'sass-rails',     '~> 5.0'
+  s.add_dependency 'coffee-rails',   '~> 4.1.0'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   s.add_dependency 'handlebars_assets', '~> 0.15'
   s.add_dependency 'uglifier', '~> 2.4.0'

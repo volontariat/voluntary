@@ -58,13 +58,8 @@ group :test, :cucumber do
 end
 
 group :development, :test do
-  gem 'debugger', platforms: :mri_19
-  gem 'ruby-debug', '~> 0.10.4', platforms: :mri_18
+  gem 'pry-byebug', '~> 3.1.0'
+  gem 'spring'
 end
 
-group :assets do
-  gem 'therubyracer', '~> 0.12.0', platforms: :ruby
-  
-  # asset_sync is required as needed by application.rb
-  gem 'asset_sync', '~> 0.5.0', require: nil
-end
+gem 'therubyracer', '~> 0.12.0', platforms: :ruby
