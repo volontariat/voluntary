@@ -23,6 +23,7 @@ pickle-email-*.html
 /dummy/config/initializers/google.rb
 /dummy/config/initializers/facebook.rb
 /dummy/config/initializers/lastfm.rb
+/dummy/coverage/
 /dummy/log/*
 /dummy/tmp/
 /dummy/db/structure.sql
