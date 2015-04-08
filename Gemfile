@@ -52,6 +52,10 @@ group :test do
   gem 'simplecov', '~> 0.7.1', require: false
 end
 
+group :test, :cucumber do
+  gem 'codeclimate-test-reporter', require: nil
+end
+
 group :development, :test do
   gem 'debugger', platforms: :mri_19
   gem 'ruby-debug', '~> 0.10.4', platforms: :mri_18
