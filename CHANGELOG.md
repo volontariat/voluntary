@@ -1,5 +1,7 @@
 ## unreleased ##
 
+*  #40 Rails 4.2.1 upgrade.
+
 ## 0.2.4 (March 23, 2015) ##
 
 *  #73 Sticky Footer for Application Layout (Twitter Bootstrap).

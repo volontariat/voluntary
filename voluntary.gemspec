@@ -13,9 +13,9 @@ Gem::Specification.new do |s|
   s.summary     = 'Crowdsourcing management system for Rails'
   s.description = '#Crowdsourcing management system for #Ruby on #Rails changes: http://bit.ly/voluntary-0-2-4'
 
-  s.files = Dir['{app,config,db,lib,vendor_extensions}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'CHANGELOG.md', 'README.rdoc']
+  s.files = Dir['{app,config,db,lib,vendor_extensions}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'CHANGELOG.md', 'README.md']
 
-  s.add_dependency 'rails', '~> 4.0.0'
+  s.add_dependency 'rails', '~> 4.0.13'
  
   # rails 3
   s.add_dependency 'protected_attributes', '~> 1.0.5 '

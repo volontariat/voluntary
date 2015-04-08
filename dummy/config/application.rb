@@ -8,7 +8,7 @@ require "sprockets/railtie"
 
 # require "rails/test_unit/railtie"
 
-Bundler.require(:default, Rails.env)
+Bundler.require(*Rails.groups)
 require "voluntary"
 
 module Dummy
