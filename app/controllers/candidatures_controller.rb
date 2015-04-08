@@ -16,7 +16,7 @@ class CandidaturesController < ApplicationController
     @candidatures = if @vacancy
       @vacancy.candidatures.includes(:vacancy, :resource)
     else 
-      Candidature.includes(:vacancy, :resource).where(resource_type: 'User').all
+      Candidature.includes(:vacancy, :resource).where(resource_type: 'User')
     end
   end
   
