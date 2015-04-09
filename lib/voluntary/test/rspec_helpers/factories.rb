@@ -87,8 +87,10 @@ module Voluntary
               state_before 'initialized'
               state 'tasks_defined'
               
-              after_build do |story|
-                story.tasks << Factory.build(:task, offeror_id: FactoryGirl.create(:project).user_id)
+              ignore { task_factory :task }
+              
+              after_build do |story, evaluator|
+                story.tasks << Factory.build(evaluator.task_factory, offeror_id: story.project.user_id) if evaluator.task_factory
               end
             end
             
