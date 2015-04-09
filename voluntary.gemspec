@@ -82,7 +82,8 @@ Gem::Specification.new do |s|
   #  s.add_dependency 'mobile-fu'
 
   # 3.0.5 from 3-0-stable branch currently drops mongoid support that's why 3.0.4
-  s.add_dependency 'will_paginate', '~> 3.0.4'
+  s.add_dependency 'will_paginate', '~> 3.0.7'
+  s.add_dependency 'will_paginate_mongoid', '~> 2.0.1'
   s.add_dependency 'gon', '~> 5.0.1'
   
   # javascript

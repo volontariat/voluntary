@@ -28,14 +28,6 @@ gem 'addressable', '~> 2.2', require: 'addressable/uri'
 
 gem 'jasmine', git: 'https://github.com/pivotal/jasmine-gem.git'
 
-# misc
-
-# invalid byte sequence in US-ASCII on production
-#  gem 'markerb', git: 'https://github.com/plataformatec/markerb.git'
-
-# view
-gem "will_paginate", github: 'mislav/will_paginate'
-
 group :development do
   gem 'mysql2', '~> 0.3.13'
   gem 'linecache', '0.46', platforms: :mri_18
