@@ -120,7 +120,7 @@ class Workflow::TasksController < ApplicationController
   end
   
   def resource
-    @task ||= Task.find(params[:id])
+    @task ||= Task.find(params[:id]) if params[:id].present?
   end
   
   private
