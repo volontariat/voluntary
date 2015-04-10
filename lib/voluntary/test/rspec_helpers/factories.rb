@@ -90,6 +90,12 @@ module Voluntary
               ignore { task_factory :task }
               
               after_build do |story, evaluator|
+                if evaluator.task_factory.blank?
+                  story.event = 'initialization'
+                  story.state_before = 'new'
+                  story.state = 'initialized'
+                end
+                
                 story.tasks << Factory.build(evaluator.task_factory, offeror_id: story.project.user_id) if evaluator.task_factory
               end
             end
