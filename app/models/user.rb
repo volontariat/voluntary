@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
                   
   PARENT_TYPES = ['area', 'project']
   
+  def self.by_slug_or_id(id)
+    id.to_i.to_s == id.to_s ? find(id) : friendly.find(id)
+  end
+  
   def self.languages(query = nil)
     options = []
     
