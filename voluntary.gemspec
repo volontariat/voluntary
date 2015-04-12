@@ -76,6 +76,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'font-awesome-rails', '~> 4.0.3.1'
   s.add_dependency 'bootstrap-sass-rails', '~> 2.3.2.1'
   s.add_dependency 'auto_html', '~> 1.6.4'
+  s.add_dependency 'redcarpet', '~> 3.2.3' # required by auto_html
   s.add_dependency 'slim', '~> 2.0.2'
   
   # Could not find a valid   s.add_dependency 'mobile_fu' (>= 0) in any repository
