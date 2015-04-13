@@ -10,6 +10,8 @@ module StateMachines::Task
       const_set 'STATES', [:new, :assigned, :under_supervision, :completed]
       const_set 'EVENTS', [:assign, :cancel, :review, :follow_up, :complete]
       
+      after_initialize :set_initial_state
+      
       state_machine :state, initial: :new do
         event :assign do
           transition :new => :assigned
@@ -73,6 +75,12 @@ module StateMachines::Task
             end
           end
         end
+      end
+      
+      private
+      
+      def set_initial_state
+        self.state ||= :new
       end
     end
   end

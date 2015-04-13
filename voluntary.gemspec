@@ -11,11 +11,11 @@ Gem::Specification.new do |s|
   s.email       = ['gawlista@gmail.com']
   s.homepage    = 'http://Volontari.at'
   s.summary     = 'Crowdsourcing management system for Rails'
-  s.description = '#Crowdsourcing management system for #Ruby on #Rails changes: http://bit.ly/voluntary-0-2-4'
+  s.description = '#Crowdsourcing management system for #Ruby on #Rails changes: http://bit.ly/voluntary-0-3-0'
 
-  s.files = Dir['{app,config,db,lib,vendor_extensions}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'CHANGELOG.md', 'README.rdoc']
+  s.files = Dir['{app,config,db,lib,vendor_extensions}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'CHANGELOG.md', 'README.md']
 
-  s.add_dependency 'rails', '~> 4.0.0'
+  s.add_dependency 'rails', '~> 4.2.1'
  
   # rails 3
   s.add_dependency 'protected_attributes', '~> 1.0.5 '
@@ -34,8 +34,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'messagebus_ruby_api', '~> 1.0.3'
   
   # authentication / authorization
-  s.add_dependency 'devise', '~> 3.2.2'
-  s.add_dependency 'devise-encryptable', '~> 0.1.2'
+  s.add_dependency 'devise', '~> 3.4.1'
+  s.add_dependency 'devise-encryptable', '~> 0.2.0'
   s.add_dependency 'cancan', '~> 1.6.10'
   s.add_dependency 'omniauth', '~> 1.2.2'
   s.add_dependency 'omniauth-facebook', '~> 2.0.0'
@@ -52,7 +52,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'acts_as_list', '~> 0.4.0'
   s.add_dependency 'activerecord-import', '~> 0.4.1'
   s.add_dependency 'koala', '~> 1.8.0'
-  s.add_dependency 'ransack', '~> 1.1.0'
   s.add_dependency 'faker', '~> 1.2.0'# needed not just for testing but for rake db:seed, too
   s.add_dependency 'paper_trail', '~> 3.0.0'
   s.add_dependency 'mongoid-history', '~> 0.4.1'
@@ -77,12 +76,15 @@ Gem::Specification.new do |s|
   s.add_dependency 'font-awesome-rails', '~> 4.0.3.1'
   s.add_dependency 'bootstrap-sass-rails', '~> 2.3.2.1'
   s.add_dependency 'auto_html', '~> 1.6.4'
+  s.add_dependency 'redcarpet', '~> 3.2.3' # required by auto_html
+  s.add_dependency 'slim', '~> 2.0.2'
   
   # Could not find a valid   s.add_dependency 'mobile_fu' (>= 0) in any repository
   #  s.add_dependency 'mobile-fu'
 
   # 3.0.5 from 3-0-stable branch currently drops mongoid support that's why 3.0.4
-  s.add_dependency 'will_paginate', '~> 3.0.4'
+  s.add_dependency 'will_paginate', '~> 3.0.7'
+  s.add_dependency 'will_paginate_mongoid', '~> 2.0.1'
   s.add_dependency 'gon', '~> 5.0.1'
   
   # javascript
@@ -92,12 +94,6 @@ Gem::Specification.new do |s|
   #s.add_dependency 'jquery-rails', '~> 3.1.0'
   s.add_dependency 'jquery-rails', '2.2.2'
   s.add_dependency 'jquery-ui-bootstrap-rails-asset', '~> 0.0.3'
-  
-  # file uploading
-
-  s.add_dependency 'carrierwave', '~> 0.6.2'
-  s.add_dependency 'fog', '~> 1.19.0'
-  s.add_dependency 'mini_magick', '~> 3.4'
 
   # JSON and API
 
@@ -109,18 +105,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'i18n-inflector-rails', '~> 1.0'
   s.add_dependency 'rails-i18n', '~> 4.0.1'
 
-  # queue
-
-  #  s.add_dependency 'resque', '1.20.0'
-  #  s.add_dependency 'resque-timeout', '1.0.0'
-  s.add_dependency 'sidekiq', '~> 2.17.3'
-  s.add_dependency 'slim', '~> 2.0.2'
-
   # URIs and HTTP
 
   s.add_dependency 'http_accept_language', '~> 1.0.2'
   s.add_dependency 'typhoeus', '~> 0.5.3'
-  s.add_dependency 'capistrano', '~> 2.15.5'
   
   # TODO: get rid of exception wrong number of arguments (3 for 2) for form_for
   #s.add_dependency 'client_side_validations', '~> 3.2.6'
@@ -137,6 +125,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'faraday_middleware', '~> 0.9.0'
   
   # group :development
+  
   s.add_development_dependency 'letter_opener', '~> 1.0.0'
 
   # for tracing AR object instantiation and memory usage per request
@@ -149,7 +138,6 @@ Gem::Specification.new do |s|
   # group :test
   s.add_development_dependency 'capybara', '~> 1.1.2'
   s.add_development_dependency 'capybara-webkit', '~> 0.13.0'
-  s.add_development_dependency 'cucumber', '~> 1.2.5'
   s.add_development_dependency 'cucumber-rails-training-wheels', '~> 1.0.0'
   s.add_development_dependency 'timecop', '~> 0.6.1'
   s.add_development_dependency 'factory_girl_rails', '~> 1.7.0'
@@ -168,8 +156,8 @@ Gem::Specification.new do |s|
   # Gems used only for assets and not required  
   # in production environments by default.
   # group :assets
-  s.add_dependency 'sass-rails',     '~> 4.0.5'
-  s.add_dependency 'coffee-rails',   '~> 4.0.0'
+  s.add_dependency 'sass-rails',     '~> 5.0'
+  s.add_dependency 'coffee-rails',   '~> 4.1.0'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   s.add_dependency 'handlebars_assets', '~> 0.15'
   s.add_dependency 'uglifier', '~> 2.4.0'

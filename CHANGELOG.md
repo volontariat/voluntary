@@ -1,5 +1,12 @@
 ## unreleased ##
 
+## 0.3.0 (April 8, 2015) ##
+
+* #40 Rails 4.2.1 upgrade.
+* #46 Continuous integration server Travis setup.
+* #77 Workflow product and (user) product area page: consider areas with projects assigned to sub areas deeper than the direct child areas.
+* Removes rails-api gem (temporarily?).
+
 ## 0.2.4 (March 23, 2015) ##
 
 *  #73 Sticky Footer for Application Layout (Twitter Bootstrap).

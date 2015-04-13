@@ -10,6 +10,8 @@ module StateMachines::Story
       const_set 'STATES', [:new, :tasks_defined, :active, :completed, :closed]
       const_set 'EVENTS', [:initialization, :setup_tasks, :activate, :complete]
       
+      after_initialize :set_initial_state
+      
       state_machine :state, initial: :new do
         event :initialization do
           transition :new => :initialized
@@ -43,6 +45,10 @@ module StateMachines::Story
       end
       
       private
+      
+      def set_initial_state
+        self.state ||= :new
+      end
       
       def presence_of_tasks
         self.tasks.delete_if{|t| t.name.blank? && t.text.blank? }

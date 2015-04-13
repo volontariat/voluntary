@@ -8,6 +8,8 @@ module StateMachines::Candidature
       const_set 'STATES', [:new, :accepted, :denied]
       const_set 'EVENTS', [:accept, :deny, :quit]
       
+      after_initialize :set_initial_state
+      
       state_machine :state, initial: :new do
         event :accept do
           transition [:new, :denied] => :accepted
@@ -49,6 +51,10 @@ module StateMachines::Candidature
         if vacancy.limit == vacancy.candidatures.where(state: 'accepted').count
           errors[:state] << I18n.t('activerecord.errors.models.vacancy.attributes.limit.reached')
         end
+      end
+      
+      def set_initial_state
+        self.state ||= :new
       end
     end
   end

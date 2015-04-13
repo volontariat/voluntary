@@ -28,14 +28,6 @@ gem 'addressable', '~> 2.2', require: 'addressable/uri'
 
 gem 'jasmine', git: 'https://github.com/pivotal/jasmine-gem.git'
 
-# misc
-
-# invalid byte sequence in US-ASCII on production
-#  gem 'markerb', git: 'https://github.com/plataformatec/markerb.git'
-
-# view
-gem "will_paginate", github: 'mislav/will_paginate'
-
 group :development do
   gem 'mysql2', '~> 0.3.13'
   gem 'linecache', '0.46', platforms: :mri_18
@@ -46,7 +38,8 @@ group :development do
 end
 
 group :test do
-  gem 'cucumber-rails', '~> 1.3.0', require: false
+  gem 'cucumber', '~> 1.3.18'
+  gem 'cucumber-rails', '~> 1.4.0', require: false
   gem 'rspec-instafail', '~> 0.2.4', require: false
   gem 'webmock', '~> 1.8.11', require: false
   gem 'simplecov', '~> 0.7.1', require: false
@@ -57,13 +50,8 @@ group :test, :cucumber do
 end
 
 group :development, :test do
-  gem 'debugger', platforms: :mri_19
-  gem 'ruby-debug', '~> 0.10.4', platforms: :mri_18
+  gem 'pry-byebug', '~> 3.1.0'
+  gem 'spring'
 end
 
-group :assets do
-  gem 'therubyracer', '~> 0.12.0', platforms: :ruby
-  
-  # asset_sync is required as needed by application.rb
-  gem 'asset_sync', '~> 0.5.0', require: nil
-end
+gem 'therubyracer', '~> 0.12.0', platforms: :ruby

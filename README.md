@@ -1,4 +1,4 @@
-# Voluntary [![Build Status](https://travis-ci.org/volontariat/voluntary.svg?branch=master)](https://travis-ci.org/volontariat/voluntary) [![Code Climate](https://codeclimate.com/github/volontariat/voluntary/badges/gpa.svg)](https://codeclimate.com/github/volontariat/voluntary) [![Test Coverage](https://codeclimate.com/github/volontariat/voluntary/badges/coverage.svg)](https://codeclimate.com/github/volontariat/voluntary)
+# Voluntary [![Build Status](https://travis-ci.org/volontariat/voluntary.svg?branch=master)](https://travis-ci.org/volontariat/voluntary) [![Code Climate](https://codeclimate.com/github/volontariat/voluntary/badges/gpa.svg)](https://codeclimate.com/github/volontariat/voluntary) [![Test Coverage](https://codeclimate.com/github/volontariat/voluntary/badges/coverage.svg)](https://codeclimate.com/github/volontariat/voluntary) [![Dependency Status](https://gemnasium.com/volontariat/voluntary.png)](https://gemnasium.com/volontariat/voluntary)
 
 This is a gem which turns your rails application into a crowdsourcing platform to run on your intranet or on the internet.
 
