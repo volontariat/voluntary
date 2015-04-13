@@ -109,7 +109,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'http_accept_language', '~> 1.0.2'
   s.add_dependency 'typhoeus', '~> 0.5.3'
-  s.add_dependency 'capistrano', '~> 2.15.5'
   
   # TODO: get rid of exception wrong number of arguments (3 for 2) for form_for
   #s.add_dependency 'client_side_validations', '~> 3.2.6'
