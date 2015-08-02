@@ -9,7 +9,7 @@ module Voluntary
         rescue_from Mongoid::Errors::DocumentNotFound, with: :not_found
         
         helper_method :parent, :application_navigation, :navigation_product_path, :navigation_product_name, :voluntary_application_stylesheets
-        helper_method :voluntary_application_javascripts, :voluntary_application_repository_path
+        helper_method :voluntary_application_javascripts
       end
       
       def voluntary_application_stylesheets
@@ -18,10 +18,6 @@ module Voluntary
     
       def voluntary_application_javascripts
         ['voluntary/application', 'application'] 
-      end
-      
-      def voluntary_application_repository_path
-        'volontariat/voluntary'
       end
           
       def parent
