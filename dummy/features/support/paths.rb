@@ -53,20 +53,6 @@ module NavigationHelpers
       
     when /the edit project page/
       edit_project_path(@project)
-    
-    # vacancies
-    when /the vacancy page/
-      vacancy_path(@vacancy)
-      
-    when /the edit vacancy page/
-      edit_vacancy_path(@vacancy)
-    
-    # candidatures
-    when /the candidature page/
-      candidature_path(@candidature)
-      
-    when /the edit candidature page/
-      edit_candidature_path(@candidature)
       
     # stories
     when /the new project story page/

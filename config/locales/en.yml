@@ -16,8 +16,7 @@ en:
   home:
     index:
       last_projects: Last projects
-      last_vacancies: Last vacancies
-      
+
   authentication:
     title: Authentication
     sign_in: Sign in

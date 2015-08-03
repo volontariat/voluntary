@@ -1,5 +1,5 @@
 Given /^a comment$/ do
-  attributes = { commentable: @project || @vacancy || @candidature }
+  attributes = { commentable: @project }
   attributes[:user_id] ||= @me.id if @me
   @comment = FactoryGirl.create(:comment, attributes) 
   @comment.reload

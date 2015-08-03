@@ -57,21 +57,6 @@ module Voluntary
               end
             end
             
-            factory_girl.factory :vacancy do
-              association :project
-              sequence(:name) { |n| "vacancy #{n}" }
-              text Faker::Lorem.sentences(20).join(' ')
-              limit 1
-              state 'open'
-            end
-            
-            factory_girl.factory :candidature do
-              association :resource, factory: :user
-              association :vacancy
-              sequence(:name) { |n| "candidature #{n}" }
-              text Faker::Lorem.sentences(20).join(' ')
-            end
-            
             factory_girl.factory :comment do
               association :user
               association :commentable, factory: :project

@@ -16,11 +16,8 @@ class Product
   validates :name, presence: true, uniqueness: true
   
   validate :english_name_available?
-  validate :existing_model_file?
   
   index({ name: 1 }, { unique: true })
-  
-  before_validation :set_klass_name
   
   # active record compatibility
   # just belongs_to reflections for cucumber's factory steps
@@ -76,29 +73,5 @@ class Product
         'activerecord.errors.models.product.attributes.name.missing_english_name'
       )
     end
-  end
-  
-  def existing_model_file?
-    unless (get_klass_name.constantize rescue false)
-      errors[:name] << I18n.t(
-        'activerecord.errors.models.product.attributes.name.missing_model_file'
-      )
-    end
-  end
-
-  def get_klass_name
-    if klass_name.present?
-      klass_name
-    elsif name == 'Product'
-      'Product'
-    else
-      [
-        'Product', name.gsub(' - ', '_').gsub('-', '_').gsub(' ', '_').classify
-      ].join('::')
-    end
-  end
-  
-  def set_klass_name
-    self._type = get_klass_name
   end
 end

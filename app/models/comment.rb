@@ -12,5 +12,5 @@ class Comment < ActiveRecord::Base
   
   attr_accessible :commentable_type, :commentable_id, :parent_id, :name, :text
   
-  COMMENTABLE_TYPES = ['project', 'vacancy', 'candidature']
+  COMMENTABLE_TYPES = ['project']
 end

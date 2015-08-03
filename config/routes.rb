@@ -49,46 +49,12 @@ Rails.application.routes.draw do
   
   resources :projects do
     resources :users, only: :index
-    resources :vacancies, only: [:index, :new]
     resources :stories, only: [:index, :new]
     resources :comments, only: [:index, :new]
     
     collection do
       put :update_multiple
       get :autocomplete
-    end
-  end
-      
-  resources :vacancies do
-    resources :candidatures, only: [:index, :new]
-    resources :comments, only: [:index, :new]
-    
-    collection do
-      put :update_multiple
-      get :autocomplete
-    end
-    
-    member do
-      put :recommend
-      put :accept_recommendation
-      put :deny_recommendation 
-      put :close
-      put :reopen
-    end
-  end
-  
-  resources :candidatures do
-    resources :comments, only: [:index, :new]
-    
-    collection do
-      put :update_multiple
-      get :autocomplete
-    end
-    
-    member do
-      get :accept
-      get :deny
-      get :quit
     end
   end
   
@@ -134,7 +100,6 @@ Rails.application.routes.draw do
   
   resources :users do
     resources :projects, only: [:index, :new]
-    resources :candidatures, only: :index
     
     collection do
       put :update_multiple

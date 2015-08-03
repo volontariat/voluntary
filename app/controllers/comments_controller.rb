@@ -61,9 +61,7 @@ class CommentsController < ApplicationController
     @commentable = @comment.commentable ? @comment.commentable : find_parent(Comment::COMMENTABLE_TYPES)
     eval("@#{@commentable.class.name.tableize.singularize} = @commentable")
     
-    if @commentable.is_a?(Candidature)
-      @vacancy = @commentable.vacancy 
-    elsif @commentable.is_a?(Project) 
+    if @commentable.is_a?(Project) 
       @twitter_sidenav_level = 4
     end
   end

@@ -55,8 +55,7 @@ en:
     parent: Parent
     project_id: Project
     state: State
-    user_id: User
-    vacancy_id: Vacancy  
+    user_id: User 
     roles: Roles
     position: Position
     date: Date
@@ -65,7 +64,6 @@ en:
   activerecord:
     models:
       area: Area
-      candidature: Candidature
       comment: Comment
       product: Product
       organization: Organization
@@ -74,14 +72,10 @@ en:
       story: Story
       task: Task
       user: User
-      vacancy: Vacancy
       
     attributes:
       comment:
         name: Subject
-      vacancy:
-        name: Name 
-        limit: Limit
       user:
         area_tokens: Areas
         country: Country 
@@ -89,7 +83,7 @@ en:
         foreign_language: Foreign language
         interface_language: Interface language
         language: Mother tongue
-        profession: Beruf
+        profession: Profession
      
     errors:
       models:
