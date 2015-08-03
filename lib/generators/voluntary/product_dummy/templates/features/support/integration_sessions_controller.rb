@@ -1,7 +1,7 @@
 class IntegrationSessionsController < ActionController::Base
   def new
     @user_id = params[:user_id]
-    render 'features/support/integration_sessions_form', layout: false
+    render file: File.expand_path('./../integration_sessions_form.html.erb', __FILE__), layout: false
   end
   
   def create
