@@ -3,7 +3,6 @@ class Project < ActiveRecord::Base
   belongs_to :organization
   
   has_many :project_users, dependent: :destroy
-  has_many :vacancies, dependent: :destroy
   has_many :roles, through: :project_users
   has_many :comments, as: :commentable, dependent: :destroy
   

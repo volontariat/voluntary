@@ -25,29 +25,4 @@ namespace 'workflow' do
       get 'tasks/:id/complete' => 'tasks#complete', as: :complete_task
     end
   end
-  
-  resources :vacancies, controller: 'vacancies', only: :index do
-    collection do
-      get '/' => 'vacancies#open', as: :open
-      
-      get :autocomplete
-      
-      get :open
-      get :recommended
-      get :denied
-      get :closed
-    end
-  end
-  
-  resources :candidatures, controller: 'candidatures', only: :index do
-    collection do
-      get '/' => 'candidatures#new', as: :new
-       
-      get :autocomplete 
-       
-      get :new
-      get :accepted
-      get :denied
-    end
-  end
 end

@@ -4,8 +4,9 @@
       <ul>
         <li><a href="#stories"><%= I18n.t('stories.index.title') %></a></li>
         <li><a href="#tasks"><%= I18n.t('workflow.project_owner.index.tasks') %></a></li>
-        <li><a href="#candidatures"><%= I18n.t('candidatures.index.title') %></a></li>
-        <li><a href="#vacancies"><%= I18n.t('vacancies.index.title') %></a></li>
+<% Workflow::ProjectOwnerController.extra_tabs.each do |tab| %>
+        <li><a href="#<%= tab %>"><%= I18n.t("#{tab}.index.title") %></a></li>
+<% end %>
       </ul>
       <div id="stories">
         <%= render 'stories' %>
@@ -13,12 +14,11 @@
       <div id="tasks">
         <%= render 'tasks' %>
       </div>
-      <div id="candidatures">
-        <%= render 'candidatures' %>
+<% Workflow::ProjectOwnerController.extra_tabs.each do |tab| %>
+      <div id="<%= tab %>">
+        <%= render "workflow/project_owner/#{tab}" %>
       </div>
-      <div id="vacancies">
-        <%= render 'vacancies' %>
-      </div>
+<% end %>
     </div>  
   </div>
 </div>

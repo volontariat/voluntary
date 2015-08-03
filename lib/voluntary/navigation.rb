@@ -2,6 +2,8 @@ module Voluntary
   module Navigation
     class Base
       @@products = {}
+      @@core_menus = [:areas, :products, :organizations, :projects, :users, :workflow, :authentication]
+      @@core_menu_codes = {}
       @@menu_options = {}
       
       def self.add_product(slug, text)
@@ -10,6 +12,22 @@ module Voluntary
       
       def self.products
         @@products
+      end
+      
+      def self.core_menus
+        @@core_menus.uniq
+      end
+      
+      def self.core_menu_codes
+        @@core_menu_codes
+      end
+      
+      def self.insert_before_core_menu_item(menu, other_menu)
+        @@core_menus.insert(@@core_menus.index(other_menu), menu)
+      end
+      
+      def self.add_core_menu_code(resource, code)
+        @@core_menu_codes[resource] = code
       end
       
       def self.add_menu_option(resource, option, value)
@@ -29,7 +47,7 @@ module Voluntary
           primary.dom_class = 'nav'
           primary.item :root, I18n.t('general.index.title'), root_path
           
-          [:areas, :products, :organizations, :projects, :vacancies, :users, :workflow, :authentication].each do |resource|
+          ::Voluntary::Navigation::Base.core_menus.each do |resource|
             instance_exec primary, ::Voluntary::Navigation::Base.menu_options(resource), &::Voluntary::Navigation.menu_code(resource)
           end
         end
@@ -122,10 +140,6 @@ module Voluntary
                 
                 project.item :users, I18n.t('users.index.title'), project_users_path(@project)  
                 
-                project.item :vacancies, I18n.t('vacancies.index.title'), project_vacancies_path(@project) do |vacancy|
-                  vacancy.item :new, I18n.t('general.new'), new_project_vacancy_path(@project)
-                end
-                
                 project.item :stories, I18n.t('stories.index.title'), project_stories_path(@project) do |stories|
                   stories.item :new, I18n.t('general.new'), new_project_story_path(@project)
       
@@ -214,63 +228,7 @@ module Voluntary
               end
             end  
           end
-        end
-      when :vacancies
-        Proc.new do |primary, options|
-          primary.item :vacancies, I18n.t('vacancies.index.title'), vacancies_path do |vacancies|
-            vacancies.item :new, I18n.t('general.new'), new_vacancy_path
-            
-            unless (@vacancy.new_record? rescue true)
-              vacancies.item :show, "#{@vacancy.name} @ #{@vacancy.project.name}", vacancy_path(@vacancy) do |vacancy|
-                
-                if can? :destroy, @vacancy
-                  vacancy.item :destroy, I18n.t('general.destroy'), vacancy_path(@vacancy), method: :delete, confirm: I18n.t('general.questions.are_you_sure')
-                end
-                
-                vacancy.item :show, I18n.t('general.details'), "#{vacancy_path(@vacancy)}#top"
-                vacancy.item :edit, I18n.t('general.edit'), edit_vacancy_path(@vacancy) if can? :edit, @vacancy
-                
-                vacancy.item :candidatures, I18n.t('candidatures.index.title'), vacancy_candidatures_path(@vacancy) do |candidatures|
-                  candidatures.item :new, I18n.t('general.new'), new_vacancy_candidature_path(@vacancy)
-                
-                  unless (@candidature.new_record? rescue true)
-                    candidatures.item(
-                      :show, I18n.t('activerecord.models.candidature') + " of #{@candidature.resource.name} @ #{@candidature.vacancy.project.name}", 
-                      candidature_path(@candidature) 
-                    ) do |candidature|
-                      if can? :destroy, @candidature
-                        candidature.item :destroy, I18n.t('general.destroy'), candidature_path(@candidature), method: :delete, confirm: I18n.t('general.questions.are_you_sure')
-                      end
-                      
-                      candidature.item :show, I18n.t('general.details'), "#{candidature_path(@candidature)}#top"
-                      candidature.item :edit, I18n.t('general.edit'), edit_candidature_path(@candidature) if can? :edit, @candidature
-                      
-                      candidature.item :comments, I18n.t('comments.index.title'), "#{candidature_path(@candidature)}#comments" do |comments|
-                        comments.item(:new, I18n.t('general.new'), new_candidature_comment_path(@candidature)) if @comment
-                        
-                        if @comment.try(:id) && can?(:edit, @comment)
-                          comments.item(:edit, I18n.t('general.edit'), edit_comment_path(@comment))
-                        end
-                      end 
-                    end
-                  end
-                end
-                 
-                vacancy.item :comments, I18n.t('comments.index.title'), "#{vacancy_path(@vacancy)}#comments" do |comments|
-                  comments.item(:new, I18n.t('general.new'), new_vacancy_comment_path(@vacancy)) if @comment && !@candidature
-                  
-                  if @comment.try(:id) && can?(:edit, @comment)
-                    comments.item(:edit, I18n.t('general.edit'), edit_comment_path(@comment)) 
-                  end
-                end 
-                
-                if options[:after_resource_has_many]
-                  instance_exec vacancy, {}, &options[:after_resource_has_many]
-                end
-              end
-            end  
-          end
-        end
+        end  
       when :users
         Proc.new do |primary, options|
           primary.item :users, I18n.t('users.index.title'), users_path do |users|
@@ -278,7 +236,6 @@ module Voluntary
               users.item :show, I18n.t('general.details'), "#{user_path(@user)}#top"
               
               users.item :projects, I18n.t('projects.index.title'), user_projects_path(@user)
-              users.item :candidatures, I18n.t('candidatures.index.title'), user_candidatures_path(@user)
               
               if options[:after_resource_has_many]
                 instance_exec users, {}, &options[:after_resource_has_many]
@@ -291,16 +248,8 @@ module Voluntary
           if user_signed_in?
             primary.item :workflow, I18n.t('workflow.index.title'), workflow_path do |workflow|
               workflow.item :project_owner, I18n.t('workflow.project_owner.index.title'), workflow_project_owner_index_path do |project_owner|
-                project_owner.item :vacancies, I18n.t('vacancies.index.title'), open_workflow_vacancies_path do |vacancies|
-                  Vacancy::STATES.each do |state|
-                    vacancies.item state, I18n.t("vacancies.show.states.#{state}"), eval("#{state}_workflow_vacancies_path")
-                  end
-                end
-                  
-                project_owner.item :candidatures, I18n.t('candidatures.index.title'), new_workflow_candidatures_path do |candidatures|
-                  Candidature::STATES.each do |state|
-                    candidatures.item state, I18n.t("candidatures.show.states.#{state}"), eval("#{state}_workflow_candidatures_path")
-                  end
+                if options[:project_owner_menu_items]
+                  instance_exec project_owner, {}, &options[:project_owner_menu_items]
                 end
               end
               
@@ -339,7 +288,10 @@ module Voluntary
                 user.item :settings, I18n.t('users.edit.title'), edit_user_path(current_user)
                 user.item :preferences, I18n.t('users.preferences.title'), preferences_user_path(current_user)
                 user.item :projects, I18n.t('projects.index.title'), user_projects_path(current_user)
-                user.item :candidatures, I18n.t('candidatures.index.title'), user_candidatures_path(current_user)
+                
+                if options[:profile_menu_items]
+                  instance_exec user, {}, &options[:profile_menu_items]
+                end
               end
             end
             
@@ -350,6 +302,14 @@ module Voluntary
               #authentication.item :rpx_sign_in, I18n.t('authentication.rpx_sign_in'), 'a' # link_to_rpx
               authentication.item :sign_up, I18n.t('authentication.sign_up'), new_user_registration_path
             end
+          end
+        end
+      else
+        Proc.new do |primary, options|
+          ::Voluntary::Navigation::Base.core_menu_codes.each do |working_resource, code|
+            next unless working_resource == resource
+            
+            instance_exec primary, ::Voluntary::Navigation::Base.menu_options(resource), &code
           end
         end
       end
