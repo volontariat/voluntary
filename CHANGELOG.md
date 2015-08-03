@@ -1,5 +1,14 @@
 ## unreleased ##
 
+## 0.4.0 (August 3, 2015) ##
+
+* #47 Refactoring: outsource recruiting to voluntary_recruiting gemRefactoring: outsource recruiting to voluntary_recruiting gem.
+* #81 Removes fork me on GitHub links.
+* #80 Fixes twitter bootstrap style of flash messages.
+* #79 Replace competitive_list.js by jquery-competitive_list.js.
+* Removes Capistrano as a dependency.
+* Introduction of User.by_slug_or_id.
+
 ## 0.3.0 (April 8, 2015) ##
 
 * #40 Rails 4.2.1 upgrade.
