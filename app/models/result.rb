@@ -39,6 +39,10 @@ class Result
   
   def user; user_id ? User.find(user_id) : nil; end
   def user=(value); self.user_id = value.id; end
+
+  def to_json
+    { name: name, text: text, user_id: user_id, state: state }
+  end
   
   private
   

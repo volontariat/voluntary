@@ -1,6 +1,7 @@
-scope :voluntary do
-  namespace :api, defaults: {format: 'json'} do
-    namespace :v1 do
+namespace :voluntary, path: 'api', module: 'voluntary/api', defaults: {format: 'json'} do
+  namespace :v1 do
+    resources :stories, only: [] do
+      resources :tasks, only: [:index]
     end
   end
 end

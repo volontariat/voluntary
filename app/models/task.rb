@@ -10,7 +10,7 @@ class Task
   include StateMachines::Task
   
   belongs_to :story
-  belongs_to :result, dependent: :destroy
+  belongs_to :result
   
   accepts_nested_attributes_for :result, allow_destroy: true
   
@@ -39,6 +39,7 @@ class Task
   
   after_initialize :cache_associations
   before_validation :cache_associations  
+  after_destroy :destroy_result
     
   #track_history on: [:user_id, :name, :text, :state]
     
@@ -97,6 +98,14 @@ class Task
     end
   end
   
+  def to_json
+    record = {
+      offeror_id: offeror_id, user_id: user_id, author_id: author_id, name: name, text: text, state: state
+    }
+    record[:result] = result.to_json if result.present?
+    record
+  end
+  
   protected
   
   # validates :name, presence: true, uniqueness: { scope: :story_id }
@@ -113,6 +122,10 @@ class Task
   end
   
   private
+  
+  def destroy_result
+    result.try(:destroy)
+  end
   
   def cache_associations
     self.offeror_id = story.offeror_id if story_id.present? && (story rescue nil)
