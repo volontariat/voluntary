@@ -49,7 +49,8 @@ en:
         sticky_footer: Sticky footer style from
       license: Code licensed under %{link}
       
-  attributes:  
+  attributes: 
+    id: ID 
     name: Name 
     text: Text
     parent: Parent
