@@ -14,7 +14,7 @@ class Area < ActiveRecord::Base
         OR areas2.ancestry = CONCAT(areas.id, '') 
       LEFT JOIN areas_projects ON areas_projects.area_id = areas2.id 
       LEFT JOIN projects ON projects.id = areas_projects.project_id
-    }).where('areas2.id IS NOT NULL AND projects.product_id = ?', product_id)
+    }).where('areas2.id IS NOT NULL AND projects.product_id = ?', product_id == 'no-name' ? '' : product_id)
   end
   
   validates :name, presence: true, uniqueness: true
@@ -26,7 +26,6 @@ class Area < ActiveRecord::Base
   friendly_id :name, :use => :slugged
   
   def self.find_by_product_id(product_id)
-    #roots.joins(:projects).merge(Project.for_product_id(product_id))
     roots.with_projects_for_product(product_id)
   end
   
