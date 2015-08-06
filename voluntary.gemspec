@@ -98,7 +98,6 @@ Gem::Specification.new do |s|
   # JSON and API
 
   s.add_dependency 'json', '~> 1.8.1'
-  s.add_dependency 'acts_as_api', '~> 0.4.2'
 
   # localization
 
