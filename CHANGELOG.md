@@ -2,6 +2,8 @@
 
 ## 0.4.0 (August 3, 2015) ##
 
+WARNING: this release drops recruiting data tables if you don't have installed voluntary_recruiting gem.
+
 * #47 Refactoring: outsource recruiting to voluntary_recruiting gemRefactoring: outsource recruiting to voluntary_recruiting gem.
 * #81 Removes fork me on GitHub links.
 * #80 Fixes twitter bootstrap style of flash messages.
