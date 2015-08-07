@@ -16,7 +16,7 @@ module UserCukeHelpers
   def login_as(user)
     fill_in 'Email', with: "#{user}@volontari.at"
     fill_in 'Password', with: 'password'
-    click_button :submit
+    click_button 'Log in'
   end
 
   # create a new @me user, if not present, and log in using the
@@ -31,7 +31,7 @@ module UserCukeHelpers
   def manual_login
     visit login_page
     login_as @me.name
-    visit user_confirmation_path(confirmation_token: @me.confirmation_token)  
+    #visit user_confirmation_path(confirmation_token: @me.confirmation_token)  
   end
 
   # checks the page content to see, if the login was successful

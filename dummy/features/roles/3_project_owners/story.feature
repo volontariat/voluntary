@@ -6,8 +6,8 @@ Feature: Create a story
   @javascript
   Scenario: Create a story for no product
   
-    Given a user named "user 1"
-    And I log in as "user 1"
+    Given a user named "user1"
+    And I log in as "user1"
     And a project named "project 1"
     And I am on the new project story page
     When I fill in "Name" with "Story 1"
@@ -18,9 +18,8 @@ Feature: Create a story
     And I fill in the text field of the 1st task with "Dummy 1"
     And I fill in the name field of the 2nd task with "Task 2"
     And I fill in the text field of the 2nd task with "Dummy 2"
-    And I press "Update Tasks"
-    Then I should see "Task 1"
-    And I should see "Dummy 1"
+    And I press the first update tasks button
+    Then I should see "Update successful"
+    And I should see "Task 1"
     And I should see "Task 2"
-    And I should see "Dummy 2"
     And I should see "Actions"

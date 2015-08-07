@@ -7,7 +7,9 @@ end
 When /^I (?:sign|log) in as "([^"]*)"$/ do |name|
   @me = User.find_by_name(name)
   @me.password = 'password'
-  automatic_login
+  # TODO: activate automatic login if login form template can be found again
+  #automatic_login
+  manual_login
 end
 
 When /^I fill out change password section with my password and "([^"]*)" and "([^"]*)"$/ do |new_pass, confirm_pass|
