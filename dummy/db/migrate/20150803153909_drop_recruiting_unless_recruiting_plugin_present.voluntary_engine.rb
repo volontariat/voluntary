@@ -4,7 +4,7 @@ class DropRecruitingUnlessRecruitingPluginPresent < ActiveRecord::Migration
     unless (Product::Recruiting rescue nil)
       drop_table :vacancies
       drop_table :candidatures
-      remove_index :projects_users, name: 'index_projects_users_on_project_id_and_user_id_and_vacancy_id'
+      remove_index 'projects_users', name: 'index_projects_users_on_project_id_and_user_id_and_vacancy_id'
       remove_column :projects_users, :vacancy_id
       add_index 'projects_users', ['project_id', 'user_id'], name: 'index_projects_users_on_project_id_and_user_id', unique: true, using: :btree
     end
