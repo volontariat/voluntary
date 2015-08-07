@@ -135,8 +135,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-rails', '~> 2.0' 
   
   # group :test
-  s.add_development_dependency 'capybara', '~> 1.1.2'
-  s.add_development_dependency 'capybara-webkit', '~> 0.13.0'
+  s.add_development_dependency 'capybara', '~> 2.4.4'
+  s.add_development_dependency 'capybara-webkit', '~> 1.6.0'
   s.add_development_dependency 'cucumber-rails-training-wheels', '~> 1.0.0'
   s.add_development_dependency 'timecop', '~> 0.6.1'
   s.add_development_dependency 'factory_girl_rails', '~> 1.7.0'
