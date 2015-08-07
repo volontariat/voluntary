@@ -100,7 +100,7 @@ class Task
   
   def to_json
     record = {
-      offeror_id: offeror_id, user_id: user_id, author_id: author_id, name: name, text: text, state: state
+      id: id.to_s, offeror_id: offeror_id, user_id: user_id, author_id: author_id, name: name, text: text, state: state
     }
     record[:result] = result.to_json if result.present?
     record

@@ -41,7 +41,7 @@ class Result
   def user=(value); self.user_id = value.id; end
 
   def to_json
-    { name: name, text: text, user_id: user_id, state: state }
+    { id: id.to_s, name: name, text: text, user_id: user_id, state: state }
   end
   
   private
