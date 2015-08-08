@@ -9,7 +9,7 @@ module Voluntary
         protected
         
         def current_user
-          @user ||= User.where(api_key: params[:api_key]).first
+          @current_user ||= User.where(api_key: params[:api_key]).first
         end
       end
     end
