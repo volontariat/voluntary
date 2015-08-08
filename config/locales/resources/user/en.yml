@@ -12,3 +12,15 @@ en:
       title: Settings 
     preferences:
       title: Preferences
+      
+  activerecord:
+    attributes:
+      user:
+        area_tokens: Areas
+        country: Country 
+        employment_relationship: Employment relationship
+        foreign_language: Foreign language
+        interface_language: Interface language
+        language: Mother tongue
+        profession: Profession
+        api_key: API Key

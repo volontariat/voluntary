@@ -77,15 +77,7 @@ en:
     attributes:
       comment:
         name: Subject
-      user:
-        area_tokens: Areas
-        country: Country 
-        employment_relationship: Employment relationship
-        foreign_language: Foreign language
-        interface_language: Interface language
-        language: Mother tongue
-        profession: Profession
-     
+      
     errors:
       models:
         general:
