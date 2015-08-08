@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe User do
+  describe '#create' do
+    it 'generates an API key' do
+      user = FactoryGirl.create(:user)
+      
+      user.api_key.should_not be_nil
+    end
+  end
+  
   describe '#is_master?' do
     context 'is master' do
       it 'returns true' do

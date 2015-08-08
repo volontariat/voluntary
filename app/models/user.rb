@@ -42,6 +42,7 @@ class User < ActiveRecord::Base
   
   friendly_id :name, use: :slugged     
   
+  before_create :create_api_key
   after_create :set_main_role
                   
   PARENT_TYPES = ['area', 'project']
@@ -107,6 +108,12 @@ class User < ActiveRecord::Base
   end
   
   private
+  
+  def create_api_key
+    begin
+      self.api_key = SecureRandom.uuid.tr('-', '')
+    end while User.where(api_key: api_key).any?
+  end
   
   def set_main_role
     self.update_attribute :main_role_id, Role.find_or_create_by(name: 'User').id if self.respond_to? :main_role_id
