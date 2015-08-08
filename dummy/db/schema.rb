@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803153909) do
+ActiveRecord::Schema.define(version: 20150808160320) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "ancestry",       limit: 255
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20150803153909) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "likes", force: :cascade do |t|
-    t.boolean  "positive",    limit: 1,  default: true
+    t.boolean  "positive",               default: true
     t.integer  "target_id",   limit: 4
     t.string   "target_type", limit: 60,                null: false
     t.integer  "user_id",     limit: 4
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(version: 20150803153909) do
     t.string   "state",      limit: 255
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
-    t.boolean  "public",     limit: 1,   default: false
+    t.boolean  "public",                 default: false
     t.string   "type",       limit: 255
   end
 
@@ -226,8 +226,10 @@ ActiveRecord::Schema.define(version: 20150803153909) do
     t.string   "provider",                limit: 255
     t.string   "uid",                     limit: 255
     t.string   "lastfm_user_name",        limit: 255
+    t.string   "api_key",                 limit: 32
   end
 
+  add_index "users", ["api_key"], name: "index_users_on_api_key", using: :btree
   add_index "users", ["name"], name: "index_users_on_name", unique: true, using: :btree
   add_index "users", ["profession_id"], name: "index_users_on_profession_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
