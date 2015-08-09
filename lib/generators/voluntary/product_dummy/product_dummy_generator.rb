@@ -93,21 +93,6 @@ gemspec path: File.expand_path(File.dirname(__FILE__) + "/../")
           gem 'rack-piwik', '~> 0.1.3', require: 'rack/piwik', require: false
         end
       end
-      
-      def append_load_seed_data
-        create_file 'db/seeds.rb' unless File.exists?(File.join(destination_root, 'db', 'seeds.rb'))
-        append_file 'db/seeds.rb', :verbose => true do
-          <<-EOH
-delivery_method_was = ActionMailer::Base.delivery_method
-ActionMailer::Base.delivery_method = :test
-
-db_seed = VolontariatSeed.new
-db_seed.create_fixtures
-
-ActionMailer::Base.delivery_method = delivery_method_was
-          EOH
-        end
-      end
     end
   end
 end

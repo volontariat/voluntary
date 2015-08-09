@@ -61,9 +61,6 @@ require 'selectize-rails'
 
 require 'voluntary/navigation'
 
-require 'db_seed'
-require 'volontariat_seed'
-
 if Rails.env == 'test'
   require 'voluntary/test/rspec_helpers/factories'
 end

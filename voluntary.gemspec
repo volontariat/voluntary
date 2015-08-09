@@ -52,7 +52,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'acts_as_list', '~> 0.4.0'
   s.add_dependency 'activerecord-import', '~> 0.4.1'
   s.add_dependency 'koala', '~> 1.8.0'
-  s.add_dependency 'faker', '~> 1.2.0'# needed not just for testing but for rake db:seed, too
+  s.add_dependency 'faker', '~> 1.2.0'
   s.add_dependency 'paper_trail', '~> 3.0.0'
   s.add_dependency 'mongoid-history', '~> 0.4.1'
   s.add_dependency 'acts-as-taggable-on', '~> 2.4.1'
