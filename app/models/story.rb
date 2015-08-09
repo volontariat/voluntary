@@ -26,7 +26,9 @@ class Story
   
   slug :name
   
-  attr_accessible :project_id, :name, :text, :tasks_attributes
+  attr_accessible :project_id, :name, :text, :tasks_file, :tasks_attributes
+  
+  attr_accessor :tasks_file
   
   scope :active, -> { where(state: 'active') }
   
@@ -37,7 +39,8 @@ class Story
   
   after_initialize :cache_associations
   before_validation :cache_associations 
-
+  after_save :import_tasks_from_file, if: 'tasks_file.present?'
+  
   PARENT_TYPES = ['project']
   
   def self.for_user(user)
@@ -75,6 +78,22 @@ class Story
   end
   
   private
+  
+  def import_tasks_from_file
+    csv = CSV.read(tasks_file.path)
+    column_to_index = {}
+
+    csv.first.first.split(';').each_with_index do |column, index|
+      column_to_index[column.downcase.to_sym] = index
+    end
+    
+    csv.each_with_index do |task, index|
+      next if index == 0
+      
+      task = task.first.split(';')
+      tasks.create name: task[column_to_index[:name]], text: task[column_to_index[:text]]
+    end
+  end
   
   def cache_associations
     self.offeror_id = project.user_id if project_id.present? && (project rescue nil)

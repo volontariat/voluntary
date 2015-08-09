@@ -59,6 +59,7 @@ require 'font-awesome-rails'
 require 'thor'
 require 'selectize-rails'
 require 'bitmask_attributes'
+require 'csv'
 
 require 'voluntary/navigation'
 

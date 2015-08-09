@@ -21,12 +21,17 @@ en:
         title: Criteria
       setup_tasks:
         title: Setup Tasks
+        import: Import Tasks
         add_task: Add Task
         update: Update Tasks
       activate:
         title: Activate
         
   activerecord:
+    attributes:
+      story:
+        tasks_file: Tasks file
+        
     errors:
       models:
         story:

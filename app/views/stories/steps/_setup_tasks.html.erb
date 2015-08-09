@@ -1,4 +1,18 @@
 <%= simple_form_for(@story, @step_presenter.form_options) do |f| %>
+  <%= f.input :tasks_file, as: :file, label: t('activerecord.attributes.story.tasks_file') %>
+  <% if step == :setup_tasks %>
+  <input type="hidden" name="next_step" value="1"/>
+  <% end %>
+  <div class="form-actions">
+    <div class="control-group string required" style="display: block">
+      <div class="controls">
+        <%= f.button :submit, t('stories.steps.setup_tasks.import') %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= simple_form_for(@story, @step_presenter.form_options) do |f| %>
   <%= render partial: 'shared/form/error_messages', locals: { resource: @story } %>
   <% if step == :setup_tasks %>
   <input type="hidden" name="next_step" value="1"/>
