@@ -17,4 +17,4 @@
 
 <h4><%= t('activerecord.models.result') %></h4>
 
-<%= resource.result.text %>
+<%= resource.result.text if resource.result_id.present? %>
