@@ -12,7 +12,7 @@ describe User do
   describe '#is_master?' do
     context 'is master' do
       it 'returns true' do
-        user = FactoryGirl.create(:master_user)
+        user = FactoryGirl.create(:user, roles: [:master])
         
         user.is_master?.should be_truthy
       end

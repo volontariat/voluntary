@@ -14,17 +14,6 @@ module Voluntary
               interface_language 'en'
               password 'password'
               password_confirmation { |u| u.password }
-              
-              #after_create do |user|
-              #  User.confirm_by_token(user.confirmation_token)
-              #end
-              
-              factory :master_user do
-                after_create do |user|
-                  role = Role.find_or_create_by(name: 'Master')
-                  user.roles << role
-                end
-              end
             end
             
             factory_girl.factory :area do

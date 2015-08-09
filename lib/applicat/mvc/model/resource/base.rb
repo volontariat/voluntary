@@ -5,8 +5,6 @@ module Applicat
         module Base
           def self.included(base)
             base.class_eval do
-              #has_many :role_assignments, :class_name => 'Role', :as => :authorizable
-              
               cattr_reader :per_page
               @@per_page = 20
   
@@ -43,12 +41,6 @@ module Applicat
                 end
               end
               
-              #def role_for?(role_name, user)
-              #  return true if new_record?
-              # 
-              #  role_assignments.joins(:users).where('roles.name = ? AND users.id = ?', role_name, user.id).any?
-              #end
-      
               def to_s
                 self.name rescue self.class.name.humanize
               end

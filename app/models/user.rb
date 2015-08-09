@@ -5,10 +5,8 @@ class User < ActiveRecord::Base
   include User::Omniauthable
   include User::Liking
   
-  belongs_to :main_role, class_name: 'Role'
   belongs_to :profession
   
-  has_and_belongs_to_many :roles, join_table: 'users_roles'
   has_and_belongs_to_many :areas
   has_and_belongs_to_many :projects
   
@@ -30,8 +28,6 @@ class User < ActiveRecord::Base
                   :salutation, :marital_status, :family_status, :date_of_birth, :place_of_birth, :citizenship, 
                   :email, :country, :language, :interface_language, :foreign_language_tokens, :profession_id, 
                   :employment_relationship, :area_tokens, :remember_me
-                  # preferences
-                  :main_role_id
        
   # :timeoutable, :token_authenticatable, :lockable,
   # :lock_strategy => :none, :unlock_strategy => :nones
@@ -43,8 +39,9 @@ class User < ActiveRecord::Base
   
   friendly_id :name, use: :slugged     
   
+  bitmask :roles, as: [:master]
+  
   before_create :create_api_key
-  after_create :set_main_role
                   
   PARENT_TYPES = ['area', 'project']
   
@@ -69,7 +66,7 @@ class User < ActiveRecord::Base
   end
   
   def is_master?
-    roles.where(name: 'Master').any?
+    roles.include? :master
   end
   
   def languages
@@ -114,9 +111,5 @@ class User < ActiveRecord::Base
     begin
       self.api_key = SecureRandom.uuid.tr('-', '')
     end while User.where(api_key: api_key).any?
-  end
-  
-  def set_main_role
-    self.update_attribute :main_role_id, Role.find_or_create_by(name: 'User').id if self.respond_to? :main_role_id
   end
 end
