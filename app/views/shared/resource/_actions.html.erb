@@ -1,4 +1,5 @@
 <% namespace ||= nil %>
+<% after_namespace ||= nil %>
 <% if !resource.is_a?(Column) && (
 	can?(:destroy, resource) || can?(:edit, resource) || (
       resource.respond_to?(:state_events) && resource.state_events.select{|event| can? event, resource }.any?
@@ -19,7 +20,7 @@
     </li>
   <% end %>
   <% if can? :edit, resource %>    
-    <li><%= link_to t('general.edit'), eval("edit_#{(namespace.present? ? namespace.to_s + '_' : '')}#{type.gsub('/', '_').singularize}_path(resource)") %></li>
+    <li><%= link_to t('general.edit'), eval("edit_#{(namespace.present? ? namespace.to_s + '_' : '')}#{type.gsub('/', '_').singularize}#{after_namespace.present? ? '_' + after_namespace : ''}_path(resource)") %></li>
   <% end %>
   <% links = event_links_for_resource(resource, type) %>
   <% if links.any? %>

@@ -57,7 +57,8 @@ module Voluntary
       result  = content_tag :dt, raw('&nbsp')
       result += content_tag :dd, render(
         partial: 'shared/resource/actions', locals: { 
-          type: root_model_class_name(resource).tableize, resource: resource, namespace: options[:namespace] 
+          type: root_model_class_name(resource).tableize, resource: resource, namespace: options[:namespace],
+          after_namespace: options[:after_namespace] 
         }
       )
        

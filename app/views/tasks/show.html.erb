@@ -1,0 +1,20 @@
+<h3><%= resource.name %></h3>
+
+<dl class="dl-horizontal">
+  <%= show_attribute :state %>
+  <%= show_actions after_namespace: 'workflow_project_owner_index' %>
+</dl>
+
+<h4><%= t('tasks.show.story_text') %></h4>
+
+<%= resource.story.text %>
+
+<% if resource.text.present? %>
+<h4><%= t('tasks.show.text') %></h4>
+
+<%= resource.text %>
+<% end %>
+
+<h4><%= t('activerecord.models.result') %></h4>
+
+<%= resource.result.text %>
