@@ -21,7 +21,7 @@ class RemoveRolesModel < ActiveRecord::Migration
     if role = Role.where(name: 'Master').first
       UserRole.where(role_id: role.id).find_each do |user_role|
         if user_role.role_id == role.id
-          user_role.user.update_attribute(:roles, [:master])
+          ActiveRecord::Base.connection.execute "UPDATE users SET roles = 1 WHERE id = #{user_role.user_id}"
         end
       end
     end
