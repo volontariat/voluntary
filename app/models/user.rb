@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :projects
   
   has_many :organizations, dependent: :destroy
+  def stories; Story.where(offeror_id: id); end
   
   accepts_nested_attributes_for :areas, allow_destroy: true
   
