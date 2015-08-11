@@ -40,6 +40,6 @@ body {
   text-align:center;
 }
 
-#wrap > .container-fluid {
+#wrap > .container-fluid, #wrap .container-fluid {
   padding-top: 60px;
 }
