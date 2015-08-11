@@ -87,7 +87,6 @@ PATH
       typhoeus (~> 0.5.3)
       uglifier (~> 2.4.0)
       versionist (~> 1.2.1)
-      wicked (~> 1.0.2)
       will_paginate (~> 3.0.7)
       will_paginate_mongoid (~> 2.0.1)
       zip-zip (~> 0.2)
@@ -560,8 +559,6 @@ GEM
       addressable (>= 2.2.7)
       crack (>= 0.1.7)
     websocket (1.2.2)
-    wicked (1.0.3)
-      rails (>= 3.0.7)
     will_paginate (3.0.7)
     will_paginate_mongoid (2.0.1)
       mongoid
