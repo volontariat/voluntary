@@ -1,10 +1,8 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a id="plattform_brand" class="brand" href="/">Volontari.at /</a>
-      <a id="product_brand" class="brand" href="<%= navigation_product_path %>"><%= navigation_product_name %></a>
-      
-      <%= render_navigation context: application_navigation, expand_all: false, renderer: :bootstrap %>
-    </div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <a id="plattform_brand" class="navbar-brand" href="/">Volontari.at /</a>
+    <a id="product_brand" class="navbar-brand" href="<%= navigation_product_path %>"><%= navigation_product_name %></a>
+    
+    <%= raw render_navigation(context: application_navigation, expand_all: false, renderer: :bootstrap).gsub('<ul class="nav">', '<ul class="nav navbar-nav">') %>
   </div>
-</div>
+</nav>

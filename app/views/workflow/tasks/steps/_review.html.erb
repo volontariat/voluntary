@@ -2,16 +2,21 @@
   resource, 'workflow/tasks/work_head' 
 ) %>
 
-<%= simple_form_for(resource, url: update_task_workflow_user_index_path(resource), html: {class: 'form-horizontal'}) do |f| %>
+<%= simple_form_for(
+  resource, url: update_task_workflow_user_index_path(resource), 
+  html: {class: 'form-horizontal'}, wrapper: :horizontal_form
+) do |f| %>
   <%= render_product_specific_partial_if_available( 
     resource, 'workflow/tasks/work_form', f: f, resource: resource
   ) %>
   
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.button :submit %>
     
-    <%= f.button :submit, t('tasks.general.events.follow_up'), name: 'event[follow_up]' %>
-   
-    <%= f.button :submit, t('tasks.general.events.complete'), name: 'event[complete]' %>
+      <%= f.button :submit, t('tasks.general.events.follow_up'), name: 'event[follow_up]' %>
+     
+      <%= f.button :submit, t('tasks.general.events.complete'), name: 'event[complete]' %>
+    </div>
   </div>
 <% end %>

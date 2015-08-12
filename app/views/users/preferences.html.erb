@@ -1,7 +1,9 @@
 <h3><%= t('users.preferences.title') %></h3>
 
-<%= simple_form_for(current_user, url: preferences_user_path(current_user), html: { class: 'form-horizontal block-form' }) do |f| %>
-  <div class="form-actions">
-    <%= f.button :submit %>
+<%= simple_form_for(current_user, url: preferences_user_path(current_user), html: { class: 'form-horizontal block-form' }, wrapper: :horizontal_form) do |f| %>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.button :submit %>
+    </div>
   </div>
 <% end %>

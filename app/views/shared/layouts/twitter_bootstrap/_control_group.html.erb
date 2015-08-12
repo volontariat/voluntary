@@ -1,11 +1,11 @@
 <% id ||= field.match(/id="([^"]*)"/)[1] %>
 <% required ||= false %>
-<% required_class = required ? ' required' : ' optional' %>
-<div class="control-group string<%= required_class %> <%= id %>">
-  <label for="<%= id %>" class="string<%= required_class %> control-label">
+<% required_class = required ? 'required' : 'optional' %>
+<div class="form-group string <%= required_class %> <%= id %>">
+  <label class="string <%= required_class %> control-label col-sm-3 control-label" for="<%= id %>">
     <% if required %><abbr title="required">*</abbr><% end %> <%= label %>
   </label>
-  <div class="controls">
+  <div class="col-sm-9">
     <%= field %>
   </div>
 </div>

@@ -3,15 +3,12 @@
   <% if step == :activate %>
   <input type="hidden" name="next_step" value="1"/>
   <% end %>
-  <div class="form-inputs">
-    <%= render partial: 'tasks/collection', locals: { 
-      collection: @story.tasks.select{|t| !t.new_record? }, 
-      options: { current_parent: @story, columns: @step_presenter.task_columns } 
-    } 
-    %>
-  </div>
-    
-  <div class="form-actions">
+  <%= render partial: 'tasks/collection', locals: { 
+    collection: @story.tasks.select{|t| !t.new_record? }, 
+    options: { current_parent: @story, columns: @step_presenter.task_columns, append_new_link: false } 
+  } 
+  %>
+  <div class="form-group">
     <%= f.button :submit, t('general.events.activate') %>
   </div>
 <% end %>

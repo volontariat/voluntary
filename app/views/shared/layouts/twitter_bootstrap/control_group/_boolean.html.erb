@@ -2,9 +2,9 @@
 <% required ||= false %>
 <% required_class = required ? ' required' : ' optional' %>
 <% value ||= true %>
-<div class="control-group radio_buttons <%= required_class %> <%= id %>">
-  <label class="radio_buttons <%= required_class %> control-label"><%= label %></label>
-  <div class="controls">
+<div class="form-group string <%= required_class %> <%= id %>">
+  <label class="string <%= required_class %> control-label col-sm-3 control-label"><%= label %></label>
+  <div class="col-sm-9">
     <label class="radio">
       <input type="radio" value="true" name="<%= name %>" id="<%= id %>_true"<%= value ? ' checked="checked"' : '' %> class="radio_buttons <%= required_class %>"/>
       Yes

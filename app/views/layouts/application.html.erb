@@ -21,26 +21,26 @@
     
     <div class="container-fluid">
 <% unless flash.empty? %>
-      <div class="row-fluid">
-        <div class="span12">
+      <div class="row">
+        <div class="col-md-12">
           <%= render 'layouts/shared/flash_messages' %>
         </div>
       </div>
 <% end %>    
-      <div class="row-fluid">
+      <div class="row">
 <% if sidenav(@sidenav_links_count).present? || content_for?(:search) || content_for?(:sidebar) %>
-        <div class="span9">
+        <div class="col-md-9">
   <% if content_for?(:breadcrumbs) %>
-          <div class="nav">
+          <div class="nav" style="padding-bottom:15px;">
             <%= yield :breadcrumbs %>
           </div>
   <% else %>
-          <%= breadcrumbs %>
+          <%= raw breadcrumbs.gsub('<div class="nav">', '<div class="nav" style="padding-bottom:15px;">') %>
   <% end %>
         
           <%= yield %>
         </div>      
-        <div class="span3">
+        <div class="col-md-3">
           <%= yield :search %>
           
           <%= sidenav(@sidenav_links_count) %>
@@ -48,13 +48,13 @@
           <%= yield :sidebar %>
         </div>
 <% else %>
-        <div class="span12">
+        <div class="col-md-12">
           <% if content_for?(:breadcrumbs) %>
-            <div class="nav">
+            <div class="nav" style="padding-bottom:15px;">
               <%= yield :breadcrumbs %>
             </div>
           <% else %>
-            <%= breadcrumbs %>
+            <%= raw breadcrumbs.gsub('<div class="nav">', '<div class="nav" style="padding-bottom:15px;">') %>
           <% end %>
           
           <%= yield %>

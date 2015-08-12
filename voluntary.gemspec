@@ -70,11 +70,11 @@ Gem::Specification.new do |s|
   # view
   s.add_dependency 'simple-navigation', '~> 3.11.0'  
   s.add_dependency 'facebox-rails', '~> 0.2.0'
-  s.add_dependency 'simple_form', '~> 3.0.0'
+  s.add_dependency 'simple_form', '~> 3.1.0'
   s.add_dependency 'country_select', '~> 1.3.1'
   s.add_dependency 'diffy', '~> 3.0.1'
   s.add_dependency 'font-awesome-rails', '~> 4.0.3.1'
-  s.add_dependency 'bootstrap-sass-rails', '~> 2.3.2.1'
+  s.add_dependency 'bootstrap-sass-rails', '~> 3.1.0.0'
   s.add_dependency 'auto_html', '~> 1.6.4'
   s.add_dependency 'redcarpet', '~> 3.2.3' # required by auto_html
   s.add_dependency 'slim', '~> 2.0.2'
@@ -115,7 +115,6 @@ Gem::Specification.new do |s|
   # ffi dependency older than the one from selenium-webdriver
   #  s.add_dependency 'pygments.rb'
 
-  #s.add_dependency 'twitter-bootstrap-rails', '2.1.3'
   s.add_dependency 'simple-navigation-bootstrap', '~> 1.0.0'
 
   # web

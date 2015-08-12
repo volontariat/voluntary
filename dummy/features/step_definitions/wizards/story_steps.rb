@@ -15,5 +15,5 @@ When /^(?:|I )fill in the text field of the 2nd task with "([^"]*)"$/ do |value|
 end
 
 When /^(?:|I )press the first update tasks button$/ do
-  find(:xpath, '/html/body/div[2]/div/div/div/div[2]/div[2]/form/div[1]/div/div/input').click
+  find(:xpath, '/html/body/div[2]/div/div/div/div[2]/div[2]/form[2]/div[1]/button').click
 end

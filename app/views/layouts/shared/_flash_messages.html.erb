@@ -1,6 +1,6 @@
 <div class="flash">
   <% flash.each do |type, message| -%>
-    <div class="alert message <%= (type.to_sym == :notice ? 'alert-info' : 'alert-error') %>">
+    <div class="alert message <%= (type.to_sym == :notice ? 'alert-info' : 'alert-danger') %>">
       <%= message %><br/>
     </div>
   <% end -%>
