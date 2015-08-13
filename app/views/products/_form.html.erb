@@ -1,4 +1,4 @@
-<%= simple_form_for(@product, html: {class: 'form-horizontal'}, wrapper: :horizontal_form) do |f| %>
+<%= simple_form_for(@product, url: @product.new_record? ? products_path : product_path(@product), html: {class: 'form-horizontal'}, wrapper: :horizontal_form) do |f| %>
   <%= render partial: 'shared/form/error_messages', locals: { resource: @product } %>
 
   <%= f.input :name %>  

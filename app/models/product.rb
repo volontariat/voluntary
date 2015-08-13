@@ -64,6 +64,7 @@ class Product
   
   # has_many (SQL)
   def areas; Area.where(id: area_ids); end
+  def projects; Project.where(product_id: id); end
   
   private
   

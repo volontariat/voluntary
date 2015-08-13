@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
     @product.user_id = current_user.id
     
     if @product.save
-      redirect_to @product, notice: t('general.form.successfully_created')
+      redirect_to product_path(@product), notice: t('general.form.successfully_created')
     else
       render :new
     end
@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     
     if @product.update_attributes(params[:product])
-      redirect_to @product, notice: t('general.form.successfully_updated')
+      redirect_to product_path(@product), notice: t('general.form.successfully_updated')
     else
       render :edit
     end
