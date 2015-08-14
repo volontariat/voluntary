@@ -6,6 +6,9 @@ class Thing < ActiveRecord::Base
       { id: t.id, name: t.name }
     end
     
-    known_things + Wikidata.search(term, known_things)
+    (known_things + Wikidata.search(term, known_things)).map do |item|
+      item[:value] = item[:name]
+      item
+    end
   end
 end
