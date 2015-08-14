@@ -59,6 +59,7 @@ require 'thor'
 require 'selectize-rails'
 require 'bitmask_attributes'
 require 'csv'
+require 'httparty'
 
 require 'voluntary/navigation'
 

@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails_autolink', '~> 1.1.5'
   s.add_dependency 'remotipart', '~> 1.0'
   s.add_dependency 'messagebus_ruby_api', '~> 1.0.3'
+  s.add_dependency 'httparty', '~> 0.13.5'
   
   # authentication / authorization
   s.add_dependency 'devise', '~> 3.4.1'
@@ -119,7 +120,7 @@ Gem::Specification.new do |s|
 
   # web
 
-  s.add_dependency 'faraday', '~> 0.8.9'
+  s.add_dependency 'faraday', '~> 0.9.1'
   s.add_dependency 'faraday_middleware', '~> 0.9.0'
   
   # group :development
