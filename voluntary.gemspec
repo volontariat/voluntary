@@ -132,7 +132,7 @@ Gem::Specification.new do |s|
 
   # group :development, :test
   s.add_development_dependency 'awesome_print', '~> 1.1.0'
-  s.add_development_dependency 'rspec-rails', '~> 2.0' 
+  s.add_development_dependency 'rspec-rails', '~> 3.3.3'#'~> 2.99.0' 
   
   # group :test
   s.add_development_dependency 'capybara', '~> 2.4.4'
@@ -143,9 +143,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'fixture_builder', '~> 0.3.3'
   s.add_development_dependency 'selenium-webdriver', '~> 2.22.1'
   s.add_development_dependency 'spork', '~> 1.0rc2'
-  s.add_development_dependency 'guard-rspec', '~> 3.0.2'
-  s.add_development_dependency 'guard-spork', '~> 1.5.1'
-  s.add_development_dependency 'guard-cucumber', '~> 1.4.0'
   s.add_development_dependency 'launchy', '~> 2.1.2'
 
   # group :cucumber, :test
