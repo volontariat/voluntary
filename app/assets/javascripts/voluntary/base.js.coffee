@@ -70,19 +70,20 @@ $(document).ready ->
       
     target.before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
-  
-  $('input[data-autocomplete]').each (k, v) ->
-    $(v).autocomplete({
-      source: $(this).attr('data-autocomplete'),
-      select: (event, ui) ->
-        $(this).val(ui.item.value)
-        
-        if ($(this).attr('id_element'))
-          $($(this).attr('id_element')).val(ui.item.id)
-        
-        return false;
-    });
     
+  document.body.addEventListener 'DOMNodeInserted', ((event) ->
+    $('input[data-autocomplete]').each (k, v) ->
+      $(v).autocomplete
+        source: $(this).data('autocomplete')
+        select: (event, ui) ->
+          $(this).val(ui.item.value)
+          
+          if ($(this).attr('id_element'))
+            $($(this).attr('id_element')).val(ui.item.id)
+          
+          false
+  )
+  
   $( ".datepicker" ).each (k, v) ->
     $(v).datepicker({ dateFormat: "yy-mm-dd", changeYear: true, yearRange: "c-100:c+10" });
     
