@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    errors:
+      models:
+        thing:
+          attributes:
+            name:
+              unwanted_special_characters_included: Name must not include slash.

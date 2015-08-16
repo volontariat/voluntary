@@ -16,6 +16,7 @@ module Concerns
         attr_accessible :name
         
         validates :name, presence: true, uniqueness: true
+        validate :special_characters_excluded
         
         #pusherable "#{Rails.env}_channel"
       end
@@ -45,6 +46,14 @@ module Concerns
       
       # custom associations
       def lists; List.where(thing_type: self.to_s); end
+      
+      def special_characters_excluded
+        if name.match(/\//)
+          errors[:name] << I18n.t(
+            'activerecord.errors.models.thing.attributes.name.unwanted_special_characters_included'
+          )
+        end
+      end
     end
   end
 end
