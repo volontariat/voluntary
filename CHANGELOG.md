@@ -1,5 +1,17 @@
 ## unreleased ##
 
+## 0.5.0 (August 17, 2015) ##
+
+* [#87](https://github.com/volontariat/voluntary/issues/87) WikiData.org integration for things suggestion
+* [#39](https://github.com/volontariat/voluntary/issues/39) Bootstrap 3 upgrade 
+* [#49](https://github.com/volontariat/voluntary/issues/49) Task import from CSV or Excel file
+* [#85](https://github.com/volontariat/voluntary/issues/85) Task show page
+* [#50](https://github.com/volontariat/voluntary/issues/50) [REFACTORING] Replace roles by new bitmap user attribute roles and remove seeds
+* [#84](https://github.com/volontariat/voluntary/issues/84) Task import API
+* [#42](https://github.com/volontariat/voluntary/issues/42) Secure API
+* [#35](https://github.com/volontariat/voluntary/issues/35) API for exporting task results
+* [#83](https://github.com/volontariat/voluntary/issues/83) [BUGFIX] Query about areas with projects without a product return nothing even if there are projects
+
 ## 0.4.0 (August 3, 2015) ##
 
 WARNING: this release drops recruiting data tables if you don't have installed voluntary_recruiting gem.
