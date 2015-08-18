@@ -94,8 +94,8 @@ Run this in your console:
   cd dummy
   bundle exec rake railties:install:migrations
   # change database names to #{product_name}_#{environment} and customize user credentials in dummy/config/mongoid.yml
+  # create a class for your new product under app/models/product/product_name.rb like: https://github.com/volontariat/voluntary_scholarship/blob/master/app/models/product/scholarship.rb  
   bundle exec rake db:migrate && bundle exec rake db:test:clone_structure
-  # create a class for your new product under app/models/product/product_name.rb like: https://github.com/volontariat/voluntary_scholarship/blob/master/app/models/product/scholarship.rb
   bundle exec rails s
 ```
   
