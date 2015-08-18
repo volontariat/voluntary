@@ -4,6 +4,10 @@ module Voluntary
       class Factories
         def self.code
           Proc.new do |factory_girl|
+            factory_girl.factory :argument_topic do
+              sequence(:name) { |n| "topic #{n}#{r_str}" } 
+            end
+            
             factory_girl.factory :user do
               sequence(:name) { |n| "user#{n}#{r_str}" }
               sequence(:email) { |n| "user#{n}#{r_str}@volontari.at" }

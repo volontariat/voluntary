@@ -3,5 +3,15 @@ namespace :voluntary, path: 'api', module: 'voluntary/api', defaults: {format: '
     resources :stories, only: [] do
       resources :tasks, only: [:index, :create]
     end
+    
+    resources :argument_topics, only: [] do
+      collection do
+        get :autocomplete
+      end  
+    end
+    
+    resources :arguments
+    
+    get '/things/:left_thing_name/vs/:right_thing_name/arguments', to: 'things/arguments#comparison'
   end
 end

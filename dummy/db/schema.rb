@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150809123803) do
+ActiveRecord::Schema.define(version: 20150818152730) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "ancestry",       limit: 255
@@ -45,6 +45,27 @@ ActiveRecord::Schema.define(version: 20150809123803) do
   add_index "areas_users", ["area_id", "user_id"], name: "index_areas_users_on_area_id_and_user_id", unique: true, using: :btree
   add_index "areas_users", ["area_id"], name: "index_areas_users_on_area_id", using: :btree
   add_index "areas_users", ["user_id"], name: "index_areas_users_on_user_id", using: :btree
+
+  create_table "argument_topics", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.text     "text",       limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "argument_topics", ["name"], name: "index_argument_topics_on_name", unique: true, using: :btree
+
+  create_table "arguments", force: :cascade do |t|
+    t.string   "argumentable_type", limit: 255
+    t.integer  "argumentable_id",   limit: 4
+    t.integer  "topic_id",          limit: 4
+    t.string   "value",             limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "arguments", ["argumentable_id", "argumentable_type"], name: "arguments_index_on_argumentable", using: :btree
+  add_index "arguments", ["topic_id", "argumentable_id", "argumentable_type"], name: "arguments_index_on_argumentable_topic", unique: true, using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "commentable_type", limit: 255
