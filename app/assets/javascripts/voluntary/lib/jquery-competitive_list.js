@@ -66,10 +66,6 @@
         })(this));
       };
 
-      CompetitiveList.meaningOfLife = function() {
-        return 42;
-      };
-
       CompetitiveList.prototype.start = function() {
         var matchesAlreadyExist, matchesWithoutWinner;
         matchesAlreadyExist = false;
@@ -207,7 +203,7 @@
         modalFooterHtml = '';
         if (this.currentMatch === null) {
           modalTitle = 'No matches to rate left.';
-          modalFooterHtml = "<p>\n  <button type=\"button\" class=\"cancel_tournament_button\" class=\"btn\">Save match results and close window</button>\n</p>      ";
+          modalFooterHtml = "<p>\n  <button type=\"button\" class=\"cancel_tournament_button btn btn-default\">Save match results and close window</button>\n</p>      ";
         } else {
           modalTitle = "Appoint Winner (" + this.matchesLeft + " matches left)";
           radioButtons = [];
@@ -226,10 +222,10 @@
             };
           })(this));
           modalBodyHtml += "<div class=\"controls\" style=\"margin-left:50px\">\n  <table>\n    <tr>      \n      <td style=\"width:325px; text-align:right;\">\n        " + competitorStrings[0] + "\n      </td>\n      <td>&nbsp;&nbsp;&nbsp;</td>\n      <td>" + radioButtons[0] + "</td>\n      <td>&nbsp;&nbsp;VS.&nbsp;&nbsp;&nbsp;</td>\n      <td>" + radioButtons[1] + "</td>\n      <td>\n        &nbsp;&nbsp;&nbsp;\n      </td>\n      <td style=\"width:325px\">\n        " + competitorStrings[1] + "\n      </td>\n    </tr>\n  </table>\n</div>     ";
-          modalFooterHtml = "<p>\n  <button type=\"button\" class=\"cancel_tournament_button\" class=\"btn\">Save match results and close window</button> &nbsp;&nbsp;&nbsp;&nbsp;\n  <button type=\"button\" class=\"select_winner_button\" class=\"btn btn-primary\">Submit</button>\n</p>";
+          modalFooterHtml = "<p>\n  <button type=\"button\" class=\"cancel_tournament_button btn btn-default\">Save match results and close window</button> &nbsp;&nbsp;&nbsp;&nbsp;\n  <button type=\"button\" class=\"select_winner_button btn btn-primary\">Submit</button>\n</p>";
         }
         modalBodyHtml += autoWinnerMatchesHtml;
-        html = "<form class=\"form-inline\" style=\"margin:0px;\">\n  <div class=\"modal-header\">\n    <button type=\"button\" id=\"close_bootstrap_modal_button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n    <h3>" + modalTitle + "</h3>\n  </div>\n  <div class=\"modal-body\" style=\"overflow-y:auto;\">\n    " + modalBodyHtml + "\n  </div>\n  <div class=\"modal-footer\" style=\"text-align:left;\">\n    " + modalFooterHtml + "\n  </div>\n</form>";
+        html = "<div class=\"modal-dialog\">\n  <div class=\"modal-content\">    \n    <form class=\"form-inline\" style=\"margin:0px;\">\n      <div class=\"modal-header\">\n        <button type=\"button\" id=\"close_bootstrap_modal_button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n        <h3>" + modalTitle + "</h3>\n      </div>\n      <div class=\"modal-body\" style=\"overflow-y:auto;\">\n        " + modalBodyHtml + "\n      </div>\n      <div class=\"modal-footer\" style=\"text-align:left;\">\n        " + modalFooterHtml + "\n      </div>\n    </form>\n  </div>\n</div>";
         $('#bootstrap_modal').html(html);
         $('.bootstrap_tooltip').tooltip();
         this.currentAutoWinnerMatches = [];
