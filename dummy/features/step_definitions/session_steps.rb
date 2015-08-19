@@ -10,6 +10,7 @@ When /^I (?:sign|log) in as "([^"]*)"$/ do |name|
   # TODO: activate automatic login if login form template can be found again
   #automatic_login
   manual_login
+  step %(I should see "Signed in successfully.")
 end
 
 When /^I fill out change password section with my password and "([^"]*)" and "([^"]*)"$/ do |new_pass, confirm_pass|
