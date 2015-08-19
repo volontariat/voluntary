@@ -59,7 +59,7 @@ require 'selectize-rails'
 require 'bitmask_attributes'
 require 'csv'
 require 'httparty'
-require 'active_model_serializers'
+require 'active_model/serializer'
 
 require 'voluntary/navigation'
 
