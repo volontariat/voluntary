@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'remotipart', '~> 1.0'
   s.add_dependency 'messagebus_ruby_api', '~> 1.0.3'
   s.add_dependency 'httparty', '~> 0.13.5'
+  s.add_dependency 'active_model_serializers', '~> 0.9.3'
   
   # authentication / authorization
   s.add_dependency 'devise', '~> 3.4.1'
