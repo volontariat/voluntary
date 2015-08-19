@@ -22,6 +22,10 @@ require File.join(File.dirname(__FILE__), "integration_sessions_controller")
 # steps to use the XPath syntax.
 Capybara.default_selector = :css
 
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
 Capybara.javascript_driver = ENV['JAVASCRIPT_DRIVER'] ? ENV['JAVASCRIPT_DRIVER'].to_sym : :webkit
 
 Capybara.add_selector(:row) do
