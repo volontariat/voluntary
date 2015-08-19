@@ -1,4 +1,4 @@
-<% id ||= field.match(/id="([^"]*)"/)[1] %>
+<% id ||= field.match(/id="([^"]*)"/)[1] if field.match(/id="([^"]*)"/) %>
 <% required ||= false %>
 <% required_class = required ? 'required' : 'optional' %>
 <div class="form-group string <%= required_class %> <%= id %>">
