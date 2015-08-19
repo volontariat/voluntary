@@ -1,3 +1,6 @@
+class Role < ActiveRecord::Base
+end
+
 class AddPublicAttributeToRoles < ActiveRecord::Migration
   def up
     add_column :roles, :public, :boolean, default: false
