@@ -13,5 +13,7 @@ namespace :voluntary, path: 'api', module: 'voluntary/api', defaults: {format: '
     resources :arguments
     
     get '/things/:left_thing_name/vs/:right_thing_name/arguments', to: 'things/arguments#comparison'
+    
+    resources :users
   end
 end
