@@ -9,7 +9,7 @@ module Voluntary
         def autocomplete
           render json: (
             ArgumentTopic.order(:name).where("name LIKE ?", "%#{params[:term]}%").
-            map{|t| { id: t.id, value: t.name }}
+            map{|t| { id: t.id, value: t.name.truncate(50) }}
           ), root: false
         end
       end
