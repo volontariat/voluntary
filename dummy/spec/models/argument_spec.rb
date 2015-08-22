@@ -7,10 +7,10 @@ describe 'Argument' do
         @left_thing = Factory(:thing, name: 'Left thing')
         @right_thing = Factory(:thing, name: 'Right thing')
         
-        Argument.create_with_topic(argumentable_type: 'Thing', argumentable_name: @left_thing.name, topic_name: 'Both', value: 1)
-        Argument.create_with_topic(argumentable_type: 'Thing', argumentable_name: @right_thing.name, topic_name: 'Both', value: 2)
-        Argument.create_with_topic(argumentable_type: 'Thing', argumentable_name: @left_thing.name, topic_name: 'Left', value: 3)
-        Argument.create_with_topic(argumentable_type: 'Thing', argumentable_name: @right_thing.name, topic_name: 'Right', value: 4)
+        Argument.create_with_topic(1, argumentable_type: 'Thing', argumentable_name: @left_thing.name, topic_name: 'Both', value: 1)
+        Argument.create_with_topic(1, argumentable_type: 'Thing', argumentable_name: @right_thing.name, topic_name: 'Both', value: 2)
+        Argument.create_with_topic(1, argumentable_type: 'Thing', argumentable_name: @left_thing.name, topic_name: 'Left', value: 3)
+        Argument.create_with_topic(1, argumentable_type: 'Thing', argumentable_name: @right_thing.name, topic_name: 'Right', value: 4)
       end
       
       context 'side is both' do
@@ -51,7 +51,7 @@ describe 'Argument' do
   describe '.create_with_topic' do
     context 'topic_name is blank' do
       it 'returns an error' do
-        Argument.create_with_topic(topic_name: '').should == { errors: { topic: { name: ["can't be blank"] } }}
+        Argument.create_with_topic(1, topic_name: '').should == { errors: { topic: { name: ["can't be blank"] } }}
       end
     end
 
@@ -59,7 +59,7 @@ describe 'Argument' do
       it 'creates a new topic' do
         expect do 
           Argument.create_with_topic(
-            topic_name: 'Dummy', argumentable_type: 'Thing', argumentable_id: FactoryGirl.create(:thing).id, value: 'Dummy'
+            1, topic_name: 'Dummy', argumentable_type: 'Thing', argumentable_id: FactoryGirl.create(:thing).id, value: 'Dummy'
           )
         end.to change{ArgumentTopic.count}
       end
@@ -71,7 +71,7 @@ describe 'Argument' do
         
         expect do 
           Argument.create_with_topic(
-            topic_name: 'Dummy', argumentable_type: 'Thing', argumentable_id: FactoryGirl.create(:thing).id, value: 'Dummy'
+            1, topic_name: 'Dummy', argumentable_type: 'Thing', argumentable_id: FactoryGirl.create(:thing).id, value: 'Dummy'
           )
         end.to_not change{ArgumentTopic.count}
       end
