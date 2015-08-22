@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      argument_topic: Argument Topic
+      argument_topic_short: Topic
+      
+    attributes:
+      argument_topic:
+        value: Value

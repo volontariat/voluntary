@@ -1,5 +1,17 @@
 en:  
   general:
+    account: Account
+    anonymous: Anonymous
+    authentication: Authentication
+    author: Author
+    cancel: Cancel
+    contra: contra
+    issues: Issues
+    neutral: neutral
+    pro: pro
+    sign_out: Sign out
+    vote: Vote
+    
     index:
       title: Home
     search: Search
@@ -82,5 +94,7 @@ en:
       models:
         general:
           attributes:
+            base:
+              user_resource_not_found: Resource not found for your account!
             name:
               reserved_word_included: is a reserved word

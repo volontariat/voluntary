@@ -1,0 +1,18 @@
+en:
+  arguments:
+    index:
+      title: Arguments
+    new:
+      title: New Argument
+    create:
+      title: Create Argument
+    update:
+      title: Update Argument
+      
+  activerecord:
+    errors:
+      models:
+        argument:
+          attributes:
+            base: 
+              deletion_failed: Brainstorming idea argument could not be deleted!
