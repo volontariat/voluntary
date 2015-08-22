@@ -79,7 +79,7 @@ describe 'Argument' do
     
     context 'argument invalid' do
       it 'returns an error' do
-        response = Argument.create_with_topic(argumentable_type: 'Thing', topic_name: 'Dummy', value: 'Dummy')
+        response = Argument.create_with_topic(1, argumentable_type: 'Thing', topic_name: 'Dummy', value: 'Dummy')
         
         response[:errors][:argumentable_id].should == ["can't be blank"]
       end
