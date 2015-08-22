@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :areas
   has_and_belongs_to_many :projects
   
+  has_many :arguments, dependent: :nullify
   has_many :organizations, dependent: :destroy
   def stories; Story.where(offeror_id: id); end
   

@@ -1,4 +1,5 @@
 class Argument < ActiveRecord::Base
+  belongs_to :user
   belongs_to :topic, class_name: 'ArgumentTopic'
   belongs_to :argumentable, polymorphic: true
   
@@ -21,16 +22,11 @@ class Argument < ActiveRecord::Base
   validates :topic_id, presence: true
   validates :argumentable_type, presence: true
   validates :argumentable_id, presence: true, uniqueness: { scope: [:topic_id, :argumentable_type] }
-  validates :value, presence: true
+ 
+  attr_accessible :topic_id, :argumentable_type, :argumentable_id, :vote, :value
   
-  attr_accessible :topic_id, :argumentable_type, :argumentable_id, :value
-  
-  def self.create_with_topic(attributes)
-    topic = ArgumentTopic.where('LOWER(name) = ?', attributes[:topic_name].to_s.strip.downcase).first
-    
-    unless topic
-      topic = ArgumentTopic.create(name: attributes[:topic_name].to_s.strip)
-    end
+  def self.create_with_topic(user_id, attributes)
+    topic = ArgumentTopic.find_or_create_by_name attributes[:topic_name]
     
     if topic.valid?
       argumentable_id = if attributes[:argumentable_name].present?
@@ -39,9 +35,12 @@ class Argument < ActiveRecord::Base
         attributes[:argumentable_type].constantize.where(id: attributes[:argumentable_id]).first.try(:id)
       end
       
-      argument = Argument.create(
-        topic_id: topic.id, argumentable_type: attributes[:argumentable_type], argumentable_id: argumentable_id, value: attributes[:value]
+      argument = Argument.new(
+        topic_id: topic.id, argumentable_type: attributes[:argumentable_type], argumentable_id: argumentable_id, 
+        value: attributes[:value], vote: attributes[:vote]
       )
+      argument.user_id = user_id
+      argument.save
       
       if argument.valid?
         argument
