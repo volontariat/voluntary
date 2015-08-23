@@ -8,6 +8,10 @@ en:
       title: Create Argument
     update:
       title: Update Argument
+    model:
+      publish_create_to_brainstorming: A new argument has been added  
+      publish_update_to_brainstorming: An argument has been updated
+      publish_destroy_to_brainstorming: An argument has been removed     
       
   activerecord:
     errors:
