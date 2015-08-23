@@ -1,5 +1,5 @@
 class ArgumentSerializer < ActiveModel::Serializer
-  attributes :id, :vote, :topic_id, :topic_name, :argumentable_type, :argumentable_id, :argumentable_name, :value, :user_id, :user_name, :user_slug
+  attributes :id, :vote, :topic_id, :topic_name, :argumentable_type, :argumentable_id, :argumentable_name, :value, :user_id, :user_name, :user_slug, :positive, :likes_count, :dislikes_count
 
   def argumentable_name
     object.argumentable.try(:name)
