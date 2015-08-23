@@ -1,5 +1,12 @@
 ## unreleased ##
 
+## 0.5.1 (August 23, 2015) ##
+
+* Adds new JavaScript library sugar.
+* Implements api/v1/arguments#update and #destroy.
+* Adds seeds with 1 admin user.
+* [#92](https://github.com/volontariat/voluntary/issues/92) Move Argument and ArgumentTopic model from ranking plugin to here
+ 
 ## 0.5.0 (August 17, 2015) ##
 
 * [#87](https://github.com/volontariat/voluntary/issues/87) WikiData.org integration for things suggestion
