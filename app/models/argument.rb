@@ -1,4 +1,6 @@
 class Argument < ActiveRecord::Base
+  include Likeable
+   
   belongs_to :user
   belongs_to :topic, class_name: 'ArgumentTopic'
   belongs_to :argumentable, polymorphic: true
@@ -24,6 +26,8 @@ class Argument < ActiveRecord::Base
   validates :argumentable_id, presence: true, uniqueness: { scope: [:topic_id, :argumentable_type] }
  
   attr_accessible :topic_id, :argumentable_type, :argumentable_id, :vote, :value
+  
+  attr_accessor :positive
   
   def self.create_with_topic(user_id, attributes)
     topic = ArgumentTopic.find_or_create_by_name attributes[:topic_name]
