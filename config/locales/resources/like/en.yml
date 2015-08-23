@@ -1,5 +1,11 @@
 en:
   likes:
+    create:
+      like_failed: Liking failed!
+      dislike_failed: Disliking failed!
+    destroy:
+      unlike_failed: Undoing like failed!
+      undo_dislike_failed: Undoing dislike failed!  
     actions:
       like: Like
       dislike: Dislike

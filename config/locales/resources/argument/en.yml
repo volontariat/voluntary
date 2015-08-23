@@ -4,10 +4,16 @@ en:
       title: Arguments
     new:
       title: New Argument
+    save:
+      failed: Something went wrong at saving argument
+      successful: Successfully saved argument.
     create:
       title: Create Argument
     update:
       title: Update Argument
+    destroy:
+      failed: Removing argument failed!
+      successful: Successfully removed argument.
     model:
       publish_create_to_brainstorming: A new argument has been added  
       publish_update_to_brainstorming: An argument has been updated

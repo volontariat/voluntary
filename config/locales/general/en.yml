@@ -46,7 +46,7 @@ en:
       activate: Activate
     exceptions:
       wrong_recaptcha: The captcha code which you typed in is wrong.
-      access_denied: Access denied
+      access_denied: Access denied!
       not_found: Resource not found.
     notifications:
       event_successful: "%{event} successful."
