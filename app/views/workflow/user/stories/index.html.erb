@@ -1,0 +1,26 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t('activerecord.models.story') %></th>
+      <th><%= t('activerecord.models.project') %></th>
+      <th><%= t('activerecord.models.product') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<% @stories.each do |story| %>
+    <tr>
+      <td><%= link_to story.name, story_path(story) %></td>
+      <td><%= link_to story.project.name, project_path(story.project) %></td>
+      <td>
+  <% if story.project.product %>
+        <%= link_to story.project.product.name, product_path(story.project.product) %>
+  <% else %>
+        -
+  <% end %>    
+      </td>
+      <td><%= link_to t('workflow.user.next_task'), next_task_workflow_user_index_path(story) %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

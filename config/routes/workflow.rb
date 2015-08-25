@@ -14,6 +14,8 @@ namespace 'workflow' do
       
       get 'projects/:id' => 'user/projects#show', as: :user_project
       
+      get 'stories' => 'user/stories#index', as: :stories
+      get 'tasks/assigned' => 'user/tasks#assigned', as: :assigned_tasks
       get 'stories/:story_id/tasks' => 'tasks#index', as: :tasks
       get 'stories/:story_id/tasks/next' => 'tasks#next', as: :next_task
       patch 'tasks/:id' => 'tasks#update', as: :update_task

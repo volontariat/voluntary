@@ -1,14 +1,31 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag 'voluntary/workflow/user/index' %>
+<% end %>
 <div class="container-fluid" style="padding-top:0px;">
   <div class="row">
-    <div class="col-md-6">
-      <h3><%= I18n.t('workflow.index.assigned_tasks') %></h3>
-      
-      <%= render 'tasks', collection: @assigned_tasks, columns: ['name', 'story_id'] %>
-    </div>
-    <div class="col-md-6">
-      <h3><%= I18n.t('workflow.index.completed_tasks') %></h3>
-      
-      <%= render 'tasks', collection: @completed_tasks, columns: ['name', 'story_id'] %>
+    <div class="col-md-12">
+      <div>
+        <ul id="workflow_user_tabs" class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#stories" aria-controls="stories" role="tab" data-toggle="tab" data-url="<%= stories_workflow_user_index_path %>">
+              <%= t('stories.index.title') %>
+            </a>
+          </li>
+          <li role="presentation">
+            <a href="#assigned_tasks" aria-controls="assigned_tasks" role="tab" data-toggle="tab" data-url="<%= assigned_tasks_workflow_user_index_path %>">
+              <%= t('workflow.index.assigned_tasks') %>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="stories" style="padding-top:15px;">
+            Stories
+          </div>
+          <div role="tabpanel" class="tab-pane" id="assigned_tasks" style="padding-top:15px;">
+            Tasks
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
