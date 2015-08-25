@@ -52,7 +52,7 @@ class Story
   def offeror=(value); self.offeror_id = value.id; end
   
   def project; project_id ? Project.find(project_id) : nil; end
-  def project=(value); self.project_id = value.id; end
+  def project=(value); @project = value; self.project_id = value.id; end
   
   def next_task_for_user(user)
     return nil if (users_without_tasks_ids || []).include?(user.id)
