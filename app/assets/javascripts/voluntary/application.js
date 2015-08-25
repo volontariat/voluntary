@@ -5,4 +5,8 @@
 //= require bootstrap-datetimepicker
 //= require jquery.tokeninput
 //= require selectize
-//= require_tree .
+//= require_tree ./lib
+//= require_tree ./likes
+//= require ./base
+//= require ./functions
+//= require ./users 
