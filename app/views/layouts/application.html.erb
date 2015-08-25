@@ -28,7 +28,7 @@
       </div>
 <% end %>    
       <div class="row">
-<% if sidenav(@sidenav_links_count).present? || content_for?(:search) || content_for?(:sidebar) %>
+<% if (!@hide_sidebar && sidenav(@sidenav_links_count).present?) || content_for?(:search) || content_for?(:sidebar) %>
         <div class="col-md-9">
   <% if content_for?(:breadcrumbs) %>
           <div class="nav" style="padding-bottom:15px;">
