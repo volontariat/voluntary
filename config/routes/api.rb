@@ -14,6 +14,8 @@ namespace :voluntary, path: 'api', module: 'voluntary/api', defaults: {format: '
     
     get '/things/:left_thing_name/vs/:right_thing_name/arguments', to: 'things/arguments#comparison'
     
-    resources :users
+    resources :users do
+      resources :organizations, only: [:index]
+    end
   end
 end
