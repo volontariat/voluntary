@@ -4,9 +4,10 @@ module Likeable
   included do
     belongs_to :target, polymorphic: true
     
-    has_many :likes, -> { where(positive: true) }, dependent: :delete_all, as: :target
+    has_many :likes_or_dislikes, class_name: 'Like', dependent: :delete_all, as: :target
+    has_many :likes, -> { where(positive: true) }, as: :target
     has_many :likers, class_name: 'User', through: :likes, source: :user
-    has_many :dislikes, -> { where(positive: false) }, class_name: 'Like', dependent: :delete_all, as: :target
+    has_many :dislikes, -> { where(positive: false) }, class_name: 'Like', as: :target
     has_many :dislikers, class_name: 'User', through: :dislikes, source: :user
     
     scope :liked_by, ->(user_id) do
