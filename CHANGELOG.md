@@ -1,5 +1,11 @@
 ## unreleased ##
 
+## 0.5.2 (September 2, 2015) ##
+
+* Adds moment.js.
+* Implements user organizations API endpoint.
+* [#90](https://github.com/volontariat/voluntary/issues/90) Redesign workflow user page.
+
 ## 0.5.1 (August 23, 2015) ##
 
 * Adds new JavaScript library sugar.
