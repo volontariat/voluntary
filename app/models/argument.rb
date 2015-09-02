@@ -55,4 +55,44 @@ class Argument < ActiveRecord::Base
       { errors: { topic: topic.errors.to_hash } }
     end
   end
+  
+  def self.matrix(argumentables)
+    arguments = []
+    
+    argumentables.each do |index, argumentable|
+      arguments += Argument.where(
+        argumentable_type: argumentable['type'], argumentable_id: argumentable['id']
+      ).includes(:topic).to_a
+    end
+    
+    arguments_by_name = {}
+    
+    arguments.each do |argument| 
+      arguments_by_name[argument.topic.name] ||= []
+      arguments_by_name[argument.topic.name] << argument
+    end
+    
+    json = { argumentables: [], matrix: [] }
+    
+    argumentables.keys.map(&:to_i).sort.each do |argumentable_index|
+      argumentable = argumentables[argumentable_index.to_s]
+      argumentable = argumentable['type'].constantize.find(argumentable['id'])
+      
+      json[:argumentables] << { id: argumentable.id, slug: argumentable.try(:slug), name: argumentable.name }
+    end
+    
+    arguments_by_name.keys.sort.each do |topic_name|
+      item = { topic_name: topic_name, values: [] }
+      arguments = arguments_by_name[topic_name]
+      
+      argumentables.keys.map(&:to_i).sort.each do |argumentable_index|
+        argumentable = argumentables[argumentable_index.to_s]
+        item[:values] << arguments.select{|a| a.argumentable_type == argumentable['type'] && a.argumentable_id == argumentable['id'].to_i }.first.try(:value)
+      end
+      
+      json[:matrix] << item
+    end
+    
+    json
+  end
 end
