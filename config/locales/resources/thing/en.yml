@@ -1,4 +1,11 @@
 en:
+  things:
+    show:
+      limit_of_comparison_list: Limit of 4 items in thing comparison list reached!
+      add_to_comparison_list: Add to comparison list
+      remove_from_comparison_list: Remove from comparison list
+      comparison_list: Comparison List
+      
   activerecord:
     errors:
       models:

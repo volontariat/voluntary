@@ -2,6 +2,8 @@ en:
   arguments:
     index:
       title: Arguments
+    matrix:
+      title: Arguments Matrix
     new:
       title: New Argument
     save:

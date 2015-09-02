@@ -10,7 +10,11 @@ namespace :voluntary, path: 'api', module: 'voluntary/api', defaults: {format: '
       end  
     end
     
-    resources :arguments
+    resources :arguments do
+      collection do
+        get :matrix
+      end
+    end
     
     get '/things/:left_thing_name/vs/:right_thing_name/arguments', to: 'things/arguments#comparison'
     
