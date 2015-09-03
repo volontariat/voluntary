@@ -89,7 +89,7 @@ Run this in your console:
   bundle exec rake db:create:all && bundle exec rails g voluntary:product_dummy # confirm all overwrite questions except of Gemfile
   cd ..
   # add gitignore file from voluntary: https://github.com/volontariat/voluntary/blob/master/.gitignore
-  rails g migration add_product_name_product
+  bundle exec rails g migration add_product_name_product
   # fill migration file with template: https://github.com/volontariat/voluntary_scholarship/blob/master/db/migrate/20140306201232_add_scholarship_product.rb
   cd dummy
   bundle exec rake railties:install:migrations
