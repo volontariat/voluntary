@@ -27,7 +27,7 @@ class Argument < ActiveRecord::Base
  
   attr_accessible :topic_id, :argumentable_type, :argumentable_id, :vote, :value
   
-  attr_accessor :positive
+  attr_accessor :vote, :positive
   
   def self.create_with_topic(user_id, attributes)
     topic = ArgumentTopic.find_or_create_by_name attributes[:topic_name]
