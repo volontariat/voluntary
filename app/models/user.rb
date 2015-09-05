@@ -113,4 +113,8 @@ class User < ActiveRecord::Base
       self.api_key = SecureRandom.uuid.tr('-', '')
     end while User.where(api_key: api_key).any?
   end
+  
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
+  end
 end

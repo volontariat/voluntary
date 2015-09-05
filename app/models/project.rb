@@ -74,4 +74,8 @@ class Project < ActiveRecord::Base
   def destroy_non_active_records
     stories.destroy_all
   end
+  
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
+  end
 end
