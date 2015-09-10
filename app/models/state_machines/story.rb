@@ -26,8 +26,16 @@ module StateMachines::Story
           validate :presence_of_tasks
         end
         
+        state :active do
+          validate :presence_of_tasks
+        end
+        
         event :activate do
-          transition [:tasks_defined, :completed] => :active
+          transition [:new, :tasks_defined, :completed] => :active
+        end
+        
+        event :deactivate do
+          transition :active => :tasks_defined
         end
         
         event :complete do
@@ -51,7 +59,9 @@ module StateMachines::Story
       end
       
       def presence_of_tasks
-        self.tasks.delete_if{|t| t.name.blank? && t.text.blank? }
+        self.tasks.delete_if do |t| 
+          t.name.blank? && (t.class.name == 'Task' && t.text.blank?)
+        end
         
         if tasks.select{|t| !t.valid?}.any?
           errors[:base] << I18n.t(
