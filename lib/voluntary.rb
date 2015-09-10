@@ -60,6 +60,7 @@ require 'bitmask_attributes'
 require 'csv'
 require 'httparty'
 require 'active_model/serializer'
+require 'mongoid_orderable'
 
 require 'voluntary/navigation'
 

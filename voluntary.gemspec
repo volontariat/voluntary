@@ -59,6 +59,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'mongoid-history', '~> 0.4.1'
   s.add_dependency 'acts-as-taggable-on', '~> 2.4.1'
   s.add_dependency 'bitmask_attributes', '~> 1.0.0'
+  s.add_dependency 'mongoid_orderable', '~> 4.1.1'
   
   # mongo model
   s.add_dependency 'mongoid_slug', '~> 3.2.0'
