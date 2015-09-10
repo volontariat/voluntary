@@ -36,6 +36,8 @@ en:
         update: Update Tasks
       activate:
         title: Activate
+      deactivate:
+        title: Deactivate
         
   activerecord:
     attributes:
