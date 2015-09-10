@@ -33,11 +33,6 @@ class StoriesController < ApplicationController
   end
   
   def edit
-    #if @story.tasks.none?
-      #@story.tasks << @story.tasks.new
-      #@story.tasks.first.errors.clear
-    #end
-    
     render_wizard
   end
   
@@ -90,6 +85,13 @@ class StoriesController < ApplicationController
     @presenter = Resources::General::Wizards::StoryPresenter.new(
       self.view_context, resource: resource
     )
-    render 'general/wizard'
+    
+    begin
+      raise ActionView::MissingTemplate if @project.product_id.nil?
+      
+      render "products/types/#{@project.product.class.name.split('Product::').last.tableize.singularize}/wizard"
+    rescue ActionView::MissingTemplate
+      render 'general/wizard'
+    end
   end
 end
