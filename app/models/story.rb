@@ -77,6 +77,12 @@ class Story
     task
   end
   
+  protected
+  
+  def with_offeror
+    true
+  end
+  
   private
   
   def import_tasks_from_file

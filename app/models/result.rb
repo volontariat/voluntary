@@ -23,7 +23,7 @@ class Result
   
   validates :task_id, presence: true
   validates :story_id, presence: true
-  validates :offeror_id, presence: true
+  validates :offeror_id, presence: true, if: 'task_id.present? && (task rescue nil) && task.story.with_offeror'
   validates :text, presence: true
   
   after_initialize :cache_associations
@@ -48,13 +48,13 @@ class Result
   
   def cache_associations
     self.story_id = task.story_id if task_id.present? && (task rescue nil)
-    self.offeror_id = task.offeror_id if task_id.present? && (task rescue nil)
+    self.offeror_id = task.offeror_id if task_id.present? && (task rescue nil) && task.story.with_offeror
   end
   
   def cache_product_association
     self.product_id = task.product_id if task_id.present? && (task rescue nil)
   end
   
-  def set_tasks_result_association; task.update_attribute(:result_id, id); end
-  def unset_tasks_result_association; task.update_attribute(:result_id, nil); end
+  def set_tasks_result_association; task.update_attribute(:result_id, id) unless task.respond_to?(:results); end
+  def unset_tasks_result_association; task.update_attribute(:result_id, nil) unless task.respond_to?(:results); end
 end

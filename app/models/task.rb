@@ -1,7 +1,6 @@
 class Task
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Slug
   #include Mongoid::History::Trackable
   include ActiveModel::MassAssignmentSecurity
   
@@ -21,8 +20,6 @@ class Task
   field :text, type: String
   field :state, type: String
   field :unassigned_user_ids, type: Array
-  
-  slug :name, reserve: ['new', 'edit', 'next']
    
   attr_accessible :story, :story_id, :name, :text, :result_attributes
   
@@ -33,7 +30,7 @@ class Task
   scope :incomplete, -> { ne(state: 'completed') }
   
   validates :story_id, presence: true
-  validates :offeror_id, presence: true
+  validates :offeror_id, presence: true, if: 'story_id.present? && (story rescue nil) && story.with_offeror'
   validates :text, presence: true, if: ->(t) { t.class.name == 'Task' }
   validate :name_valid?
   
@@ -124,11 +121,15 @@ class Task
   private
   
   def destroy_result
-    result.try(:destroy)
+    if respond_to? :results
+      results.map(&:destroy)
+    else
+      result.try(:destroy)
+    end
   end
   
   def cache_associations
-    self.offeror_id = story.offeror_id if story_id.present? && (story rescue nil)
+    self.offeror_id = story.offeror_id if story_id.present? && (story rescue nil) && story.with_offeror
   end
   
   def cache_product_association
