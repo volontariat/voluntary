@@ -42,6 +42,34 @@ class Voluntary::Api::V1::StoriesController < ActionController::Base
     end
   end
   
+  def activate
+    story = Story.find params[:id]
+    
+    authorize! :update, story
+    
+    story.activate
+    
+    respond_to do |format|
+      format.json do
+        render json: story.errors.empty? && story.valid? ? product_serializer('Story', story) : { errors: story.errors.to_hash }
+      end
+    end
+  end
+  
+  def deactivate
+    story = Story.find params[:id]
+    
+    authorize! :update, story
+    
+    story.deactivate
+    
+    respond_to do |format|
+      format.json do
+        render json: story.errors.empty? && story.valid? ? product_serializer('Story', story) : { errors: story.errors.to_hash }
+      end
+    end
+  end
+  
   def destroy
     story = current_user.stories.friendly.find params[:id]
     

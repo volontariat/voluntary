@@ -2,6 +2,11 @@ namespace :voluntary, path: 'api', module: 'voluntary/api', defaults: {format: '
   namespace :v1 do
     resources :stories, only: [:create, :show, :update, :destroy] do
       resources :tasks, only: [:index, :create]
+      
+      member do
+        put :activate
+        put :deactivate
+      end
     end
     
     resources :argument_topics, only: [] do
