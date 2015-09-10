@@ -26,6 +26,14 @@ module Voluntary
       
       protected
       
+      def product_serializer(class_name, record)
+        begin
+          "#{record.product.class.name.gsub('Product::', '')}#{class_name}Serializer".constantize.new(record)
+        rescue NameError
+          "#{class_name}Serializer".constantize.new(record)
+        end
+      end
+      
       def application_navigation
         :main
       end
