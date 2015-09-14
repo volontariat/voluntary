@@ -85,12 +85,12 @@ class StoriesController < ApplicationController
     @presenter = Resources::General::Wizards::StoryPresenter.new(
       self.view_context, resource: resource
     )
-    
+
     begin
-      raise ActionView::MissingTemplate if @project.product_id.nil?
+      raise NotImplementedError if @project.product_id.blank?
       
       render "products/types/#{@project.product.class.name.split('Product::').last.tableize.singularize}/wizard"
-    rescue ActionView::MissingTemplate
+    rescue NotImplementedError, ActionView::MissingTemplate
       render 'general/wizard'
     end
   end
