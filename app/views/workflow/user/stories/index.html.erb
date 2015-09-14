@@ -19,7 +19,11 @@
         -
   <% end %>    
       </td>
-      <td><%= link_to t('workflow.user.next_task'), next_task_workflow_user_index_path(story) %></td>
+      <td>
+        <%= render_product_specific_partial_if_available(
+          story.project, 'workflow/user/stories/next_task', { story: story }
+        ) %>
+      </td>
     </tr>
 <% end %>
   </tbody>
