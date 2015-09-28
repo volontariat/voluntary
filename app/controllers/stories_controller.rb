@@ -18,6 +18,7 @@ class StoriesController < ApplicationController
   
   def show
     @comments = @story.comments
+    @twitter_sidenav_level = 5
   end
   
   def new
