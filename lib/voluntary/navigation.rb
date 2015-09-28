@@ -210,6 +210,10 @@ module Voluntary
                           comments.item(:edit, I18n.t('general.edit'), edit_comment_path(@comment))
                         end
                       end 
+                      
+                      if options[:stories_after_resource_has_many]
+                        instance_exec story, {}, &options[:stories_after_resource_has_many]
+                      end
                     end
                   end
                 end
