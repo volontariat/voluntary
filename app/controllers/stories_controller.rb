@@ -34,6 +34,8 @@ class StoriesController < ApplicationController
   end
   
   def edit
+    @twitter_sidenav_level = 5
+    
     render_wizard
   end
   
