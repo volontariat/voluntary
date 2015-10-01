@@ -1,5 +1,9 @@
 ## unreleased ##
 
+## 0.6.0 (October 1, 2015) ##
+
+* [#93](https://github.com/volontariat/voluntary/issues/93) Core customizations for survey product.
+
 ## 0.5.2 (September 2, 2015) ##
 
 * Adds moment.js.
