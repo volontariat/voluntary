@@ -1,5 +1,5 @@
 class AddApiKeyToUsers < ActiveRecord::Migration
-  def change
+  def up
     add_column :users, :api_key, :string, limit: 32
     
     User.where('api_key IS NULL').find_each do |user|
@@ -9,5 +9,9 @@ class AddApiKeyToUsers < ActiveRecord::Migration
       
       user.save!
     end
+  end
+  
+  def down
+    remove_column :users, :api_key
   end
 end
