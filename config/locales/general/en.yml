@@ -10,6 +10,7 @@ en:
     neutral: neutral
     pro: pro
     sign_out: Sign out
+    sign_up: Sign up
     vote: Vote
     
     index:
@@ -62,9 +63,11 @@ en:
       license: Code licensed under %{link}
       
   attributes: 
-    id: ID 
+    id: ID
+    from: From
     name: Name 
     text: Text
+    to: To
     parent: Parent
     project_id: Project
     state: State
@@ -73,6 +76,11 @@ en:
     position: Position
     date: Date
     trend: Trend
+    address: Address
+    description: Description
+    string: String
+    timezone: Timezone
+    resource_type: Resource type
     
   activerecord:
     models:
