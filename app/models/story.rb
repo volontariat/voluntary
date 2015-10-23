@@ -77,6 +77,14 @@ class Story
     task
   end
   
+  def after_creation_path
+    Rails.application.routes.url_helpers.edit_story_path self
+  end
+  
+  def custom_tasks
+    tasks
+  end
+  
   protected
   
   def with_offeror

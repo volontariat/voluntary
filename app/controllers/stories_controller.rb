@@ -27,7 +27,7 @@ class StoriesController < ApplicationController
   
   def create
     if @story.initialization
-      redirect_to edit_story_path(@story) and return
+      redirect_to @story.after_creation_path and return
     else
       render_wizard
     end
