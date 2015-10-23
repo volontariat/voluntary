@@ -7,7 +7,7 @@ class Resources::User::FormPresenter < ResourcePresenter
     list += [:password, :password_confirmation] if resource.new_record? && resource.provider.blank?
     
     list += [
-      :country, :language, :interface_language, :foreign_language_tokens, :profession, 
+      :country, :language, :interface_language, :foreign_language_tokens, :timezone, :profession, 
       :employment_relationship, :area_tokens
     ]
     

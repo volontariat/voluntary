@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :password, :password_confirmation, :remember_me, :text, :language, :first_name, :last_name, 
                   :salutation, :marital_status, :family_status, :date_of_birth, :place_of_birth, :citizenship, 
                   :email, :country, :language, :interface_language, :foreign_language_tokens, :profession_id, 
-                  :employment_relationship, :area_tokens, :remember_me
+                  :employment_relationship, :area_tokens, :remember_me, :timezone
        
   # :timeoutable, :token_authenticatable, :lockable,
   # :lock_strategy => :none, :unlock_strategy => :nones

@@ -17,6 +17,8 @@
       f.input attribute, collection: available_language_options
     when :foreign_language_tokens
       f.input attribute, as: :string, input_html: { data: { load: resource.foreign_language_tokens } } unless Rails.env == 'test'
+    when :timezone
+      f.input attribute, as: :time_zone
     when :profession
       autocomplete_input(f, attribute)
     when :employment_relationship

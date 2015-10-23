@@ -10,6 +10,8 @@ module Voluntary
         
         helper_method :parent, :application_navigation, :navigation_product_path, :navigation_product_name, :voluntary_application_stylesheets
         helper_method :voluntary_application_javascripts
+        
+        before_filter :set_timezone
       end
       
       def voluntary_application_stylesheets
@@ -76,6 +78,10 @@ module Voluntary
       end
       
       private
+      
+      def set_timezone
+        Time.zone = current_user.try(:timezone) || 'UTC'
+      end
       
       def current_namespace
         controller_name_segments = params[:controller].split('/')
