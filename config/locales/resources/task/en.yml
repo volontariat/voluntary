@@ -17,6 +17,9 @@ en:
     new: 
       title: New Task
     
+    create:
+      successful: Task successfully created.
+      
     show:
       story_text: Story
       text: Task Text
@@ -25,6 +28,9 @@ en:
     
     edit: 
       title: Edit Task  
+    
+    update:
+      successful: Task successfully updated.
       
   activerecord:
     errors:

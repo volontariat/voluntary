@@ -1,0 +1,5 @@
+<%= simple_form_for(@task, url: @task.new_record? ? tasks_path : task_path(@task), as: :task, html: {class: 'form-vertical', style: 'margin-bottom:15px;'}) do |f| %>
+  <%= f.input :name %>  
+  <%= f.input :text, as: :text %>
+  <%= f.button :submit %>
+<% end %>
