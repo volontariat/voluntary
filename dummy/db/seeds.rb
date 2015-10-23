@@ -3,7 +3,7 @@ ActionMailer::Base.delivery_method = :test
 
 User.create!(
   name: 'Administrator', first_name: 'Mister', last_name: 'Admin', email: 'admin@test.com', 
-  language: 'en', country: 'DE', interface_language: 'en', password: 'administrator', 
+  language: 'en', country: 'Germany', interface_language: 'en', password: 'administrator', 
   password_confirmation: 'administrator', roles: 1
 )
 
