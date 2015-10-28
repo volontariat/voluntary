@@ -81,6 +81,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'auto_html', '~> 1.6.4'
   s.add_dependency 'redcarpet', '~> 3.2.3' # required by auto_html
   s.add_dependency 'slim', '~> 2.0.2'
+  s.add_dependency 'fullcalendar-rails', '~> 2.4'
   
   # Could not find a valid   s.add_dependency 'mobile_fu' (>= 0) in any repository
   #  s.add_dependency 'mobile-fu'
@@ -94,8 +95,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'selectize-rails', '~> 0.12.0'
   s.add_dependency 'bootstrap-datetimepicker-rails', '~> 0.0.11'
   # includes jquery 1.11.0 which is not supported by ember.js
-  #s.add_dependency 'jquery-rails', '~> 3.1.0'
-  s.add_dependency 'jquery-rails', '2.2.2'
+  s.add_dependency 'jquery-rails', '~> 3.1.1'
   s.add_dependency 'jquery-ui-bootstrap-rails-asset', '~> 0.0.3'
 
   # JSON and API

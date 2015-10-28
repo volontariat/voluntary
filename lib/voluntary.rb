@@ -61,6 +61,8 @@ require 'csv'
 require 'httparty'
 require 'active_model/serializer'
 require 'mongoid_orderable'
+require 'momentjs-rails'
+require 'fullcalendar-rails'
 
 require 'voluntary/navigation'
 
