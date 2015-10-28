@@ -4,13 +4,16 @@ en:
     anonymous: Anonymous
     authentication: Authentication
     author: Author
+    calendar: Calendar
     cancel: Cancel
     contra: contra
     issues: Issues
+    list: List
     neutral: neutral
     pro: pro
     sign_out: Sign out
     sign_up: Sign up
+    unlimited: unlimited
     vote: Vote
     
     index:
