@@ -12,12 +12,21 @@ class TasksController < ApplicationController
     @story = Story.find(params[:story_id])
     @project = @story.project
     @tasks = @story.custom_tasks
-    @tasks = @tasks.paginate(page: params[:page], per_page: 1)
+    @tasks = @tasks.paginate(page: params[:page], per_page: 25)
     @twitter_sidenav_level = 5
   end
   
   def show
     @comments = @task.comments
+    @hide_sidebar = true
+    
+    begin
+      raise NotImplementedError if @project.product_id.blank?
+      
+      render "products/types/#{@project.product.class.name.split('Product::').last.tableize.singularize}/tasks/show"
+    rescue NotImplementedError, ActionView::MissingTemplate
+      render 'show'
+    end
   end
   
   def new
