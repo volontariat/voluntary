@@ -80,7 +80,7 @@ module Voluntary
       private
       
       def set_timezone
-        Time.zone = current_user.try(:timezone) || 'UTC'
+        Time.zone = current_user.try(:timezone).present? ? current_user.timezone : 'UTC'
       end
       
       def current_namespace
