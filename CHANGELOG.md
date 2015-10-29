@@ -1,5 +1,12 @@
 ## unreleased ##
 
+## 0.7.0 (October 29, 2015) ##
+
+* [#94](https://github.com/volontariat/voluntary/issues/94) Customization for classified advertisement product.
+* [#97](https://github.com/volontariat/voluntary/issues/97) User form does not show errors like country can't be blank. 
+* [#96](https://github.com/volontariat/voluntary/issues/96) Regard user's timezone.
+* [BUGFIX] Remove obsolete scroll bar from modals.
+
 ## 0.6.0 (October 1, 2015) ##
 
 * [#93](https://github.com/volontariat/voluntary/issues/93) Core customizations for survey product.

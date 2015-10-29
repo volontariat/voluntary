@@ -26,7 +26,7 @@ GIT
 PATH
   remote: .
   specs:
-    voluntary (0.6.0)
+    voluntary (0.7.0)
       active_model_serializers (~> 0.9.3)
       activerecord-deprecated_finders (~> 1.0.3)
       activerecord-import (~> 0.4.1)
