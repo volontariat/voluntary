@@ -17,7 +17,6 @@ class TasksController < ApplicationController
   end
   
   def show
-    @comments = @task.comments
     @hide_sidebar = true
     
     begin
