@@ -1,5 +1,9 @@
 ## unreleased ##
 
+## 0.7.1 (November 9, 2015) ##
+
+* Don't load comments on task show page.
+
 ## 0.7.0 (October 29, 2015) ##
 
 * [#94](https://github.com/volontariat/voluntary/issues/94) Customization for classified advertisement product.
